@@ -1,12 +1,14 @@
-// тест:
-
 import './App.css';
+
+import Header from "../Header/Header";
 
 function App() {
   return (
-    <p>
-      Alloha!
-    </p>
+    <div className="root">
+      <div className="page">
+        <Header />
+      </div>
+    </div>
   );
 }
 

@@ -1,0 +1,15 @@
+.header {
+  background-color: #073042;
+  display: flex;
+  justify-content: space-between;
+  padding: 18px 70px;
+
+}
+
+.header__logo {
+  background-image: url(../../images/logo.svg);
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 38px;
+  height: 38px;
+}
