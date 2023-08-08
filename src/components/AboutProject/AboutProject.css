@@ -1,14 +1,6 @@
 .about-project {
   padding-top: 110px;
-}
-
-.about-project__title {
-  margin: 0;
-  padding-bottom: 23px;
-  font-size: 22px;
-  font-weight: 400;
-  letter-spacing: -1px;
-  border-bottom: #DADADA 1px solid;
+  padding-bottom: 110px;
 }
 
 .about-project__list {
