@@ -19,7 +19,6 @@
   flex-wrap: wrap;
   gap: 40px;
   list-style: none;
-
 }
 
 .about-project__item {
@@ -31,7 +30,6 @@
   font-size: 20px;
   font-weight: 400;
   letter-spacing: -.8px;
-
 }
 
 .about-project__paragraph {
