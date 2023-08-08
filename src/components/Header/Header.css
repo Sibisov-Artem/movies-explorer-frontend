@@ -2,7 +2,8 @@
   background-color: #073042;
   display: flex;
   justify-content: space-between;
-  padding: 18px 70px;
+  padding-top: 18px;
+  padding-bottom: 18px;
 }
 
 .header__logo {
