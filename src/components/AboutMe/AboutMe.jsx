@@ -1,6 +1,6 @@
 import './AboutMe.css';
 
-import aboutMeImage from '../../images/about-me.png';
+import aboutMeImage from '../../images/about-me.jpg';
 
 function AboutMe() {
   return (
