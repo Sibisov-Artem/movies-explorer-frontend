@@ -1,0 +1,39 @@
+.footer {
+  padding-top: 79px;
+  padding-bottom: 20px;
+}
+
+.footer__paragraph {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 400;
+  color: #8B8B8B;
+  padding: 0 0 20px 0;
+  border-bottom: 1px #424242 solid;
+  text-align: center;
+}
+
+.footer__wrapper {
+  font-size: 13px;
+  font-weight: 400;
+  margin: 20px 0 0 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.footer__year {
+  margin: 0;
+}
+
+.footer__links-list {
+  margin: 0;
+  list-style: none;
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.footer__link-item {
+  text-decoration: none;
+  color: #FFF;
+}
