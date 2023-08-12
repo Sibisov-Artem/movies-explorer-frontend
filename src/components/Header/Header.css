@@ -1,9 +1,16 @@
 .header {
-  background-color: #073042;
   display: flex;
   justify-content: space-between;
   padding-top: 18px;
   padding-bottom: 18px;
+}
+
+.header__background_theme_main {
+  background-color: #073042;
+}
+
+.header__background_theme_other {
+  background-color: #202020;
 }
 
 .header__logo {
