@@ -1,0 +1,54 @@
+.search-form {
+  padding-top: 60px;
+  padding-bottom: 10px;
+}
+
+.search-form__input-container {
+  display: flex;
+  align-items: center;
+  border: none;
+  border-radius: 40px;
+  padding: 0;
+  height: 46px;
+  background-color: #2F2F2F;
+  margin: 0 0 41px 0;
+}
+
+.search-form__input {
+  color: #FFF;
+  font-size: 13px;
+  line-height: 17px;
+  font-weight: 400;
+  background-color: #2F2F2F;
+  border: none;
+  width: 100%;
+  margin-left: 22px;
+}
+
+.search-form__submit-btn {
+  width: 34px;
+  height: 34px;
+  background-image: url(../../images/button-find-movie.svg);
+  background-color: #4285F4;
+  border-radius: 48px;
+  border: none;
+  padding: 0 17px;
+  background-repeat: no-repeat;
+  background-position: center;
+  margin: 0 6px;
+}
+
+.search-form__filter {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  padding-bottom: 65px;
+  border-bottom: 1px solid #424242;
+}
+
+.search-form__filter-caption {
+  font-size: 14px;
+  line-height: 18px;
+  font-weight: 400;
+  margin: 0;
+}
