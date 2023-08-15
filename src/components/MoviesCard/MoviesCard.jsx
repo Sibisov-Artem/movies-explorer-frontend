@@ -1,6 +1,10 @@
 import './MoviesCard.css';
 
+import { useLocation } from 'react-router-dom';
+
 function MoviesCard({ movie }) {
+
+  const location = useLocation();
 
   return (
     <li className="movies-card">
@@ -10,7 +14,7 @@ function MoviesCard({ movie }) {
           <h2 className="movies-card__title">{movie.nameMovie}</h2>
           <p className="movies-card__duration">{movie.duration}</p>
         </div>
-        <button className="movies-card__like-btn "></button>
+        <button className={`movies-card__like-btn ${location.pathname === "/saved-movies" && "movies-card__delete-btn"}`}></button>
       </div>
     </li >
   );

@@ -1,6 +1,7 @@
 .movies-card {
   list-style: none;
   display: block;
+  cursor: pointer;
 }
 
 .movies-card__image {
@@ -44,6 +45,17 @@
   width: 14px;
   height: 12px;
   background-image: url(../../images/like-btn.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  border: none;
+  background-color: transparent;
+  padding: 17px 7px 0 7px;
+}
+
+.movies-card__delete-btn {
+  width: 16.84px;
+  height: 21.58px;
+  background-image: url(../../images/delete-btn.svg);
   background-position: center;
   background-repeat: no-repeat;
   border: none;
