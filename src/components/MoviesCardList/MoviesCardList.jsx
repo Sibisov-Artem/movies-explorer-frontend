@@ -1,23 +1,20 @@
 import './MoviesCardList.css';
 
+
+
 import MoviesCard from '../MoviesCard/MoviesCard';
 
-function MoviesCardList() {
+function MoviesCardList({ array }) {
   return (
     <section className="movies-cards section">
       <ul className="movies-cards__grid">
-        <MoviesCard />
-        <MoviesCard />
-        <MoviesCard />
-        <MoviesCard />
-        <MoviesCard />
-        <MoviesCard />
-        <MoviesCard />
-        <MoviesCard />
-        <MoviesCard />
-        <MoviesCard />
-        <MoviesCard />
-        <MoviesCard />
+
+        {array.map((movieCard) => (
+          <MoviesCard
+            movie={movieCard}
+          />
+        ))}
+
       </ul>
     </section>
   );

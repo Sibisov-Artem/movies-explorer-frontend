@@ -1,18 +1,14 @@
 import './MoviesCard.css';
 
-import image from '../../images/image-movie-example.jpg';
-
-function MoviesCard() {
-
-  const movieExample = { nameMovie: '33 слова о дизайне', posterMovie: image, duration: '1ч 47м' }
+function MoviesCard({ movie }) {
 
   return (
     <li className="movies-card">
-      <img className="movies-card__image" src={movieExample.posterMovie} alt={`Кадр из фильма "${movieExample.nameMovie}"`}></img>
+      <img className="movies-card__image" src={movie.posterMovie} alt={`Кадр из фильма "${movie.nameMovie}"`}></img>
       <div className="movies-card__info-wrapper">
         <div className="movies-card__info">
-          <h2 className="movies-card__title">{movieExample.nameMovie}</h2>
-          <p className="movies-card__duration">{movieExample.duration}</p>
+          <h2 className="movies-card__title">{movie.nameMovie}</h2>
+          <p className="movies-card__duration">{movie.duration}</p>
         </div>
         <button className="movies-card__like-btn "></button>
       </div>
