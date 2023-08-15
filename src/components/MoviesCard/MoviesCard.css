@@ -10,7 +10,7 @@
   object-fit: contain;
   margin-bottom: 16px;
   aspect-ratio: 364/203;
-  border-radius: 9px 9px 0 0;
+  border-radius: 13px 13px 0 0;
 }
 
 .movies-card__info-wrapper {
