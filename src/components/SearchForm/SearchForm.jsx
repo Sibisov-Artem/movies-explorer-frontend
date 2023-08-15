@@ -1,4 +1,4 @@
-import './SearchForm.css'
+import './SearchForm.css';
 
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 

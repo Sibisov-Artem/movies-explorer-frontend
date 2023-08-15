@@ -1,4 +1,4 @@
-import './FilterCheckbox.css'
+import './FilterCheckbox.css';
 
 function FilterCheckbox() {
   return (

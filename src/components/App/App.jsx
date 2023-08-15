@@ -5,7 +5,6 @@ import Header from '../Header/Header';
 import Main from '../Main/Main';
 import Footer from '../Footer/Footer';
 import Movies from '../Movies/Movies';
-import Preloader from '../Preloader/Preloader';
 
 function App() {
   return (
@@ -15,7 +14,7 @@ function App() {
 
         <Routes>
           <Route path='/' element={<Main />} />
-          <Route path='/movies' element={<Preloader />} />
+          <Route path='/movies' element={<Movies />} />
         </Routes>
 
         <Footer />
