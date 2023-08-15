@@ -5,7 +5,6 @@ function MoviesMore() {
     <div className="movies-more section">
       <button className="movies-more__btn">Ещё</button>
     </div>
-
   );
 }
 
