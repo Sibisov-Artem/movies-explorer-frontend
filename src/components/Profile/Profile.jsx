@@ -19,7 +19,7 @@ function Profile() {
   }
 
   return (
-    <section className="profile section">
+    <div className="profile section">
 
       <div className="profile__container">
         <h2 className="profile__title">{`Привет, ${name}!`}</h2>
@@ -58,7 +58,7 @@ function Profile() {
         <button className="profile__close-btn" type="button">Выйти из аккаунта</button>
       </div>
 
-    </section>
+    </div>
   );
 }
 
