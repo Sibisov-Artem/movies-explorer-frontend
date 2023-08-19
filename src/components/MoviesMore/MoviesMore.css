@@ -12,6 +12,7 @@
   background-color: #2F2F2F;
   border: none;
   border-radius: 6px;
+  line-height: 15px;
 }
 
 .movies-more__not-visible {

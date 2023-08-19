@@ -17,6 +17,7 @@
   font-weight: 500;
   margin: 0 0 123px 0;
   width: 100%;
+  line-height: 29px;
 }
 
 .profile__form {
@@ -40,6 +41,7 @@
   padding-bottom: 16px;
   margin-bottom: 17px;
   width: 100%;
+  line-height: 13px;
 }
 
 .profile__label:last-child {
@@ -55,6 +57,7 @@
   color: #FFF;
   border: none;
   text-align: end;
+  line-height: 13px;
 }
 
 .profile__submit-btn {
@@ -67,6 +70,7 @@
   margin-bottom: 16px;
   padding: 0;
   display: block;
+  line-height: 16px;
 }
 
 .profile__close-btn {
@@ -78,4 +82,5 @@
   width: 100%;
   padding: 0;
   display: block;
+  line-height: 16px;
 }

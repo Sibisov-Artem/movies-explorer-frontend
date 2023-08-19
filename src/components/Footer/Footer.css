@@ -11,18 +11,20 @@
   padding: 0 0 20px 0;
   border-bottom: 1px #424242 solid;
   text-align: center;
+  line-height: 16px;
 }
 
 .footer__wrapper {
   font-size: 13px;
   font-weight: 400;
-  margin: 22px 0 0 0;
+  margin: 20px 0 0 0;
   display: flex;
   justify-content: space-between;
 }
 
 .footer__year {
   margin: 0;
+  line-height: 16px;
 }
 
 .footer__links-list {
@@ -36,4 +38,5 @@
 .footer__link-item {
   text-decoration: none;
   color: #FFF;
+  line-height: 16px;
 }
