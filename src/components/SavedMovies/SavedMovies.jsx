@@ -2,6 +2,7 @@ import './SavedMovies.css';
 
 import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
+import MoviesMore from '../MoviesMore/MoviesMore';
 
 import { savedMoviesArray } from '../../utils/moviesArray'
 
@@ -11,6 +12,7 @@ function SavedMovies() {
       <SearchForm />
       <MoviesCardList
         array={savedMoviesArray} />
+      <MoviesMore />
     </main>
   );
 }

@@ -13,3 +13,8 @@
   border: none;
   border-radius: 6px;
 }
+
+.movies-more__not-visible {
+  padding-top: 50px;
+  padding-bottom: 80px;
+}
