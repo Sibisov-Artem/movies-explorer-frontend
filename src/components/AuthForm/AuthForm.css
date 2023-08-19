@@ -11,7 +11,11 @@
   line-height: 29px;
 }
 
-.auth-form__form {}
+.auth-form__form {
+  display: flex;
+  flex-direction: column;
+  height: 423px;
+}
 
 .auth-form__input-container {
   display: flex;
@@ -63,6 +67,7 @@
   height: 45px;
   margin-bottom: 16px;
   line-height: 17px;
+  margin-top: auto;
 }
 
 .auth-form__auth {
