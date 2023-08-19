@@ -15,7 +15,7 @@
 .navigation__list_other {
   display: flex;
   align-items: center;
-  margin: 0;
+  margin: 0 0 0 48px;
   padding: 0;
   list-style: none;
   gap: 16px;
