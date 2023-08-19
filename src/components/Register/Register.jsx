@@ -1,5 +1,3 @@
-import './Register.css'
-
 import AuthForm from '../AuthForm/AuthForm';
 
 function Register() {
