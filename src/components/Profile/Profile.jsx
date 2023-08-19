@@ -33,27 +33,27 @@ function Profile() {
                 placeholder="Имя"
                 required
                 minLength="2" maxLength="50"
-                id="profileName"
+                id="profile-name"
                 onChange={handleChangeName}
                 value={name}
               />
             </label>
 
             <label className="profile__label">E-mail
-              <input className="profile__input profile__input_el_description"
-                type="text"
+              <input className="profile__input"
+                type="email"
                 name="info"
                 placeholder="E-mail"
                 required
                 minLength="2" maxLength="50"
-                id="profileDescription"
+                id="profile-email"
                 onChange={handleChangeEmail}
                 value={email}
               />
             </label>
           </fieldset>
 
-          <button className="profile__submit-btn" type="submit">Редактировать</button>  {/*submitText*/}
+          <button className="profile__submit-btn" type="submit">Редактировать</button>
         </form>
         <button className="profile__close-btn" type="button">Выйти из аккаунта</button>
       </div>

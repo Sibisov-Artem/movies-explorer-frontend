@@ -20,7 +20,7 @@ function Header() {
         location.pathname === "/profile" ?
         (
           <header className={`header section header__background_theme_${location.pathname === "/" ? "main" : "other"}`}>
-            <div className="header__logo"></div>
+            <div className="logo"></div>
             <Navigation />
           </header>
         ) : (

@@ -1,0 +1,8 @@
+.logo {
+  background-image: url(../images/logo.svg);
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 38px;
+  height: 38px;
+  padding-right: 48px;
+}
