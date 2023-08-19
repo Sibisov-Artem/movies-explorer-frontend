@@ -16,3 +16,15 @@
   padding: 184px 0 224px 0;
   letter-spacing: -2px;
 }
+
+/* -------------------------------------------- */
+
+@media screen and (max-width: 768px) {
+  .promo__title {
+    padding: 326px 0 342px 0;
+  }
+
+  .promo {
+    background-position: 50% 48%;
+  }
+}

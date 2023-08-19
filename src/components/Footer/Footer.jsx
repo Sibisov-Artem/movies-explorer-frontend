@@ -12,7 +12,7 @@ function Footer() {
         location.pathname === "/movies" ||
         location.pathname === "/saved-movies" ?
         (
-          <footer className="footer section">
+          <footer className="footer">
             <p className="footer__paragraph">Учебный проект Яндекс.Практикум х BeatFilm.</p>
             <div className="footer__wrapper">
               <p className="footer__year">©&nbsp;2023</p>

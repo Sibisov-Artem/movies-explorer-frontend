@@ -1,6 +1,5 @@
 .footer {
-  padding-top: 79px;
-  padding-bottom: 20px;
+  padding: 79px 70px 20px;
 }
 
 .footer__paragraph {
@@ -39,4 +38,13 @@
   text-decoration: none;
   color: #FFF;
   line-height: 16px;
+}
+
+/* ---------------------------------------- */
+
+@media screen and (max-width: 768px) {
+
+  .footer {
+    padding: 79px 30px 20px;
+  }
 }

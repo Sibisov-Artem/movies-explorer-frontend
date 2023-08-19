@@ -32,7 +32,7 @@
   font-size: 30px;
   line-height: 50px;
   font-weight: 400;
-  letter-spacing: -1.2px;
+  letter-spacing: -1.15px;
   text-decoration: none;
   color: #FFF;
 }
@@ -44,4 +44,24 @@
   background-repeat: no-repeat;
   background-size: contain;
   margin-right: 6px;
+}
+
+/* -------------------------------------------- */
+
+@media screen and (max-width: 768px) {
+
+  .portfolio {
+    padding-top: 91px;
+  }
+
+  .portfolio__link {
+    font-size: 28px;
+    font-weight: 400;
+    letter-spacing: -1.1px;
+  }
+
+  .portfolio__link-arrow {
+    width: 16px;
+    height: 15px;
+  }
 }

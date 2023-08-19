@@ -8,13 +8,13 @@
   padding: 0;
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   gap: 40px;
   list-style: none;
 }
 
 .about-project__item {
-  width: 550px;
+  max-width: 550px;
 }
 
 .about-project__subtitle {
@@ -66,4 +66,36 @@
 
 .timeline__item_grey {
   background-color: #8B8B8B;
+}
+
+/* ----------------------------------------------- */
+
+@media screen and (max-width: 768px) {
+
+  .about-project {
+    padding-top: 90px;
+    padding-bottom: 82px;
+  }
+
+  .about-project__paragraph {
+    font-size: 12px;
+    line-height: 18px;
+  }
+
+  .about-project__subtitle {
+    margin: 0 0 22px 0;
+  }
+
+  .about-project__list {
+    margin: 70px 0 93px 0;
+    gap: 37px;
+  }
+
+  .timeline__first-column {
+    width: 21%;
+  }
+
+  .timeline__second-column {
+    width: 79%;
+  }
 }
