@@ -17,13 +17,13 @@ export const moviesArray = [
   { nameMovie: 'В погоне за Бенкси', posterMovie: image_3, duration: '1ч 42м', isLicked: false, },
   { nameMovie: 'Баския: Взрыв реальности', posterMovie: image_4, duration: '1ч 21м', isLicked: false, },
   { nameMovie: 'Бег это свобода', posterMovie: image_5, duration: '1ч 44м', isLicked: false, },
-  // { nameMovie: 'Книготорговцы', posterMovie: image_6, duration: '1ч 37м', isLicked: true, },
-  // { nameMovie: 'Когда я думаю о Германии ночью', posterMovie: image_7, duration: '1ч 56м', isLicked: false, },
-  // { nameMovie: 'Gimme Danger: История Игги и The Stooge...', posterMovie: image_8, duration: '1ч 59м', isLicked: false, },
-  // { nameMovie: 'Дженис: Маленькая девочка грустит', posterMovie: image_9, duration: '1ч 42м', isLicked: true, },
-  // { nameMovie: 'Соберись перед прыжком', posterMovie: image_10, duration: '1ч 10м', isLicked: true, },
-  // { nameMovie: 'Пи Джей Харви: A dog called money', posterMovie: image_11, duration: '1ч 4м', isLicked: false, },
-  // { nameMovie: 'По волнам: Искусство звука в кино', posterMovie: image_12, duration: '1ч 7м', isLicked: false, },
+  { nameMovie: 'Книготорговцы', posterMovie: image_6, duration: '1ч 37м', isLicked: true, },
+  { nameMovie: 'Когда я думаю о Германии ночью', posterMovie: image_7, duration: '1ч 56м', isLicked: false, },
+  { nameMovie: 'Gimme Danger: История Игги и The Stooge...', posterMovie: image_8, duration: '1ч 59м', isLicked: false, },
+  { nameMovie: 'Дженис: Маленькая девочка грустит', posterMovie: image_9, duration: '1ч 42м', isLicked: true, },
+  { nameMovie: 'Соберись перед прыжком', posterMovie: image_10, duration: '1ч 10м', isLicked: true, },
+  { nameMovie: 'Пи Джей Харви: A dog called money', posterMovie: image_11, duration: '1ч 4м', isLicked: false, },
+  { nameMovie: 'По волнам: Искусство звука в кино', posterMovie: image_12, duration: '1ч 7м', isLicked: false, },
 ];
 
 export const savedMoviesArray = [
