@@ -10,6 +10,7 @@
   padding: 0;
   list-style: none;
   gap: 30px;
+  align-items: center;
 }
 
 .navigation__opacity-background {
@@ -28,6 +29,7 @@
 .navigation__link {
   text-decoration: none;
   color: #FFF;
+  box-sizing: border-box;
 }
 
 .navigation__link_place_main {
@@ -115,7 +117,6 @@
     height: 100vh;
     left: 32.2%;
     right: 0;
-    overflow-y: auto;
     margin: 0;
     box-sizing: border-box;
     padding: 159px 0 90px 0;

@@ -19,7 +19,6 @@ function Header() {
     setBurgerActive(!burgerActive);     // от него зависят стили в Navigation(менюшка) и визулизация кнопочки-бургера
   }
 
-
   return (
     <>
       {location.pathname === "/" ||
@@ -31,9 +30,11 @@ function Header() {
             <div className="logo"></div>
             <Navigation
               burgerActive={burgerActive} />
-            <Burger
-              burgerClick={handleBurgerClick}     // нажатие кнопки в Burger.jsx
-              burgerActive={burgerActive} />
+            {location.pathname === "/" ?
+              (null) : (
+                <Burger
+                  burgerClick={handleBurgerClick}     // нажатие кнопки в Burger.jsx
+                  burgerActive={burgerActive} />)}
           </header>
         ) : (
           null
