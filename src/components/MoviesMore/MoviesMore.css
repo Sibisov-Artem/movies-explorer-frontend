@@ -19,3 +19,11 @@
   padding-top: 158px;
   padding-bottom: 80px;
 }
+
+/* ----------------------------------------------- */
+
+@media screen and (max-width: 768px) {
+  .movies-more__not-visible {
+    padding-top: 60px;
+  }
+}
