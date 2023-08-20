@@ -84,3 +84,19 @@
   display: block;
   line-height: 16px;
 }
+
+/* ----------------------------------------------- */
+
+@media screen and (max-width: 768px) {
+  .profile {
+    padding-top: 236px;
+  }
+
+  .profile__title {
+    margin: 0 0 96px 0;
+  }
+
+  .profile__label:last-child {
+    margin-bottom: 210px;
+  }
+}
