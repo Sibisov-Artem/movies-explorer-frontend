@@ -27,3 +27,12 @@
     padding-top: 60px;
   }
 }
+
+/* ----------------------------------------------- */
+
+@media screen and (max-width: 450px) {
+
+  .movies-more {
+    padding-bottom: 98px;
+  }
+}

@@ -6,7 +6,7 @@ function SearchForm() {
 
   return (
 
-    <div className="search-form section">
+    <div className="search-form">
 
       <form className="search-form__form">
 

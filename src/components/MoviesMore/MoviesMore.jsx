@@ -10,7 +10,7 @@ function MoviesMore() {
     <>
       {location.pathname === "/movies" ?
         (
-          <div className="movies-more section">
+          <div className="movies-more">
             <button className="movies-more__btn">Ещё</button>
           </div>
         ) : (

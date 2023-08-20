@@ -63,5 +63,23 @@
   .search-form__filter {
     padding-bottom: 47px;
   }
+}
 
+/* ----------------------------------------------- */
+
+@media screen and (max-width: 450px) {
+
+  .search-form__input {
+    font-size: 11px;
+    margin-left: 17px;
+  }
+
+  .search-form {
+    padding-left: 4px;
+    padding-right: 4px;
+  }
+
+  .search-form__filter-caption {
+    font-size: 11px;
+  }
 }

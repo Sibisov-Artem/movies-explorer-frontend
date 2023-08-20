@@ -76,4 +76,28 @@
   .movies-card__title {
     margin-bottom: 15px;
   }
+
+  .movies-card__info-wrapper {
+    margin: 0 22px 16px 16px;
+  }
+}
+
+/* ----------------------------------------------- */
+
+@media screen and (max-width: 450px) {
+
+  .movies-card__title {
+    font-size: 12px;
+    margin-bottom: 15px;
+    line-height: 15px;
+  }
+
+  .movies-card__duration {
+    font-size: 10px;
+    line-height: 12px;
+  }
+
+  .movies-card__info-wrapper {
+    margin: 0 18px 16px 16px;
+  }
 }
