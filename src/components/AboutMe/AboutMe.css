@@ -55,8 +55,7 @@
 
 @media screen and (max-width: 768px) {
   .about-me {
-    padding-top: 90px;
-    padding-bottom: 70px;
+    padding: 90px 50px 70px;
   }
 
   .about-me__subtitle {
@@ -89,5 +88,47 @@
   .about-me__info {
     flex-direction: column-reverse;
     justify-content: space-between;
+  }
+
+  .about-me__image {
+    margin: 0 auto;
+  }
+}
+
+/* ----------------------------------------------- */
+
+@media screen and (max-width: 450px) {
+
+  .about-me {
+    padding: 71px 14px 70px;
+  }
+
+  .about-me__image {
+    width: 292px;
+    height: 352px;
+  }
+
+  .about-me__info {
+    margin-top: 60px;
+    gap: 40px
+  }
+
+  .about-me__subtitle {
+    margin: 0 0 19px 0;
+    font-size: 30px;
+    line-height: 36px;
+    letter-spacing: -1.2px;
+  }
+
+  .about-me__subline {
+    margin: 0 0 20px 0;
+    font-size: 11px;
+    line-height: 16px;
+  }
+
+  .about-me__paragraph {
+    margin: 0 0 40px 0;
+    font-size: 11px;
+    line-height: 16px;
   }
 }

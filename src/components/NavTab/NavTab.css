@@ -20,3 +20,16 @@
   line-height: 16px;
   color: #FFF;
 }
+
+/* ----------------------------------------------- */
+
+@media screen and (max-width: 450px) {
+
+  .nav-tab__list {
+    gap: 24px;
+  }
+
+  .nav-tab__link {
+    font-size: 11px;
+  }
+}

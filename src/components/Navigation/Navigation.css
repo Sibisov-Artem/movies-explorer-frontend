@@ -158,3 +158,21 @@
     display: inline-block;
   }
 }
+
+/* ----------------------------------------------- */
+
+@media screen and (max-width: 450px) {
+
+  .navigation__link_target_signin {
+    padding: 5px 12px;
+  }
+
+  .navigation__link_place_main {
+    font-size: 10px;
+  }
+
+  .navigation__list_main {
+    gap: 14px;
+    padding-bottom: 1px;
+  }
+}

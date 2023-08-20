@@ -48,3 +48,41 @@
     padding: 79px 30px 20px;
   }
 }
+
+/* ----------------------------------------------- */
+
+@media screen and (max-width: 450px) {
+
+  .footer {
+    padding: 60px 10px 20px;
+  }
+
+  .footer__paragraph {
+    font-size: 12px;
+    padding: 0 0 21px 0;
+    line-height: 15px;
+  }
+
+  .footer__wrapper {
+    font-size: 12px;
+    margin: 30px 0 0 0;
+    flex-direction: column-reverse;
+    text-align: center;
+    gap: 30px;
+  }
+
+  .footer__links-list {
+    gap: 12px;
+    flex-direction: column;
+    padding: 0;
+  }
+
+  .footer__link-item {
+    line-height: 15px;
+  }
+
+  .footer__year {
+    color: #8B8B8B;
+    line-height: 15px;
+  }
+}
