@@ -59,4 +59,9 @@
   .search-form {
     padding-top: 80px;
   }
+
+  .search-form__filter {
+    padding-bottom: 47px;
+  }
+
 }

@@ -64,3 +64,16 @@
   background-color: transparent;
   padding: 17px 7px 0 7px;
 }
+
+/* ----------------------------------------------- */
+
+@media screen and (max-width: 768px) {
+
+  .movies-card__image {
+    margin-bottom: 14px;
+  }
+
+  .movies-card__title {
+    margin-bottom: 15px;
+  }
+}
