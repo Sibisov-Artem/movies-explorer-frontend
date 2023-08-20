@@ -100,3 +100,31 @@
     margin-bottom: 210px;
   }
 }
+
+
+/* ----------------------------------------------- */
+
+@media screen and (max-width: 450px) {
+  .profile {
+    padding: 70px 30px 40px;
+  }
+
+  .profile__title {
+    margin: 0 0 80px 0;
+  }
+
+  .profile__label:last-child {
+    margin-bottom: 376px;
+  }
+
+  .profile__submit-btn {
+    font-size: 12px;
+    line-height: 15px;
+  }
+
+  .profile__close-btn {
+    font-size: 12px;
+    line-height: 15px;
+  }
+
+}
