@@ -26,7 +26,7 @@ function Header() {
         location.pathname === "/saved-movies" ||
         location.pathname === "/profile" ?
         (
-          <header className={`header  header__background_theme_${location.pathname === "/" ? "main" : "other"}`}>
+          <header className={`header section header__background_theme_${location.pathname === "/" ? "main" : "other"}`}>
             <div className="logo"></div>
             <Navigation
               burgerActive={burgerActive} />

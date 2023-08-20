@@ -52,3 +52,11 @@
   font-weight: 400;
   margin: 0;
 }
+
+/* ----------------------------------------------- */
+
+@media screen and (max-width: 768px) {
+  .search-form {
+    padding-top: 80px;
+  }
+}

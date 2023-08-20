@@ -17,6 +17,10 @@
 
 @media screen and (max-width: 768px) {
   .section {
+    padding: 0 30px;
+  }
+
+  .section__additional-padding {
     padding: 0 50px;
   }
 }

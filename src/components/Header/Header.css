@@ -1,6 +1,7 @@
 .header {
   display: flex;
-  padding: 18px 70px;
+  padding-top: 18px;
+  padding-bottom: 18px;
 }
 
 .header__background_theme_main {
@@ -9,12 +10,4 @@
 
 .header__background_theme_other {
   background-color: #202020;
-}
-
-/* -------------------------------------------- */
-
-@media screen and (max-width: 768px) {
-  .header {
-    padding: 18px 30px;
-  }
 }
