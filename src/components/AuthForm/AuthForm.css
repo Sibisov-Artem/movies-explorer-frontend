@@ -14,6 +14,7 @@
 .auth-form__form {
   display: flex;
   flex-direction: column;
+  height: 423px;
 }
 
 .auth-form__input-container {
@@ -127,5 +128,9 @@
 
   .auth-form__auth-link {
     line-height: 15px;
+  }
+
+  .auth-form__form {
+    height: 507px;
   }
 }
