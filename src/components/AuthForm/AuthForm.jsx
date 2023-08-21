@@ -12,7 +12,7 @@ function AuthForm({ title, password, buttonText, authText, authLink, authTextLin
 
   return (
     <div className="auth-form">
-      <Link to="/" className='auth-form__link'>
+      <Link to="/" className='auth-form__link hover'>
         <div className="logo"></div>
       </Link>
       <h2 className="auth-form__title">{title}</h2>
@@ -23,7 +23,7 @@ function AuthForm({ title, password, buttonText, authText, authLink, authTextLin
             (
               <>
                 <label className="auth-form__label" for="auth-form-name">Имя</label>
-                <input className="auth-form__input"
+                <input className="auth-form__input hover"
                   type="text"
                   name="name"
                   placeholder="Имя"
@@ -37,7 +37,7 @@ function AuthForm({ title, password, buttonText, authText, authLink, authTextLin
             ) : (null)}
 
           <label className="auth-form__label" for="auth-form-email">E-mail</label>
-          <input className="auth-form__input"
+          <input className="auth-form__input hover"
             type="email"
             name="email"
             placeholder="E-mail"
@@ -48,8 +48,8 @@ function AuthForm({ title, password, buttonText, authText, authLink, authTextLin
           />
           <span className="auth-form__message-error"></span>
 
-          <label className="auth-form__label" for="auth-form-password">Пароль</label>
-          <input className="auth-form__input auth-form__input_error"
+          <label className="auth-form__label " for="auth-form-password">Пароль</label>
+          <input className="auth-form__input auth-form__input_error hover"
             type="password"
             name="password"
             placeholder="Пароль"
@@ -65,10 +65,10 @@ function AuthForm({ title, password, buttonText, authText, authLink, authTextLin
 
         </fieldset>
 
-        <button className="auth-form__submit-btn" type="submit">{buttonText}</button>
+        <button className="auth-form__submit-btn hover" type="submit">{buttonText}</button>
 
         <div className="auth-form__auth">
-          <p className="auth-form__auth-text">{authText} <Link to={authLink} className="auth-form__auth-link">{authTextLink}</Link> </p>
+          <p className="auth-form__auth-text">{authText} <Link to={authLink} className="auth-form__auth-link hover">{authTextLink}</Link> </p>
         </div>
 
       </form>

@@ -53,9 +53,9 @@ function Profile() {
             </label>
           </fieldset>
 
-          <button className="profile__submit-btn" type="submit">Редактировать</button>
+          <button className="profile__submit-btn hover" type="submit">Редактировать</button>
         </form>
-        <button className="profile__close-btn" type="button">Выйти из аккаунта</button>
+        <button className="profile__close-btn hover" type="button">Выйти из аккаунта</button>
       </div>
 
     </div>

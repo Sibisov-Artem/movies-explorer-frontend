@@ -16,7 +16,7 @@
 .movies-card__info-wrapper {
   display: flex;
   justify-content: space-between;
-  margin: 0 24px 16px 16px;
+  margin: 0 21px 16px 16px;
 }
 
 .movies-card__info {
@@ -67,8 +67,8 @@
 
 .movies-card__delete-btn {
   opacity: 0;
-  width: 16.84px;
-  height: 21.58px;
+  width: 18px;
+  height: 18px;
   background-image: url(../../images/delete-btn.svg);
   background-position: center;
   background-repeat: no-repeat;
@@ -76,6 +76,12 @@
   background-color: transparent;
   padding: 17px 7px 0 7px;
   transition: all .4s ease;
+  border-radius: 9px;
+}
+
+.movies-card__delete-btn:hover {
+  background-color: #2F2F2F;
+  transform: scale(1.5);
 }
 
 .movies-card:hover .movies-card__delete-btn {

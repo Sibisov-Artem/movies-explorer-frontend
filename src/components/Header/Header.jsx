@@ -27,7 +27,7 @@ function Header() {
         location.pathname === "/profile" ?
         (
           <header className={`header section header__background_theme_${location.pathname === "/" ? "main" : "other"}`}>
-            <Link to="/" className="header__link">
+            <Link to="/" className="header__link hover">
               <div className="logo"></div>
             </Link>
             <Navigation
