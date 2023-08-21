@@ -1,6 +1,6 @@
 import './Header.css';
 
-import { useLocation } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
 import { useState } from 'react';
 
 import Navigation from '../Navigation/Navigation';
@@ -27,7 +27,9 @@ function Header() {
         location.pathname === "/profile" ?
         (
           <header className={`header section header__background_theme_${location.pathname === "/" ? "main" : "other"}`}>
-            <div className="logo"></div>
+            <Link to="/" className="header__link">
+              <div className="logo"></div>
+            </Link>
             <Navigation
               burgerActive={burgerActive} />
             {location.pathname === "/" ?

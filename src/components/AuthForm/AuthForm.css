@@ -4,6 +4,11 @@
   padding: 70px 0;
 }
 
+.auth-form__link {
+  display: inline-block;
+  vertical-align: bottom;
+}
+
 .auth-form__title {
   font-size: 24px;
   font-weight: 500;

@@ -12,7 +12,9 @@ function AuthForm({ title, password, buttonText, authText, authLink, authTextLin
 
   return (
     <div className="auth-form">
-      <div className="logo"></div>
+      <Link to="/" className='auth-form__link'>
+        <div className="logo"></div>
+      </Link>
       <h2 className="auth-form__title">{title}</h2>
       <form className="auth-form__form" onSubmit={onSubmit}>
 
