@@ -66,6 +66,7 @@
 }
 
 .movies-card__delete-btn {
+  opacity: 0;
   width: 16.84px;
   height: 21.58px;
   background-image: url(../../images/delete-btn.svg);
@@ -74,6 +75,11 @@
   border: none;
   background-color: transparent;
   padding: 17px 7px 0 7px;
+  transition: all .4s ease;
+}
+
+.movies-card:hover .movies-card__delete-btn {
+  opacity: 1;
 }
 
 /* ----------------------------------------------- */

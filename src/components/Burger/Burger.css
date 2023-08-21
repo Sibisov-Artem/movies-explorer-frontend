@@ -19,7 +19,7 @@
   height: 3px;
   width: 100%;
   background-color: #FFF;
-  transition: all .4s ease 0s;
+  transition: all .4s ease;
 }
 
 .burger::after {
@@ -29,7 +29,7 @@
   height: 3px;
   width: 100%;
   background-color: #FFF;
-  transition: all .4s ease 0s;
+  transition: all .4s ease;
 }
 
 .burger__central-line {
