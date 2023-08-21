@@ -26,11 +26,32 @@ function Navigation({ burgerActive }) {
             </li>
 
             <li class="navigation__item">
-              <Link to="/movies" className="navigation__link navigation__link_place_other navigation__link_target_movies hover">Фильмы</Link>
+              {window.innerWidth > 769 ? (
+                <Link to="/movies" className={`${location.pathname === "/movies" ?
+                  "navigation__link navigation__link_place_other navigation__link_active_panel hover" :
+                  "navigation__link navigation__link_place_other navigation__link_target_movies hover"}`}>
+                  Фильмы</Link>
+              ) : (
+                <Link to="/movies" className={`${location.pathname === "/movies" ?
+                  "navigation__link navigation__link_place_other navigation__link_active_menu hover" :
+                  "navigation__link navigation__link_place_other navigation__link_target_movies hover"}`}>
+                  Фильмы</Link>
+              )}
+
             </li>
 
             <li class="navigation__item">
-              <Link to="/saved-movies" className="navigation__link navigation__link_place_other navigation__link_target_saved-movies hover">Сохранённые фильмы</Link>
+              {window.innerWidth > 769 ? (
+                <Link to="/saved-movies" className={`${location.pathname === "/saved-movies" ?
+                  "navigation__link navigation__link_place_other navigation__link_active_panel hover" :
+                  "navigation__link navigation__link_place_other navigation__link_target_saved-movies hover"}`}>
+                  Сохранённые фильмы</Link>
+              ) : (
+                <Link to="/saved-movies" className={`${location.pathname === "/saved-movies" ?
+                  "navigation__link navigation__link_place_other navigation__link_active_menu hover" :
+                  "navigation__link navigation__link_place_other navigation__link_target_saved-movies hover"}`}>
+                  Сохранённые фильмы</Link>
+              )}
             </li>
 
             <li class="navigation__item navigation__item_target_profile">
