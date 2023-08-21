@@ -7,3 +7,12 @@
   padding: 19px;
   box-sizing: border-box;
 }
+
+/* ----------------------------------------------- */
+
+@media screen and (max-width: 450px) {
+
+  .logo {
+    margin: 0 auto;
+  }
+}
