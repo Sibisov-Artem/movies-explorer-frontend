@@ -1,10 +1,16 @@
 import './MoviesCard.css';
 
 import { useLocation } from 'react-router-dom';
+import { useState } from 'react';
 
 function MoviesCard({ movie }) {
 
   const location = useLocation();
+
+  const [likeActive, setLikeActive] = useState(false);
+  function handleLikeClick() {          // обработчик управления кнопки лайка,
+    setLikeActive(!likeActive);
+  }
 
   return (
     <li className="movies-card">
@@ -14,7 +20,10 @@ function MoviesCard({ movie }) {
           <h2 className="movies-card__title">{movie.nameMovie}</h2>
           <p className="movies-card__duration">{movie.duration}</p>
         </div>
-        <button className={`movies-card__like-btn ${location.pathname === "/saved-movies" && "movies-card__delete-btn"}`}></button>
+        <button className={`movies-card__like-btn
+        ${(movie.isLicked || likeActive) && "movies-card__like-btn_active"}
+        ${location.pathname === "/saved-movies" && "movies-card__delete-btn"}`}
+          onClick={handleLikeClick} ></button>
       </div>
     </li >
   );
