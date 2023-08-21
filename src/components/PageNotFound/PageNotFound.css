@@ -35,3 +35,29 @@
     padding: 408px 0 222px;
   }
 }
+
+/* ----------------------------------------------- */
+
+@media screen and (max-width: 450px) {
+
+  .page-not-found {
+    padding: 329px 0 30px 0;
+  }
+
+  .page-not-found__title {
+    font-size: 80px;
+    line-height: 97px;
+    margin: 0 0 10px 0;
+  }
+
+  .page-not-found__subtitle {
+    font-size: 12px;
+    line-height: 15px;
+  }
+
+  .page-not-found__link {
+    font-size: 12px;
+    line-height: 15px;
+    margin-top: 284px;
+  }
+}
