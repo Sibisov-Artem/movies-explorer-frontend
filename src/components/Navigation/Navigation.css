@@ -119,7 +119,7 @@
     right: 0;
     margin: 0;
     box-sizing: border-box;
-    padding: 159px 0 90px 0;
+    padding: 159px 0 94px 0;
   }
 
   .navigation__item {
@@ -149,7 +149,7 @@
   .navigation__link_target_profile {
     font-size: 13px;
     line-height: 12px;
-    margin: 0;
+    margin-left: 3px;
     display: flex;
     justify-content: center;
   }
@@ -174,5 +174,11 @@
   .navigation__list_main {
     gap: 14px;
     padding-bottom: 1px;
+  }
+
+  .navigation__list_other {
+    gap: 24px;
+    left: 0;
+    padding: 144px 0 49px 0;
   }
 }

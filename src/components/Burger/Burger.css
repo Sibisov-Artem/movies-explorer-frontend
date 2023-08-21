@@ -68,3 +68,15 @@
     display: flex;
   }
 }
+
+/* ----------------------------------------------- */
+
+@media screen and (max-width: 450px) {
+
+  .burger_active {
+    top: 8px;
+    right: 8px;
+    width: 22px;
+    height: 25px;
+  }
+}
