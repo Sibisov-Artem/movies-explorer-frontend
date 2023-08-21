@@ -20,9 +20,10 @@ function MoviesCard({ movie }) {
           <h2 className="movies-card__title">{movie.nameMovie}</h2>
           <p className="movies-card__duration">{movie.duration}</p>
         </div>
-        <button className={`movies-card__like-btn
-        ${(movie.isLicked || likeActive) && "movies-card__like-btn_active"}
-        ${location.pathname === "/saved-movies" && "movies-card__delete-btn"}`}
+        <button className={`
+               ${location.pathname === "/saved-movies" ? "movies-card__delete-btn" : "movies-card__like-btn"}
+               ${location.pathname === "/movies" & (movie.isLicked || likeActive) && "movies-card__like-btn_active"}
+        `}
           onClick={handleLikeClick} ></button>
       </div>
     </li >
