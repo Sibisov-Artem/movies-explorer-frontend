@@ -3,6 +3,6 @@
 }
 
 .hover:hover {
-  opacity: .7;
+  opacity: .75;
   cursor: pointer;
 }
