@@ -2,11 +2,8 @@
   max-width: 396px;
   margin: 0 auto;
   padding: 70px 0;
-}
-
-.auth-form__link {
-  display: inline-block;
-  vertical-align: bottom;
+  display: flex;
+  flex-direction: column;
 }
 
 .auth-form__title {
@@ -109,6 +106,10 @@
   .auth-form {
     max-width: 396px;
     padding: 56px 30px 30px;
+  }
+
+  .auth-form__link {
+    align-self: center;
   }
 
   .auth-form__title {
