@@ -22,7 +22,7 @@ function AuthForm({ title, password, buttonText, authText, authLink, authTextLin
           {location.pathname === "/signup" ?
             (
               <>
-                <label className="auth-form__label" for="auth-form-name">Имя</label>
+                <label className="auth-form__label" htmlFor="auth-form-name">Имя</label>
                 <input className="auth-form__input hover"
                   type="text"
                   name="name"
@@ -36,7 +36,7 @@ function AuthForm({ title, password, buttonText, authText, authLink, authTextLin
               </>
             ) : (null)}
 
-          <label className="auth-form__label" for="auth-form-email">E-mail</label>
+          <label className="auth-form__label" htmlFor="auth-form-email">E-mail</label>
           <input className="auth-form__input hover"
             type="email"
             name="email"
@@ -48,7 +48,7 @@ function AuthForm({ title, password, buttonText, authText, authLink, authTextLin
           />
           <span className="auth-form__message-error"></span>
 
-          <label className="auth-form__label " for="auth-form-password">Пароль</label>
+          <label className="auth-form__label " htmlFor="auth-form-password">Пароль</label>
           <input className="auth-form__input auth-form__input_error hover"
             type="password"
             name="password"
