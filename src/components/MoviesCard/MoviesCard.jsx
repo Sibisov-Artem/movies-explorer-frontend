@@ -24,6 +24,7 @@ function MoviesCard({ movie }) {
                ${location.pathname === "/saved-movies" ? "movies-card__delete-btn" : "movies-card__like-btn"}
                ${location.pathname === "/movies" & (movie.isLicked || likeActive) ? "movies-card__like-btn_active" : ""}
         `}
+          type="button"
           onClick={handleLikeClick} ></button>
       </div>
     </li >
