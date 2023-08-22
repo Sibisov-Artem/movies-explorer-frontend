@@ -12,6 +12,7 @@ function MoviesCardList({ array }) {
         {array.map((movieCard) => (
           <MoviesCard
             movie={movieCard}
+            key={movieCard._id}
           />
         ))}
 
