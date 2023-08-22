@@ -1,0 +1,11 @@
+.root {
+  font-family: 'Inter', Arial, sans-serif;
+  background-color: #202020;
+  min-height: 100vh;
+}
+
+.page {
+  max-width: 1280px;
+  margin: 0 auto;
+  color: #FFF;
+}

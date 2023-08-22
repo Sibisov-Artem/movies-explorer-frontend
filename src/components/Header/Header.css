@@ -1,0 +1,13 @@
+.header {
+  display: flex;
+  padding-top: 18px;
+  padding-bottom: 18px;
+}
+
+.header_background-theme_main {
+  background-color: #073042;
+}
+
+.header_background-theme_other {
+  background-color: #202020;
+}

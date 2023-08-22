@@ -1,0 +1,134 @@
+.about-me {
+  padding-top: 110px;
+  padding-bottom: 106px;
+}
+
+.about-me__info {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 66px;
+  gap: 49px;
+}
+
+.about-me__description {
+  max-width: 600px;
+}
+
+.about-me__subtitle {
+  margin: 0 0 18px 0;
+  font-size: 50px;
+  font-weight: 400;
+  line-height: 58px;
+  letter-spacing: -2px;
+}
+
+.about-me__subline {
+  margin: 0 0 26px 0;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 20px;
+}
+
+.about-me__paragraph {
+  margin: 0 0 99px 0;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 22px;
+}
+
+.about-me__github {
+  color: #FFF;
+  font-size: 14px;
+  font-weight: 500;
+  display: block;
+  text-decoration: none;
+  line-height: 17px;
+}
+
+.about-me__image {
+  width: 270px;
+  height: 327px;
+  border-radius: 10px;
+}
+
+/* -------------------------------------------- */
+
+@media screen and (max-width: 768px) {
+  .about-me {
+    padding: 90px 50px 70px;
+  }
+
+  .about-me__subtitle {
+    margin: 0 0 16px 0;
+    font-size: 40px;
+    line-height: 40px;
+    letter-spacing: -1.6px;
+  }
+
+  .about-me__subline {
+    margin: 0 0 20px 0;
+    font-size: 12px;
+    line-height: 18px;
+  }
+
+  .about-me__paragraph {
+    margin: 0 0 87px 0;
+    font-size: 12px;
+    line-height: 18px;
+  }
+
+  .about-me__image {
+    width: 255px;
+    height: 307px;
+  }
+}
+
+@media screen and (max-width: 655px) {
+
+  .about-me__info {
+    flex-direction: column-reverse;
+    justify-content: space-between;
+  }
+
+  .about-me__image {
+    margin: 0 auto;
+  }
+}
+
+/* ----------------------------------------------- */
+
+@media screen and (max-width: 450px) {
+
+  .about-me {
+    padding: 71px 14px 70px;
+  }
+
+  .about-me__image {
+    width: 292px;
+    height: 352px;
+  }
+
+  .about-me__info {
+    margin-top: 60px;
+    gap: 40px
+  }
+
+  .about-me__subtitle {
+    margin: 0 0 19px 0;
+    font-size: 30px;
+    line-height: 36px;
+    letter-spacing: -1.2px;
+  }
+
+  .about-me__subline {
+    margin: 0 0 20px 0;
+    font-size: 11px;
+    line-height: 16px;
+  }
+
+  .about-me__paragraph {
+    margin: 0 0 40px 0;
+    font-size: 11px;
+    line-height: 16px;
+  }
+}
