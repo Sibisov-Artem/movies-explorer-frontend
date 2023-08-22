@@ -23,7 +23,7 @@ function Profile() {
       <section className="profile section">
 
         <div className="profile__container">
-          <h2 className="profile__title">{`Привет, ${name}!`}</h2>
+          <h1 className="profile__title">{`Привет, ${name}!`}</h1>
           <form className="profile__form" name="profile" onSubmit={onSubmit}>
 
             <fieldset className="profile__input-container">

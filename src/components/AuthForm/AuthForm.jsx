@@ -15,7 +15,7 @@ function AuthForm({ title, password, buttonText, authText, authLink, authTextLin
       <Link to="/" className='auth-form__link hover'>
         <div className="logo"></div>
       </Link>
-      <h2 className="auth-form__title">{title}</h2>
+      <h1 className="auth-form__title">{title}</h1>
       <form className="auth-form__form" onSubmit={onSubmit}>
 
         <fieldset className="auth-form__input-container">
