@@ -6,7 +6,7 @@ function SearchForm() {
 
   return (
 
-    <div className="search-form">
+    <section className="search-form">
 
       <form className="search-form__form">
 
@@ -15,14 +15,14 @@ function SearchForm() {
           <button className="search-form__submit-btn hover" type="submit"></button>
         </fieldset>
 
+        <div className="search-form__filter">
+          <FilterCheckbox />
+          <p className="search-form__filter-caption">Короткометражки</p>
+        </div>
+
       </form>
 
-      <div className="search-form__filter">
-        <FilterCheckbox />
-        <p className="search-form__filter-caption">Короткометражки</p>
-      </div>
-
-    </div >
+    </section >
   );
 }
 
