@@ -9,7 +9,7 @@ function Navigation({ burgerActive }) {
   return (
     <nav className="navigation">
       {location.pathname === "/" ? (
-        <ul className="navigation__list_main">
+        <ul className="navigation__list navigation__list_main">
           <li className="navigation__item">
             <Link to="/signup" className="navigation__link navigation__link_place_main hover">Регистрация</Link>
           </li>
@@ -18,8 +18,8 @@ function Navigation({ burgerActive }) {
           </li>
         </ul>
       ) : (
-        <div className={`navigation__opacity-background ${burgerActive && "navigation__opacity-background_active"}`}>
-          <ul className="navigation__list_other">
+        <div className={`navigation__opacity-background ${burgerActive ? "navigation__opacity-background_active" : ""}`}>
+          <ul className="navigation__list navigation__list_other">
 
             <li className="navigation__item navigation__item-burger">
               <Link to="/" className="navigation__link navigation__link_place_other hover">Главная</Link>

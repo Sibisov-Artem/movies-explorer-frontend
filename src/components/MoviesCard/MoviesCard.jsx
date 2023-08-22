@@ -22,7 +22,7 @@ function MoviesCard({ movie }) {
         </div>
         <button className={`hover
                ${location.pathname === "/saved-movies" ? "movies-card__delete-btn" : "movies-card__like-btn"}
-               ${location.pathname === "/movies" & (movie.isLicked || likeActive) && "movies-card__like-btn_active"}
+               ${location.pathname === "/movies" & (movie.isLicked || likeActive) ? "movies-card__like-btn_active" : ""}
         `}
           onClick={handleLikeClick} ></button>
       </div>

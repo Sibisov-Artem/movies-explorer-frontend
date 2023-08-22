@@ -19,10 +19,6 @@
   .section {
     padding: 0 30px;
   }
-
-  .section__additional-padding {
-    padding: 0 50px;
-  }
 }
 
 /* ----------------------------------------------- */
@@ -30,10 +26,6 @@
 @media screen and (max-width: 450px) {
   .section {
     padding: 0 14px;
-  }
-
-  .section__additional-padding {
-    padding: 18px;
   }
 
   .section__title {

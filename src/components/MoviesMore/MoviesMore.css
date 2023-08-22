@@ -15,7 +15,7 @@
   line-height: 15px;
 }
 
-.movies-more__not-visible {
+.movies-more_not-visible {
   padding-top: 158px;
   padding-bottom: 80px;
 }
@@ -23,7 +23,7 @@
 /* ----------------------------------------------- */
 
 @media screen and (max-width: 768px) {
-  .movies-more__not-visible {
+  .movies-more_not-visible {
     padding-top: 60px;
   }
 }

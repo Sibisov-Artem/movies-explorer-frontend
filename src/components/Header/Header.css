@@ -4,10 +4,10 @@
   padding-bottom: 18px;
 }
 
-.header__background_theme_main {
+.header_background-theme_main {
   background-color: #073042;
 }
 
-.header__background_theme_other {
+.header_background-theme_other {
   background-color: #202020;
 }

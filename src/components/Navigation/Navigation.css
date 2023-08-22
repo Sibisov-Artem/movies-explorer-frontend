@@ -4,13 +4,16 @@
   width: 100%;
 }
 
-.navigation__list_main {
+.navigation__list {
   display: flex;
-  margin: 0 0 0 auto;
   padding: 0;
   list-style: none;
-  gap: 30px;
   align-items: center;
+}
+
+.navigation__list_main {
+  margin: 0 0 0 auto;
+  gap: 30px;
 }
 
 .navigation__opacity-background {
@@ -18,11 +21,7 @@
 }
 
 .navigation__list_other {
-  display: flex;
-  align-items: center;
   margin: 0 0 0 48px;
-  padding: 0;
-  list-style: none;
   gap: 16px;
 }
 

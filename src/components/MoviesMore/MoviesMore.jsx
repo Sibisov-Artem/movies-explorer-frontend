@@ -14,7 +14,7 @@ function MoviesMore() {
             <button className="movies-more__btn hover">Ещё</button>
           </div>
         ) : (
-          <div className="movies-more movies-more__not-visible section"></div>
+          <div className="movies-more movies-more_not-visible section"></div>
         )}
 
     </>
