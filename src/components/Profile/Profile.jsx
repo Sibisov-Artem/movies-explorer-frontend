@@ -1,6 +1,7 @@
 import './Profile.css';
 
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 function Profile() {
 
@@ -56,7 +57,7 @@ function Profile() {
 
             <button className="profile__submit-btn hover" type="submit">Редактировать</button>
           </form>
-          <button className="profile__close-btn hover" type="button">Выйти из аккаунта</button>
+          <Link to="/" className="profile__close-btn hover">Выйти из аккаунта</Link>
         </div>
 
       </section>
