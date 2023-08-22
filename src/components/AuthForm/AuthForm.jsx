@@ -11,7 +11,7 @@ function AuthForm({ title, password, buttonText, authText, authLink, authTextLin
   }
 
   return (
-    <div className="auth-form">
+    <section className="auth-form">
       <Link to="/" className='auth-form__link hover'>
         <div className="logo"></div>
       </Link>
@@ -73,7 +73,7 @@ function AuthForm({ title, password, buttonText, authText, authLink, authTextLin
 
       </form>
 
-    </div>
+    </section>
   );
 }
 
