@@ -10,10 +10,10 @@ function Navigation({ burgerActive }) {
     <nav className="navigation">
       {location.pathname === "/" ? (
         <ul className="navigation__list_main">
-          <li class="navigation__item">
+          <li className="navigation__item">
             <Link to="/signup" className="navigation__link navigation__link_place_main hover">Регистрация</Link>
           </li>
-          <li class="navigation__item">
+          <li className="navigation__item">
             <Link to="/signin" className="navigation__link navigation__link_place_main navigation__link_target_signin hover">Войти</Link>
           </li>
         </ul>
@@ -21,11 +21,11 @@ function Navigation({ burgerActive }) {
         <div className={`navigation__opacity-background ${burgerActive && "navigation__opacity-background_active"}`}>
           <ul className="navigation__list_other">
 
-            <li class="navigation__item navigation__item-burger">
+            <li className="navigation__item navigation__item-burger">
               <Link to="/" className="navigation__link navigation__link_place_other hover">Главная</Link>
             </li>
 
-            <li class="navigation__item">
+            <li className="navigation__item">
               {window.innerWidth > 769 ? (
                 <Link to="/movies" className={`${location.pathname === "/movies" ?
                   "navigation__link navigation__link_place_other navigation__link_active_panel hover" :
@@ -40,7 +40,7 @@ function Navigation({ burgerActive }) {
 
             </li>
 
-            <li class="navigation__item">
+            <li className="navigation__item">
               {window.innerWidth > 769 ? (
                 <Link to="/saved-movies" className={`${location.pathname === "/saved-movies" ?
                   "navigation__link navigation__link_place_other navigation__link_active_panel hover" :
@@ -54,7 +54,7 @@ function Navigation({ burgerActive }) {
               )}
             </li>
 
-            <li class="navigation__item navigation__item_target_profile">
+            <li className="navigation__item navigation__item_target_profile">
               <Link to="/profile" className="navigation__link navigation__link_place_other navigation__link_target_profile hover">
                 Аккаунт <div className="navigation__profile-icon" > </div>
               </Link></li>
