@@ -66,11 +66,10 @@
   color: #FFF;
   background-color: #202020;
   border: none;
-  width: 100%;
   margin-bottom: 16px;
   padding: 0;
-  display: block;
   line-height: 16px;
+  vertical-align: bottom;
 }
 
 .profile__close-btn {
@@ -79,11 +78,10 @@
   color: #EE3465;
   background-color: #202020;
   border: none;
-  width: 100%;
   padding: 0;
-  display: block;
   line-height: 16px;
   text-decoration: none;
+  vertical-align: top;
 }
 
 /* ----------------------------------------------- */
