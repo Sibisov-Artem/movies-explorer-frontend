@@ -1,5 +1,8 @@
 import './App.css';
+import { mainApi } from '../../utils/MainApi';
+
 import { Routes, Route } from 'react-router-dom';
+import { useEffect } from 'react';
 
 import Header from '../Header/Header';
 import Main from '../Main/Main';
@@ -12,6 +15,18 @@ import Login from '../Login/Login';
 import PageNotFound from '../PageNotFound/PageNotFound';
 
 function App() {
+
+  useEffect(() => {
+    mainApi.getUser()
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((err) => {
+        console.log(err); // выведем ошибку в консоль
+      });
+  }, [])
+
+
   return (
     <div className="root">
       <div className="page">

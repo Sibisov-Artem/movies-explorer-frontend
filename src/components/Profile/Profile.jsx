@@ -44,7 +44,7 @@ function Profile() {
               <label className="profile__label">E-mail
                 <input className="profile__input"
                   type="email"
-                  name="info"
+                  name="email"
                   placeholder="E-mail"
                   required
                   minLength="2" maxLength="50"
