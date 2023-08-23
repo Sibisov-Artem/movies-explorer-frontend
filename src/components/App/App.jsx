@@ -1,5 +1,6 @@
 import './App.css';
 import { mainApi } from '../../utils/MainApi';
+import { moviesApi } from '../../utils/MoviesApi';
 
 import { Routes, Route } from 'react-router-dom';
 import { useEffect } from 'react';
@@ -16,6 +17,7 @@ import PageNotFound from '../PageNotFound/PageNotFound';
 
 function App() {
 
+  // Проверка///////////////////////////////////////////////////////////////////
   useEffect(() => {
     mainApi.getUser()
       .then((data) => {
@@ -25,7 +27,19 @@ function App() {
         console.log(err); // выведем ошибку в консоль
       });
   }, [])
+  ////////////////////////////////////////////////////////////////////////////
 
+  // Проверка///////////////////////////////////////////////////////////////////
+  useEffect(() => {
+    moviesApi.getMovies()
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((err) => {
+        console.log(err); // выведем ошибку в консоль
+      });
+  }, [])
+  ////////////////////////////////////////////////////////////////////////////
 
   return (
     <div className="root">
