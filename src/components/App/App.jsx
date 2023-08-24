@@ -2,7 +2,7 @@ import './App.css';
 import { mainApi } from '../../utils/MainApi';
 import { moviesApi } from '../../utils/MoviesApi';
 
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
 import Header from '../Header/Header';
@@ -18,6 +18,8 @@ import PageNotFound from '../PageNotFound/PageNotFound';
 import { CurrentUserContext } from '../../context/CurrentUserContext';
 
 function App() {
+
+  const navigate = useNavigate();
 
   const [movieCards, setMoviesCards] = useState([]);
 
@@ -56,6 +58,16 @@ function App() {
       })
   }
 
+  function handleRegistration(inputData) {
+    mainApi.register(inputData)
+      .then((data) => {
+        navigate('/signin');
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="root">
@@ -68,7 +80,7 @@ function App() {
             />} />
             <Route path='/saved-movies' element={<SavedMovies />} />
             <Route path='/profile' element={<Profile onUpdateUser={handleUpdateUser} />} />
-            <Route path='/signup' element={<Register />} />
+            <Route path='/signup' element={<Register onRegistration={handleRegistration} />} />
             <Route path='/signin' element={<Login />} />
             <Route path='/*' element={<PageNotFound />} />
           </Routes>

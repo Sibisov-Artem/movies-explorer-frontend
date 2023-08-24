@@ -2,13 +2,14 @@ import './AuthForm.css'
 
 import { Link, useLocation } from 'react-router-dom';
 
-function AuthForm({ title, password, buttonText, authText, authLink, authTextLink }) {
+function AuthForm({ title, buttonText, authText, authLink, authTextLink, name, email, password, onSubmit,
+  handleChangeName, handleChangeEmail, handleChangePassword }) {
 
   const location = useLocation();
 
-  function onSubmit(e) {
-    e.preventDefault();
-  }
+  // function onSubmit(e) {
+  //   e.preventDefault();
+  // }
 
   return (
     <section className="auth-form">
@@ -30,7 +31,8 @@ function AuthForm({ title, password, buttonText, authText, authLink, authTextLin
                   required
                   minLength="2" maxLength="40"
                   id="auth-form-name"
-                  defaultValue="Виталий"
+                  value={name}
+                  onChange={handleChangeName}
                 />
                 <span className="auth-form__message-error"></span>
               </>
@@ -44,7 +46,8 @@ function AuthForm({ title, password, buttonText, authText, authLink, authTextLin
             required
             minLength="2" maxLength="200"
             id="auth-form-email"
-            defaultValue="pochta@yandex.ru"
+            value={email}
+            onChange={handleChangeEmail}
           />
           <span className="auth-form__message-error"></span>
 
@@ -56,7 +59,8 @@ function AuthForm({ title, password, buttonText, authText, authLink, authTextLin
             required
             minLength="2" maxLength="200"
             id="auth-form-password"
-            defaultValue={password}
+            value={password}
+            onChange={handleChangePassword}
           />
           {location.pathname === "/signup" ?
             (
