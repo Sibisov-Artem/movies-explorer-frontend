@@ -31,7 +31,7 @@ function AuthForm({ title, buttonText, authText, authLink, authTextLink, name, e
                   required
                   minLength="2" maxLength="40"
                   id="auth-form-name"
-                  value={name}
+                  defaultValue={name}
                   onChange={handleChangeName}
                 />
                 <span className="auth-form__message-error"></span>
@@ -46,7 +46,7 @@ function AuthForm({ title, buttonText, authText, authLink, authTextLink, name, e
             required
             minLength="2" maxLength="200"
             id="auth-form-email"
-            value={email}
+            defaultValue={email}
             onChange={handleChangeEmail}
           />
           <span className="auth-form__message-error"></span>
@@ -59,7 +59,7 @@ function AuthForm({ title, buttonText, authText, authLink, authTextLink, name, e
             required
             minLength="2" maxLength="200"
             id="auth-form-password"
-            value={password}
+            defaultValue={password}
             onChange={handleChangePassword}
           />
           {location.pathname === "/signup" ?

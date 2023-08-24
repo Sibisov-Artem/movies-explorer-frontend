@@ -15,8 +15,7 @@ class MainApi {
   }
 
   _giveHeaders() {
-    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGU3N2Q5ODdiZjcxNDcxOTk4YzZjNjUiLCJpYXQiOjE2OTI4OTI1NzEsImV4cCI6MTY5MzQ5NzM3MX0.YEMIXqrlwhk2Xzs0yAb3WEP23cnP2HfAJXQXx5jTqPc'
-    //localStorage.getItem('token');
+    const token = localStorage.getItem('token');
     const newHeaderObj = {
       authorization: `Bearer ${token}`,
       'Content-Type': 'application/json'
