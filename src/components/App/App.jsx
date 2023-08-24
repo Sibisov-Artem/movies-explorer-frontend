@@ -15,9 +15,13 @@ import Register from '../Register/Register';
 import Login from '../Login/Login';
 import PageNotFound from '../PageNotFound/PageNotFound';
 
+import { CurrentUserContext } from '../../context/CurrentUserContext';
+
 function App() {
 
   const [movieCards, setMoviesCards] = useState([]);
+
+  const [currentUser, setCurrentUser] = useState({ name: '', email: '' });
 
   useEffect(() => {
     moviesApi.getMovies()
@@ -31,25 +35,48 @@ function App() {
   }, [])
   ////////////////////////////////////////////////////////////////////////////
 
+  useEffect(() => {
+    mainApi.getUser()
+      .then((data) => {
+        setCurrentUser(data);
+        console.log(data);
+      })
+      .catch((err) => {
+        console.log(err); // выведем ошибку в консоль
+      });
+  }, [])
+
+  function handleUpdateUser(inputData) {
+    mainApi.editUser(inputData)
+      .then((data) => {
+        setCurrentUser(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+  }
+
   return (
-    <div className="root">
-      <div className="page">
-        <Header />
+    <CurrentUserContext.Provider value={currentUser}>
+      <div className="root">
+        <div className="page">
+          <Header />
 
-        <Routes>
-          <Route path='/' element={<Main />} />
-          <Route path='/movies' element={<Movies movieCards={movieCards}
-          />} />
-          <Route path='/saved-movies' element={<SavedMovies />} />
-          <Route path='/profile' element={<Profile />} />
-          <Route path='/signup' element={<Register />} />
-          <Route path='/signin' element={<Login />} />
-          <Route path='/*' element={<PageNotFound />} />
-        </Routes>
+          <Routes>
+            <Route path='/' element={<Main />} />
+            <Route path='/movies' element={<Movies movieCards={movieCards}
+            />} />
+            <Route path='/saved-movies' element={<SavedMovies />} />
+            <Route path='/profile' element={<Profile onUpdateUser={handleUpdateUser} />} />
+            <Route path='/signup' element={<Register />} />
+            <Route path='/signin' element={<Login />} />
+            <Route path='/*' element={<PageNotFound />} />
+          </Routes>
 
-        <Footer />
+          <Footer />
+        </div>
       </div>
-    </div>
+    </CurrentUserContext.Provider>
   );
 }
 

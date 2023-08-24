@@ -1,12 +1,21 @@
 import './Profile.css';
 
-import { useState } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-function Profile() {
+import { CurrentUserContext } from '../../context/CurrentUserContext';
 
-  const [name, setName] = useState('Виталий');
-  const [email, setEmail] = useState('pochta@yandex.ru');
+function Profile({ onUpdateUser }) {
+
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+
+  const currentUser = useContext(CurrentUserContext);
+
+  useEffect(() => {
+    setName(currentUser.name);
+    setEmail(currentUser.email);
+  }, [currentUser]);
 
   function handleChangeName(e) {
     setName(e.target.value);
@@ -17,14 +26,16 @@ function Profile() {
 
   function onSubmit(e) {
     e.preventDefault();
+    // Передаём значения управляемых компонентов во внешний обработчик
+    onUpdateUser({ name, email });
   }
-
+  //===============================================================================
   return (
     <main className="main">
       <section className="profile section">
 
         <div className="profile__container">
-          <h1 className="profile__title">{`Привет, ${name}!`}</h1>
+          <h1 className="profile__title">{`Привет, ${currentUser.name}!`}</h1>
           <form className="profile__form" name="profile" onSubmit={onSubmit}>
 
             <fieldset className="profile__input-container">
