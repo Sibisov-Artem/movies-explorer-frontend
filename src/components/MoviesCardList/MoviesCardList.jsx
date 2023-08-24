@@ -4,15 +4,15 @@ import './MoviesCardList.css';
 
 import MoviesCard from '../MoviesCard/MoviesCard';
 
-function MoviesCardList({ array }) {
+function MoviesCardList({ movieCards }) {
   return (
     <section className="movies-cards">
       <ul className="movies-cards__grid">
 
-        {array.map((movieCard) => (
+        {movieCards.map((movieCard) => (
           <MoviesCard
-            movie={movieCard}
-            key={movieCard._id}
+            movieCard={movieCard}
+            key={movieCard.id}
           />
         ))}
 

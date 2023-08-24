@@ -4,14 +4,12 @@ import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import MoviesMore from '../MoviesMore/MoviesMore';
 
-import { moviesArray } from '../../utils/moviesArray'
-
-function Movies() {
+function Movies({ movieCards }) {
   return (
     <main className="movies">
       <SearchForm />
       <MoviesCardList
-        array={moviesArray} />
+        movieCards={movieCards} />
       <MoviesMore />
     </main>
   );

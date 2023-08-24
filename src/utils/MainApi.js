@@ -15,7 +15,7 @@ class MainApi {
   }
 
   _giveHeaders() {
-    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGU2NDQzOGRhNDJjMGQ2MmM1MTI0OTQiLCJpYXQiOjE2OTI4MTIzNTIsImV4cCI6MTY5MzQxNzE1Mn0.1fqhN5ppzwHNIKir5qdmu3ckXyp7RZPog6IIZAsNwp4'
+    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGU2NDQzOGRhNDJjMGQ2MmM1MTI0OTQiLCJpYXQiOjE2OTI4NzcxMDksImV4cCI6MTY5MzQ4MTkwOX0.01gq6Mo5Mwyw62lxRUKj411pI-L5ZBgXRYmHdFvo9zs'
     //localStorage.getItem('token');
     const newHeaderObj = {
       authorization: `Bearer ${token}`,
