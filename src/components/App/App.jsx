@@ -24,6 +24,7 @@ function App() {
   const navigate = useNavigate();
 
   const [movieCards, setMoviesCards] = useState([]);
+  const [savedMovieCards, setSavedMovieCards] = useState([]);
 
   const [currentUser, setCurrentUser] = useState({ name: '', email: '' });
 
@@ -38,6 +39,7 @@ function App() {
           setLoggedIn(true);
           navigate(location.pathname); //чтоб оставаться при обновлении страницы на том же месте где и были
           setCurrentUser(data);
+          getUserMovies();
         })
         .catch((err) => {
           console.log(err); // выведем ошибку в консоль
@@ -89,6 +91,18 @@ function App() {
       });
   }
 
+  // запрос сохраненных пользователем фильмов
+  function getUserMovies() {
+    mainApi
+      .getUserMovies()
+      .then((savedMovies) => {
+        setSavedMovieCards(savedMovies);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  }
+
   useEffect(() => {
     handleCheckToken();
     if (loggedIn) {
@@ -130,7 +144,7 @@ function App() {
             <Route path='/' element={<Main />} />
             <Route path='/movies' element={<Movies movieCards={movieCards}
             />} />
-            <Route path='/saved-movies' element={<SavedMovies />} />
+            <Route path='/saved-movies' element={<SavedMovies movieCards={savedMovieCards} />} />
             <Route path='/profile' element={<Profile
               onUpdateUser={handleUpdateUser}
               onSignOut={onSignOut} />} />

@@ -4,14 +4,13 @@ import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import MoviesMore from '../MoviesMore/MoviesMore';
 
-import { savedMoviesArray } from '../../utils/moviesArray'
 
-function SavedMovies() {
+function SavedMovies({ movieCards }) {
   return (
     <main className="saved-movies">
       <SearchForm />
       <MoviesCardList
-        array={savedMoviesArray} />
+        movieCards={movieCards} />
       <MoviesMore />
     </main>
   );
