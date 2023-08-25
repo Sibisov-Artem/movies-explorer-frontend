@@ -104,29 +104,16 @@ function App() {
   }
 
   useEffect(() => {
-    handleCheckToken();
     if (loggedIn) {
-      moviesApi.getMovies()
+      mainApi.getUser()
         .then((data) => {
-          setMoviesCards(data);
+          setCurrentUser(data);
           console.log(data);
         })
         .catch((err) => {
           console.log(err); // выведем ошибку в консоль
         });
     }
-  }, [])
-  ////////////////////////////////////////////////////////////////////////////
-
-  useEffect(() => {
-    mainApi.getUser()
-      .then((data) => {
-        setCurrentUser(data);
-        console.log(data);
-      })
-      .catch((err) => {
-        console.log(err); // выведем ошибку в консоль
-      });
   }, [])
 
 
