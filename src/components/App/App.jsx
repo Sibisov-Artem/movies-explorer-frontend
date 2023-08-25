@@ -62,6 +62,11 @@ function App() {
       })
   }
 
+  function onSignOut() {
+    localStorage.removeItem('token');
+    setLoggedIn(false);
+  }
+
   function handleRegistration(inputData) {
     mainApi.register(inputData)
       .then((data) => {
@@ -111,6 +116,10 @@ function App() {
   }, [])
 
 
+  useEffect(() => {
+    handleCheckToken();
+  }, [loggedIn])
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="root">
@@ -122,7 +131,9 @@ function App() {
             <Route path='/movies' element={<Movies movieCards={movieCards}
             />} />
             <Route path='/saved-movies' element={<SavedMovies />} />
-            <Route path='/profile' element={<Profile onUpdateUser={handleUpdateUser} />} />
+            <Route path='/profile' element={<Profile
+              onUpdateUser={handleUpdateUser}
+              onSignOut={onSignOut} />} />
             <Route path='/signup' element={<Register onRegistration={handleRegistration} />} />
             <Route path='/signin' element={<Login onAuthorization={handleAuthorization} />} />
             <Route path='/*' element={<PageNotFound />} />

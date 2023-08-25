@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 import { CurrentUserContext } from '../../context/CurrentUserContext';
 
-function Profile({ onUpdateUser }) {
+function Profile({ onUpdateUser, onSignOut }) {
 
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -68,7 +68,7 @@ function Profile({ onUpdateUser }) {
 
             <button className="profile__submit-btn hover" type="submit">Редактировать</button>
           </form>
-          <Link to="/" className="profile__close-btn hover">Выйти из аккаунта</Link>
+          <Link to="/" className="profile__close-btn hover" onClick={onSignOut}>Выйти из аккаунта</Link>
         </div>
 
       </section>
