@@ -2,7 +2,7 @@ import './MoviesCard.css';
 
 import { useLocation } from 'react-router-dom';
 
-function MoviesCard({ movieCard, saveActive, handleDeleteClick, onMovieCardLike }) {
+function MoviesCard({ movieCard, saveActive, onMovieCardLikeOff, onMovieCardLike }) {
 
   const location = useLocation();
 
@@ -10,6 +10,11 @@ function MoviesCard({ movieCard, saveActive, handleDeleteClick, onMovieCardLike 
 
   function handleLikeClick() {
     onMovieCardLike(movieCard)
+    console.log(movieCard)
+  }
+
+  function handleDeleteClick() {
+    onMovieCardLikeOff(movieCard)
     console.log(movieCard)
   }
 

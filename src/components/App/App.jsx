@@ -124,6 +124,19 @@ function App() {
       });
   }
 
+  function deleteMovieCard(movie) {
+    const movieForDelete = savedMovieCards.find((c) => c.movieId === movie.id || movie.movieId);
+
+    mainApi
+      .deleteUserMovie(movieForDelete._id)
+      .then(() => {
+        setSavedMovieCards((state) => state.filter((c) => c._id !== movieForDelete._id));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
   useEffect(() => {
     if (loggedIn) {
       mainApi.getUser()
@@ -136,7 +149,6 @@ function App() {
         });
     }
   }, [])
-
 
   useEffect(() => {
     handleCheckToken();
@@ -153,10 +165,14 @@ function App() {
             <Route path='/movies' element={<Movies
               movieCards={movieCards}
               saveActive={saveMovieCardsActive}
-              // handleDeleteClick={handleDeleteClick}
               onMovieCardLike={saveMovieCard}
+              onMovieCardLikeOff={deleteMovieCard}
             />} />
-            <Route path='/saved-movies' element={<SavedMovies movieCards={savedMovieCards} saveActive={saveMovieCardsActive} />} />
+
+            <Route path='/saved-movies' element={<SavedMovies
+              movieCards={savedMovieCards}
+              onMovieCardLikeOff={deleteMovieCard}
+            />} />
             <Route path='/profile' element={<Profile
               onUpdateUser={handleUpdateUser}
               onSignOut={onSignOut} />} />

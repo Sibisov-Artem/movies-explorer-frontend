@@ -1,10 +1,9 @@
 import './MoviesCardList.css';
 
-
-
 import MoviesCard from '../MoviesCard/MoviesCard';
 
-function MoviesCardList({ movieCards, saveActive, handleDeleteClick, onMovieCardLike }) {
+function MoviesCardList({ movieCards, saveActive, onMovieCardLikeOff, onMovieCardLike }) {
+
   return (
     <section className="movies-cards">
       <ul className="movies-cards__grid">
@@ -12,10 +11,10 @@ function MoviesCardList({ movieCards, saveActive, handleDeleteClick, onMovieCard
         {movieCards.map((movieCard) => (
           <MoviesCard
             movieCard={movieCard}
-            key={movieCard.id}
+            key={movieCard.id || movieCard._id}
             saveActive={saveActive}
-            handleDeleteClick={handleDeleteClick}
             onMovieCardLike={onMovieCardLike}
+            onMovieCardLikeOff={onMovieCardLikeOff}
           />
         ))}
 
