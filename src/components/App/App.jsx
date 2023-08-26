@@ -47,6 +47,7 @@ function App() {
       moviesApi.getMovies()
         .then((data) => {
           setMoviesCards(data);
+          console.log(data);
         })
         .catch((err) => {
           console.log(err); // выведем ошибку в консоль
@@ -103,6 +104,26 @@ function App() {
       });
   }
 
+  function saveMovieCardsActive(movieCard) {
+    // function sayTrue() {
+    return savedMovieCards.some(
+      (c) => c.nameRU === movieCard.nameRU
+    );
+    // }
+    // console.log(sayTrue());
+  }
+
+  function saveMovieCard(movie) {
+    mainApi
+      .addNewUserMovie(movie)
+      .then((newMovie) => {
+        setSavedMovieCards([...savedMovieCards, newMovie]);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
   useEffect(() => {
     if (loggedIn) {
       mainApi.getUser()
@@ -129,9 +150,13 @@ function App() {
 
           <Routes>
             <Route path='/' element={<Main />} />
-            <Route path='/movies' element={<Movies movieCards={movieCards}
+            <Route path='/movies' element={<Movies
+              movieCards={movieCards}
+              saveActive={saveMovieCardsActive}
+              // handleDeleteClick={handleDeleteClick}
+              onMovieCardLike={saveMovieCard}
             />} />
-            <Route path='/saved-movies' element={<SavedMovies movieCards={savedMovieCards} />} />
+            <Route path='/saved-movies' element={<SavedMovies movieCards={savedMovieCards} saveActive={saveMovieCardsActive} />} />
             <Route path='/profile' element={<Profile
               onUpdateUser={handleUpdateUser}
               onSignOut={onSignOut} />} />
