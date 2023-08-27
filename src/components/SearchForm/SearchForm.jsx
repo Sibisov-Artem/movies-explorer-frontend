@@ -6,7 +6,7 @@ import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 
 
 
-function SearchForm({ onSearchMovie, currentInputQuery }) {
+function SearchForm({ onSearchMovie, currentInputQuery, handleShortFilm, isShortFilm }) {
 
   const [searchQuery, setSearchQuery] = useState('');
 
@@ -42,7 +42,9 @@ function SearchForm({ onSearchMovie, currentInputQuery }) {
         </fieldset>
 
         <div className="search-form__filter">
-          <FilterCheckbox />
+          <FilterCheckbox
+            handleShortFilm={handleShortFilm}
+            isShortFilm={isShortFilm} />
           <p className="search-form__filter-caption">Короткометражки</p>
         </div>
 

@@ -33,6 +33,8 @@ function App() {
 
   const [currentInputQuery, setCurrentInputQuery] = useState('');
 
+  const [isShortFilm, setIsShortFilm] = useState(false);
+
   function handleCheckToken() {
     const token = localStorage.getItem('token');
     if (token) {
@@ -104,7 +106,11 @@ function App() {
           const resultSearchMovie = [];  //сюда будем добавлять результат поиска
           data.forEach((movie) => {
             if (movie.nameRU.toLowerCase().includes(inputSearch.toLowerCase())) { //убрать чувствительность к регистру
-              resultSearchMovie.push(movie);
+              if (isShortFilm) {
+                movie.duration <= 40 && resultSearchMovie.push(movie);
+              } else {
+                resultSearchMovie.push(movie);
+              }
             }
           })
 
@@ -121,7 +127,11 @@ function App() {
       const resultSearchMovie = [];
       movieCards.forEach((movie) => {
         if (movie.nameRU.toLowerCase().includes(inputSearch.toLowerCase())) { //убрать чувствительность к регистру
-          resultSearchMovie.push(movie);
+          if (isShortFilm) {
+            movie.duration <= 40 && resultSearchMovie.push(movie);
+          } else {
+            resultSearchMovie.push(movie);
+          }
         }
       })
 
@@ -130,6 +140,7 @@ function App() {
     }
   }
 
+  // поиск  по инпуту среди сохраненных фильмов
   function handleSearchSaveMovie(inputSearch) {
     const resultSearchSavedMovie = [];
     JSON.parse(localStorage.getItem('savedMovieCards')).forEach((movie) => {
@@ -138,6 +149,10 @@ function App() {
       }
     })
     setSavedMovieCards(resultSearchSavedMovie)
+  }
+
+  function handleShortFilm() {
+    setIsShortFilm(!isShortFilm)
   }
 
   // запрос сохраненных пользователем фильмов
@@ -222,6 +237,8 @@ function App() {
               onMovieCardLikeOff={deleteMovieCard}
               onSearchMovie={handleSearchMovie}
               currentInputQuery={currentInputQuery}
+              handleShortFilm={handleShortFilm}
+              isShortFilm={isShortFilm}
 
             />} />
 

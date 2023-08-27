@@ -10,12 +10,16 @@ function Movies({ movieCards,
   onMovieCardLike,
   onSearchMovie,
   currentInputQuery,
+  handleShortFilm,
+  isShortFilm,
 }) {
   return (
     <main className="movies">
       <SearchForm
         onSearchMovie={onSearchMovie}
         currentInputQuery={currentInputQuery}
+        handleShortFilm={handleShortFilm}
+        isShortFilm={isShortFilm}
       />
 
       <MoviesCardList
