@@ -4,10 +4,20 @@ import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import MoviesMore from '../MoviesMore/MoviesMore';
 
-function Movies({ movieCards, saveActive, onMovieCardLikeOff, onMovieCardLike }) {
+function Movies({ movieCards,
+  saveActive,
+  onMovieCardLikeOff,
+  onMovieCardLike,
+  onSearchMovie,
+  currentInputQuery,
+}) {
   return (
     <main className="movies">
-      <SearchForm />
+      <SearchForm
+        onSearchMovie={onSearchMovie}
+        currentInputQuery={currentInputQuery}
+      />
+
       <MoviesCardList
         movieCards={movieCards}
         saveActive={saveActive}

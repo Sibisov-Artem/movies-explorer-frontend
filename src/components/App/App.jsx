@@ -23,13 +23,15 @@ function App() {
 
   const navigate = useNavigate();
 
-  const [movieCards, setMoviesCards] = useState([]);
+  const [movieCards, setMovieCards] = useState([]);
   const [savedMovieCards, setSavedMovieCards] = useState([]);
+  const [searchMovieCards, setSearchMovieCards] = useState([]); // для найденных по запросу фильмов
 
   const [currentUser, setCurrentUser] = useState({ name: '', email: '' });
 
   const [loggedIn, setLoggedIn] = useState(false);
 
+  const [currentInputQuery, setCurrentInputQuery] = useState('');
 
   function handleCheckToken() {
     const token = localStorage.getItem('token');
@@ -44,14 +46,14 @@ function App() {
         .catch((err) => {
           console.log(err); // выведем ошибку в консоль
         });
-      moviesApi.getMovies()
-        .then((data) => {
-          setMoviesCards(data);
-          console.log(data);
-        })
-        .catch((err) => {
-          console.log(err); // выведем ошибку в консоль
-        });
+      // moviesApi.getMovies()
+      //   .then((data) => {
+      //     setMovieCards(data);
+      //     console.log(data);
+      //   })
+      //   .catch((err) => {
+      //     console.log(err); // выведем ошибку в консоль
+      //   });
     }
   }
 
@@ -90,6 +92,44 @@ function App() {
       .catch((err) => {
         console.log(err);
       });
+  }
+
+  // поиск фильмов по инпуту
+  function handleSearchMovie(inputSearch) {
+    localStorage.setItem('inputSearch', inputSearch);          // сохраняем инпутовский запрос в локальное хранилще
+    setCurrentInputQuery(localStorage.getItem('inputSearch')); // инпут запрос из хранилища сохраняем в currentInputQuery
+
+    if (movieCards.length === 0) {  // если нет загруженных фильмов
+      moviesApi.getMovies()
+        .then((data) => {
+
+          const resultSearchMovie = [];  //сюда будем добавлять результат поиска
+          data.forEach((movie) => {
+            if (movie.nameRU.toLowerCase().includes(inputSearch.toLowerCase())) { //убрать чувствительность к регистру
+              resultSearchMovie.push(movie);
+            }
+          })
+
+          localStorage.setItem('findedMovies', JSON.stringify(resultSearchMovie));
+          setSearchMovieCards(JSON.parse(localStorage.getItem('findedMovies')))
+          setMovieCards(data); // чтобы в след раз поиск проводить без запроса к api
+        })
+        .catch((err) => {
+          console.log(err); // выведем ошибку в консоль
+        });
+
+      //  в случае если фильмы загружены в movieCards
+    } else {
+      const resultSearchMovie = [];
+      movieCards.forEach((movie) => {
+        if (movie.nameRU.toLowerCase().includes(inputSearch.toLowerCase())) { //убрать чувствительность к регистру
+          resultSearchMovie.push(movie);
+        }
+      })
+
+      localStorage.setItem('findedMovies', JSON.stringify(resultSearchMovie));
+      setSearchMovieCards(JSON.parse(localStorage.getItem('findedMovies')))
+    }
   }
 
   // запрос сохраненных пользователем фильмов
@@ -137,6 +177,8 @@ function App() {
       });
   }
 
+
+
   useEffect(() => {
     if (loggedIn) {
       mainApi.getUser()
@@ -162,11 +204,15 @@ function App() {
 
           <Routes>
             <Route path='/' element={<Main />} />
+
             <Route path='/movies' element={<Movies
-              movieCards={movieCards}
+              movieCards={searchMovieCards}
               saveActive={saveMovieCardsActive}
               onMovieCardLike={saveMovieCard}
               onMovieCardLikeOff={deleteMovieCard}
+              onSearchMovie={handleSearchMovie}
+              currentInputQuery={currentInputQuery}
+
             />} />
 
             <Route path='/saved-movies' element={<SavedMovies
