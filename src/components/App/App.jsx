@@ -96,8 +96,6 @@ function App() {
 
   // поиск фильмов по инпуту
   function handleSearchMovie(inputSearch) {
-    localStorage.setItem('inputSearch', inputSearch);          // сохраняем инпутовский запрос в локальное хранилще
-    setCurrentInputQuery(localStorage.getItem('inputSearch')); // инпут запрос из хранилища сохраняем в currentInputQuery
 
     if (movieCards.length === 0) {  // если нет загруженных фильмов
       moviesApi.getMovies()
@@ -132,6 +130,16 @@ function App() {
     }
   }
 
+  function handleSearchSaveMovie(inputSearch) {
+    const resultSearchSavedMovie = [];
+    JSON.parse(localStorage.getItem('savedMovieCards')).forEach((movie) => {
+      if (movie.nameRU.toLowerCase().includes(inputSearch.toLowerCase())) {
+        resultSearchSavedMovie.push(movie);
+      }
+    })
+    setSavedMovieCards(resultSearchSavedMovie)
+  }
+
   // запрос сохраненных пользователем фильмов
   function getUserMovies() {
     mainApi
@@ -158,6 +166,8 @@ function App() {
       .addNewUserMovie(movie)
       .then((newMovie) => {
         setSavedMovieCards([...savedMovieCards, newMovie]);
+        const saveMoviesLocalStorage = [...savedMovieCards, newMovie];
+        localStorage.setItem('savedMovieCards', JSON.stringify(saveMoviesLocalStorage))
       })
       .catch((err) => {
         console.log(err);
@@ -218,6 +228,7 @@ function App() {
             <Route path='/saved-movies' element={<SavedMovies
               movieCards={savedMovieCards}
               onMovieCardLikeOff={deleteMovieCard}
+              onSearchMovie={handleSearchSaveMovie}
             />} />
             <Route path='/profile' element={<Profile
               onUpdateUser={handleUpdateUser}

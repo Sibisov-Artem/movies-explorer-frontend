@@ -5,10 +5,15 @@ import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import MoviesMore from '../MoviesMore/MoviesMore';
 
 
-function SavedMovies({ movieCards, onMovieCardLikeOff, }) {
+function SavedMovies({ movieCards,
+  onMovieCardLikeOff,
+  onSearchMovie,
+}) {
   return (
     <main className="saved-movies">
-      <SearchForm />
+      <SearchForm
+        onSearchMovie={onSearchMovie}
+      />
       <MoviesCardList
         movieCards={movieCards}
         onMovieCardLikeOff={onMovieCardLikeOff}
