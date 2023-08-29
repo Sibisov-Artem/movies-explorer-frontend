@@ -15,6 +15,8 @@ import Register from '../Register/Register';
 import Login from '../Login/Login';
 import PageNotFound from '../PageNotFound/PageNotFound';
 
+import ProtectedRouteElement from '../ProtectedRoute/ProtectedRoute';
+
 import { CurrentUserContext } from '../../context/CurrentUserContext';
 
 function App() {
@@ -301,7 +303,9 @@ function App() {
           <Routes>
             <Route path='/' element={<Main />} />
 
-            <Route path='/movies' element={<Movies
+            <Route path='/movies' element={<ProtectedRouteElement
+              element={Movies}
+              loggedIn={loggedIn}
               movieCards={searchMovieCards}
               saveActive={saveMovieCardsActive}
               onMovieCardLike={saveMovieCard}
@@ -313,7 +317,9 @@ function App() {
 
             />} />
 
-            <Route path='/saved-movies' element={<SavedMovies
+            <Route path='/saved-movies' element={<ProtectedRouteElement
+              element={SavedMovies}
+              loggedIn={loggedIn}
               movieCards={savedMovieCards}
               onMovieCardLikeOff={deleteMovieCard}
               onSearchMovie={handleSearchSaveMovie}
@@ -321,7 +327,9 @@ function App() {
               handleShortFilm={handleShortSaveFilm}
               isShortFilm={isShortFilmSaveMovie}
             />} />
-            <Route path='/profile' element={<Profile
+            <Route path='/profile' element={<ProtectedRouteElement
+              element={Profile}
+              loggedIn={loggedIn}
               onUpdateUser={handleUpdateUser}
               onSignOut={onSignOut} />} />
             <Route path='/signup' element={<Register onRegistration={handleRegistration} />} />

@@ -24,10 +24,8 @@ function SavedMovies({
   function showQuantityOnSize() {
     if (window.innerWidth >= 1280) {
       setCardForDisplay(12)
-
     } else if (window.innerWidth < 600) {
       setCardForDisplay(5)
-
     } else {
       setCardForDisplay(8)
     }
@@ -46,19 +44,15 @@ function SavedMovies({
     }, 1000);
   }, []);
 
-
   function loadMore() {
     console.log(123)
     if (window.innerWidth >= 1280) {
       setCardForDisplay(cardForDisplay + 3)
-
     } else if (window.innerWidth < 600) {
       setCardForDisplay(cardForDisplay + 2)
-
     } else {
       setCardForDisplay(cardForDisplay + 2)
     }
-
   }
 
   return (
