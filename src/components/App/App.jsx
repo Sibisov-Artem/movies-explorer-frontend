@@ -23,10 +23,9 @@ function App() {
 
   const navigate = useNavigate();
 
-  const [movieCards, setMovieCards] = useState([]);
-  const [savedMovieCards, setSavedMovieCards] = useState([]);
-  const [searchMovieCards, setSearchMovieCards] = useState([]); // для найденных по запросу фильмов
-  const [searchSavedMovieCards, setSearchSavedMovieCards] = useState([]); // для найденных по запросу фильмов
+  const [movieCards, setMovieCards] = useState([]); // первая загрузка с moviesApi
+  const [savedMovieCards, setSavedMovieCards] = useState([]); //сохраненные пользователем
+  const [searchMovieCards, setSearchMovieCards] = useState([]); // для найденных по запросу фильмов для роута movies
 
   const [currentUser, setCurrentUser] = useState({ name: '', email: '' });
 
@@ -46,7 +45,6 @@ function App() {
           setLoggedIn(true);
           navigate(location.pathname); //чтоб оставаться при обновлении страницы на том же месте где и были
           setCurrentUser(data);
-          getUserMovies();
         })
         .catch((err) => {
           console.log(err); // выведем ошибку в консоль
@@ -54,36 +52,8 @@ function App() {
     }
   }
 
-  function handleUpdateUser(inputData) {
-    mainApi.editUser(inputData)
-      .then((data) => {
-        setCurrentUser(data);
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-  }
-
-  function onSignOut() {
-    localStorage.removeItem('token');
-
-    localStorage.removeItem('inputSearch');
-    localStorage.removeItem('inputSearchSaveMovie');
-
-    localStorage.removeItem('findedMovies');
-    localStorage.removeItem('findedSaveMovies');
-
-    setSavedMovieCards([]);
-    setSearchMovieCards([])
-    setSearchSavedMovieCards([])
-    setMovieCards([])
-
-    setCurrentInputQuery([])
-    setCurrentInputQuerySaveMovie([])
-
-    setLoggedIn((''));
-  }
-
+  //==========================================================
+  //==============================================================
   function handleRegistration(inputData) {
     mainApi.register(inputData)
       .then((data) => {
@@ -105,6 +75,42 @@ function App() {
         console.log(err);
       });
   }
+
+  function handleUpdateUser(inputData) {
+    mainApi.editUser(inputData)
+      .then((data) => {
+        setCurrentUser(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+  }
+
+  function onSignOut() {
+    localStorage.removeItem('token');
+
+    localStorage.removeItem('inputSearch');
+    localStorage.removeItem('inputSearchSaveMovie');
+
+    localStorage.removeItem('shortFilmStatus');
+    localStorage.removeItem('shortFilmStatusSaveMovie');
+
+    localStorage.removeItem('findedMovies');
+    localStorage.removeItem('findedSaveMovies');
+    localStorage.removeItem('savedMovieCards');
+
+    setSavedMovieCards([]);
+    setSearchMovieCards([])
+    setMovieCards([])
+
+    setCurrentInputQuery([])
+    setCurrentInputQuerySaveMovie([])
+
+    setLoggedIn((''));
+  }
+
+  //==========================================================
+  //=========================================================
 
   // поиск фильмов по инпуту
   function handleSearchMovie(inputSearch) {
@@ -154,23 +160,24 @@ function App() {
 
   // поиск  по инпуту среди сохраненных фильмов
   function handleSearchSaveMovie(inputSearch) {
+    // тут надо написать условие, что если  есть сохраненные карточки то производим поиск
+    if (localStorage.getItem('savedMovieCards')) {
 
-    localStorage.setItem('inputSearchSaveMovie', inputSearch); // сохраняем текущий запрос в локальное хранилище
-    localStorage.setItem('shortFilmStatusSaveMovie', isShortFilmSaveMovie) // сохраняем текущее состояние чекбокса в лок хран
-    const resultSearchSavedMovie = [];
-    JSON.parse(localStorage.getItem('savedMovieCards')).forEach((movie) => {
-      if (movie.nameRU.toLowerCase().includes(inputSearch.toLowerCase())) {
-        if (isShortFilmSaveMovie) {
-          movie.duration <= 40 && resultSearchSavedMovie.push(movie);
-        } else {
-          resultSearchSavedMovie.push(movie);
+      localStorage.setItem('inputSearchSaveMovie', inputSearch); // сохраняем текущий запрос в локальное хранилище
+      localStorage.setItem('shortFilmStatusSaveMovie', isShortFilmSaveMovie) // сохраняем текущее состояние чекбокса в лок хран
+      const resultSearchSavedMovie = [];
+      JSON.parse(localStorage.getItem('savedMovieCards')).forEach((movie) => { //среди сохраненных пользовательских ищем по инпут запросу
+        if (movie.nameRU.toLowerCase().includes(inputSearch.toLowerCase())) {
+          if (isShortFilmSaveMovie) {
+            movie.duration <= 40 && resultSearchSavedMovie.push(movie);
+          } else {
+            resultSearchSavedMovie.push(movie);
+          }
         }
-      }
-    })
-    localStorage.setItem('findedSaveMovies', JSON.stringify(resultSearchSavedMovie));
-    setSearchSavedMovieCards(JSON.parse(localStorage.getItem('findedSaveMovies')))
-
-    setSavedMovieCards(resultSearchSavedMovie)
+      })
+      localStorage.setItem('findedSaveMovies', JSON.stringify(resultSearchSavedMovie));
+      setSavedMovieCards(JSON.parse(localStorage.getItem('findedSaveMovies')));
+    }
   }
 
   function handleShortFilm() {
@@ -229,6 +236,13 @@ function App() {
   }
 
 
+  //========================================================================
+  //========================================================================
+  //========================================================================
+  //========================================================================
+  //========================================================================
+  //========================================================================
+
 
   useEffect(() => {
     if (loggedIn) {
@@ -241,35 +255,48 @@ function App() {
           console.log(err); // выведем ошибку в консоль
         });
     }
+    getUserMovies();
   }, [])
 
   useEffect(() => {
     handleCheckToken();
   }, [loggedIn])
 
-  useEffect(() => {
 
+  // для сохранения при обновлении страницы поискового запроса на роуте movies
+  useEffect(() => {
     if (localStorage.getItem('inputSearch')) {
       setCurrentInputQuery(localStorage.getItem('inputSearch'));
     }
-
+    // для сохранения при обновлении страницы поискового запроса на роуте save-movies
     if (localStorage.getItem('inputSearchSaveMovie')) {
       setCurrentInputQuerySaveMovie(localStorage.getItem('inputSearchSaveMovie'));
     }
-
+    // для сохранения при обновлении страницы найденных по запросу фильмов на роуте movies
     if (localStorage.getItem('findedMovies')) {
-      setSearchMovieCards(JSON.parse(localStorage.getItem('findedMovies')));
+      setSearchMovieCards(JSON.parse(localStorage.getItem('findedMovies'))); //найденные по поиску для роута movies
     }
+  }, [loggedIn]);
 
-    if (localStorage.getItem('savedMovieCards')) {
-      setSavedMovieCards(JSON.parse(localStorage.getItem('savedMovieCards')));
-    }
+  // для сохранения при обновлении страницы найденных по запросу фильмов на роуте save-movies
+  useEffect(() => {
+    // const findedSaveMoviesForDisplay = JSON.parse(localStorage.getItem('findedSaveMovies'));
+    // if (findedSaveMoviesForDisplay) {
+    //   setSavedMovieCards(findedSaveMoviesForDisplay)
+    // }
+    setSavedMovieCards(JSON.parse(localStorage.getItem('findedSaveMovies')))
+    // if (localStorage.getItem('findedMovies')) {
+    //   setSearchMovieCards(JSON.parse(localStorage.getItem('findedMovies'))); //найденные по поиску для роута movies
+    // }
 
-    if (localStorage.getItem('findedSaveMovies')) {
-      setSearchSavedMovieCards(JSON.parse(localStorage.getItem('findedSaveMovies')));
-    }
+  }, [loggedIn])
 
-  }, []);
+  //========================================================================
+  //========================================================================
+  //========================================================================
+  //========================================================================
+  //========================================================================
+  //========================================================================
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -293,7 +320,7 @@ function App() {
             />} />
 
             <Route path='/saved-movies' element={<SavedMovies
-              movieCards={searchSavedMovieCards}
+              movieCards={savedMovieCards}
               onMovieCardLikeOff={deleteMovieCard}
               onSearchMovie={handleSearchSaveMovie}
               currentInputQuery={currentInputQuerySaveMovie}
