@@ -35,7 +35,6 @@ function SearchForm({ onSearchMovie, currentInputQuery, handleShortFilm, isShort
             type="text"
             name="movie"
             placeholder="Фильм"
-            required
             onChange={handleChangeQuery}
             defaultValue={currentInputQuery} />
           <button className="search-form__submit-btn hover" type="submit"></button>
