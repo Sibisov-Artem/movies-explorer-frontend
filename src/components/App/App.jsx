@@ -26,14 +26,17 @@ function App() {
   const [movieCards, setMovieCards] = useState([]);
   const [savedMovieCards, setSavedMovieCards] = useState([]);
   const [searchMovieCards, setSearchMovieCards] = useState([]); // для найденных по запросу фильмов
+  const [searchSavedMovieCards, setSearchSavedMovieCards] = useState([]); // для найденных по запросу фильмов
 
   const [currentUser, setCurrentUser] = useState({ name: '', email: '' });
 
   const [loggedIn, setLoggedIn] = useState(false);
 
   const [currentInputQuery, setCurrentInputQuery] = useState('');
+  const [currentInputQuerySaveMovie, setCurrentInputQuerySaveMovie] = useState('');
 
-  const [isShortFilm, setIsShortFilm] = useState(localStorage.getItem('shortFilmStatus') || false);
+  const [isShortFilm, setIsShortFilm] = useState(JSON.parse(localStorage.getItem('shortFilmStatus')) || false);
+  const [isShortFilmSaveMovie, setIsShortFilmSaveMovie] = useState(JSON.parse(localStorage.getItem('shortFilmStatusSaveMovie')) || false);
 
   function handleCheckToken() {
     const token = localStorage.getItem('token');
@@ -63,12 +66,21 @@ function App() {
 
   function onSignOut() {
     localStorage.removeItem('token');
+
     localStorage.removeItem('inputSearch');
+    localStorage.removeItem('inputSearchSaveMovie');
+
     localStorage.removeItem('findedMovies');
+    localStorage.removeItem('findedSaveMovies');
+
     setSavedMovieCards([]);
     setSearchMovieCards([])
+    setSearchSavedMovieCards([])
     setMovieCards([])
+
     setCurrentInputQuery([])
+    setCurrentInputQuerySaveMovie([])
+
     setLoggedIn((''));
   }
 
@@ -142,17 +154,31 @@ function App() {
 
   // поиск  по инпуту среди сохраненных фильмов
   function handleSearchSaveMovie(inputSearch) {
+
+    localStorage.setItem('inputSearchSaveMovie', inputSearch); // сохраняем текущий запрос в локальное хранилище
+    localStorage.setItem('shortFilmStatusSaveMovie', isShortFilmSaveMovie) // сохраняем текущее состояние чекбокса в лок хран
     const resultSearchSavedMovie = [];
     JSON.parse(localStorage.getItem('savedMovieCards')).forEach((movie) => {
       if (movie.nameRU.toLowerCase().includes(inputSearch.toLowerCase())) {
-        resultSearchSavedMovie.push(movie);
+        if (isShortFilmSaveMovie) {
+          movie.duration <= 40 && resultSearchSavedMovie.push(movie);
+        } else {
+          resultSearchSavedMovie.push(movie);
+        }
       }
     })
+    localStorage.setItem('findedSaveMovies', JSON.stringify(resultSearchSavedMovie));
+    setSearchSavedMovieCards(JSON.parse(localStorage.getItem('findedSaveMovies')))
+
     setSavedMovieCards(resultSearchSavedMovie)
   }
 
   function handleShortFilm() {
     setIsShortFilm(!isShortFilm)
+  }
+
+  function handleShortSaveFilm() {
+    setIsShortFilmSaveMovie(!isShortFilmSaveMovie)
   }
 
   // запрос сохраненных пользователем фильмов
@@ -227,8 +253,20 @@ function App() {
       setCurrentInputQuery(localStorage.getItem('inputSearch'));
     }
 
+    if (localStorage.getItem('inputSearchSaveMovie')) {
+      setCurrentInputQuerySaveMovie(localStorage.getItem('inputSearchSaveMovie'));
+    }
+
     if (localStorage.getItem('findedMovies')) {
       setSearchMovieCards(JSON.parse(localStorage.getItem('findedMovies')));
+    }
+
+    if (localStorage.getItem('savedMovieCards')) {
+      setSavedMovieCards(JSON.parse(localStorage.getItem('savedMovieCards')));
+    }
+
+    if (localStorage.getItem('findedSaveMovies')) {
+      setSearchSavedMovieCards(JSON.parse(localStorage.getItem('findedSaveMovies')));
     }
 
   }, []);
@@ -255,9 +293,12 @@ function App() {
             />} />
 
             <Route path='/saved-movies' element={<SavedMovies
-              movieCards={savedMovieCards}
+              movieCards={searchSavedMovieCards}
               onMovieCardLikeOff={deleteMovieCard}
               onSearchMovie={handleSearchSaveMovie}
+              currentInputQuery={currentInputQuerySaveMovie}
+              handleShortFilm={handleShortSaveFilm}
+              isShortFilm={isShortFilmSaveMovie}
             />} />
             <Route path='/profile' element={<Profile
               onUpdateUser={handleUpdateUser}
