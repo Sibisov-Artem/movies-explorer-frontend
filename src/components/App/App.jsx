@@ -263,8 +263,9 @@ function App() {
   }, [loggedIn])
 
 
-  // для сохранения при обновлении страницы поискового запроса на роуте movies
+
   useEffect(() => {
+    // для сохранения при обновлении страницы поискового запроса на роуте movies
     if (localStorage.getItem('inputSearch')) {
       setCurrentInputQuery(localStorage.getItem('inputSearch'));
     }
@@ -276,20 +277,13 @@ function App() {
     if (localStorage.getItem('findedMovies')) {
       setSearchMovieCards(JSON.parse(localStorage.getItem('findedMovies'))); //найденные по поиску для роута movies
     }
+    // для сохранения при обновлении страницы найденных по запросу фильмов на роуте save-movies
+    const findedSaveMoviesForDisplay = JSON.parse(localStorage.getItem('findedSaveMovies'));
+    if (findedSaveMoviesForDisplay) {
+      setSavedMovieCards(findedSaveMoviesForDisplay)
+    }
   }, [loggedIn]);
 
-  // для сохранения при обновлении страницы найденных по запросу фильмов на роуте save-movies
-  useEffect(() => {
-    // const findedSaveMoviesForDisplay = JSON.parse(localStorage.getItem('findedSaveMovies'));
-    // if (findedSaveMoviesForDisplay) {
-    //   setSavedMovieCards(findedSaveMoviesForDisplay)
-    // }
-    setSavedMovieCards(JSON.parse(localStorage.getItem('findedSaveMovies')))
-    // if (localStorage.getItem('findedMovies')) {
-    //   setSearchMovieCards(JSON.parse(localStorage.getItem('findedMovies'))); //найденные по поиску для роута movies
-    // }
-
-  }, [loggedIn])
 
   //========================================================================
   //========================================================================
