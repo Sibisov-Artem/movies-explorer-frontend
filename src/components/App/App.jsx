@@ -33,7 +33,7 @@ function App() {
 
   const [currentInputQuery, setCurrentInputQuery] = useState('');
 
-  const [isShortFilm, setIsShortFilm] = useState(false);
+  const [isShortFilm, setIsShortFilm] = useState(localStorage.getItem('shortFilmStatus') || false);
 
   function handleCheckToken() {
     const token = localStorage.getItem('token');
@@ -48,14 +48,6 @@ function App() {
         .catch((err) => {
           console.log(err); // выведем ошибку в консоль
         });
-      // moviesApi.getMovies()
-      //   .then((data) => {
-      //     setMovieCards(data);
-      //     console.log(data);
-      //   })
-      //   .catch((err) => {
-      //     console.log(err); // выведем ошибку в консоль
-      //   });
     }
   }
 
@@ -71,7 +63,13 @@ function App() {
 
   function onSignOut() {
     localStorage.removeItem('token');
-    setLoggedIn(false);
+    localStorage.removeItem('inputSearch');
+    localStorage.removeItem('findedMovies');
+    setSavedMovieCards([]);
+    setSearchMovieCards([])
+    setMovieCards([])
+    setCurrentInputQuery([])
+    setLoggedIn((''));
   }
 
   function handleRegistration(inputData) {
@@ -99,6 +97,8 @@ function App() {
   // поиск фильмов по инпуту
   function handleSearchMovie(inputSearch) {
 
+    localStorage.setItem('inputSearch', inputSearch); // сохраняем текущий запрос в локальное хранилище
+    localStorage.setItem('shortFilmStatus', isShortFilm) // сохраняем текущее состояние чекбокса в лок хран
     if (movieCards.length === 0) {  // если нет загруженных фильмов
       moviesApi.getMovies()
         .then((data) => {
@@ -220,6 +220,18 @@ function App() {
   useEffect(() => {
     handleCheckToken();
   }, [loggedIn])
+
+  useEffect(() => {
+
+    if (localStorage.getItem('inputSearch')) {
+      setCurrentInputQuery(localStorage.getItem('inputSearch'));
+    }
+
+    if (localStorage.getItem('findedMovies')) {
+      setSearchMovieCards(JSON.parse(localStorage.getItem('findedMovies')));
+    }
+
+  }, []);
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
