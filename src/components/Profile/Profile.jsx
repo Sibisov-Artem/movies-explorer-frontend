@@ -1,33 +1,32 @@
 import './Profile.css';
 
-import { useState, useContext, useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 import { CurrentUserContext } from '../../context/CurrentUserContext';
+import useFormValidation from '../hooks/useFormValidation';
 
 function Profile({ onUpdateUser, onSignOut }) {
 
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
+  const { values, handleChange, errors, isValid, setValues } = useFormValidation();
 
   const currentUser = useContext(CurrentUserContext);
 
-  useEffect(() => {
-    setName(currentUser.name);
-    setEmail(currentUser.email);
-  }, [currentUser]);
+  const statusDisabledForClassName = !isValid;
 
-  function handleChangeName(e) {
-    setName(e.target.value);
-  }
-  function handleChangeEmail(e) {
-    setEmail(e.target.value);
-  }
+  useEffect(() => {
+    setValues(
+      {
+        name: currentUser.name,
+        email: currentUser.email,
+      }
+    );
+  }, [currentUser]);
 
   function onSubmit(e) {
     e.preventDefault();
     // Передаём значения управляемых компонентов во внешний обработчик
-    onUpdateUser({ name, email });
+    onUpdateUser(values);
   }
   //===============================================================================
   return (
@@ -47,10 +46,13 @@ function Profile({ onUpdateUser, onSignOut }) {
                   required
                   minLength="2" maxLength="50"
                   id="profile-name"
-                  onChange={handleChangeName}
-                  value={name}
+                  onChange={handleChange}
+                  defaultValue={values.name}
+                  pattern="[а-яёА-ЯЁa-zA-Z\s\-]+"
+                  title="Введите имя, используя латиницу, кириллицу, пробел или дефис"
                 />
               </label>
+              <span className="profile__message-error">{errors.name}</span>
 
               <label className="profile__label">E-mail
                 <input className="profile__input"
@@ -60,13 +62,17 @@ function Profile({ onUpdateUser, onSignOut }) {
                   required
                   minLength="2" maxLength="50"
                   id="profile-email"
-                  onChange={handleChangeEmail}
-                  value={email}
+                  onChange={handleChange}
+                  defaultValue={values.email}
+                  pattern="[A-Za-z0-9]+@[A-Za-z0-9]+\.[A-Za-z]+"
+                  title="Введите email"
                 />
               </label>
+              <span className="profile__message-error">{errors.email}</span>
             </fieldset>
 
-            <button className="profile__submit-btn hover" type="submit">Редактировать</button>
+            <button className={`profile__submit-btn ${statusDisabledForClassName ? "profile__submit-btn_disable" : "hover"}`}
+            type="submit">Редактировать</button>
           </form>
           <Link to="/" className="profile__close-btn hover" onClick={onSignOut}>Выйти из аккаунта</Link>
         </div>

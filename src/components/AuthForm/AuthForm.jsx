@@ -3,7 +3,7 @@ import './AuthForm.css'
 import { Link, useLocation } from 'react-router-dom';
 
 function AuthForm({ title, buttonText, authText, authLink, authTextLink, name, email, password, onSubmit,
-  handleChangeName, handleChangeEmail, handleChangePassword }) {
+  handleChange, statusDisabled, errorMessageName, errorMessageEmail, errorMessagePassword, statusDisabledForClassName }) {
 
   const location = useLocation();
 
@@ -32,9 +32,13 @@ function AuthForm({ title, buttonText, authText, authLink, authTextLink, name, e
                   minLength="2" maxLength="40"
                   id="auth-form-name"
                   defaultValue={name}
-                  onChange={handleChangeName}
+                  onChange={handleChange}
+                  message={'asfas'}
+                  // поле name содержит только латиницу, кириллицу, пробел или дефис
+                  pattern="[а-яёА-ЯЁa-zA-Z\s\-]+"
+                  title="Введите имя, используя латиницу, кириллицу, пробел или дефис"
                 />
-                <span className="auth-form__message-error"></span>
+                <span className="auth-form__message-error">{errorMessageName}</span>
               </>
             ) : (null)}
 
@@ -47,9 +51,11 @@ function AuthForm({ title, buttonText, authText, authLink, authTextLink, name, e
             minLength="2" maxLength="200"
             id="auth-form-email"
             defaultValue={email}
-            onChange={handleChangeEmail}
+            onChange={handleChange}
+            pattern="[A-Za-z0-9]+@[A-Za-z0-9]+\.[A-Za-z]+"
+            title="Введите email"
           />
-          <span className="auth-form__message-error"></span>
+          <span className="auth-form__message-error">{errorMessageEmail}</span>
 
           <label className="auth-form__label " htmlFor="auth-form-password">Пароль</label>
           <input className="auth-form__input auth-form__input_error hover"
@@ -60,16 +66,20 @@ function AuthForm({ title, buttonText, authText, authLink, authTextLink, name, e
             minLength="2" maxLength="200"
             id="auth-form-password"
             defaultValue={password}
-            onChange={handleChangePassword}
+            onChange={handleChange}
+            title="Введите пароль"
           />
           {location.pathname === "/signup" ?
             (
-              <span className="auth-form__message-error">Что-то пошло не так...</span>
+              <span className="auth-form__message-error">{errorMessagePassword}</span>
             ) : (null)}
 
         </fieldset>
 
-        <button className="auth-form__submit-btn hover" type="submit">{buttonText}</button>
+        <button className={`auth-form__submit-btn  ${statusDisabledForClassName ? "auth-form__submit-btn_disable" : "hover"}`}
+          type="submit"
+          disabled={statusDisabled}
+        >{buttonText}</button>
 
         <div className="auth-form__auth">
           <p className="auth-form__auth-text">{authText} <Link to={authLink} className="auth-form__auth-link hover">{authTextLink}</Link> </p>

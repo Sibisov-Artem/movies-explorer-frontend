@@ -1,35 +1,17 @@
 import AuthForm from '../AuthForm/AuthForm';
-
-import { useState } from "react";
+import useFormValidation from '../hooks/useFormValidation';
 
 function Register({ onRegistration }) {
 
-  const [name, setName] = useState('');
-  // Обработчик изменения инпута обновляет стейт
-  function handleChangeName(e) {
-    setName(e.target.value);
-  }
+  const { values, handleChange, errors, isValid } = useFormValidation();
 
-  const [email, setEmail] = useState('');
-  // Обработчик изменения инпута обновляет стейт
-  function handleChangeEmail(e) {
-    setEmail(e.target.value);
-  }
-
-  const [password, setPassword] = useState('');
-  function handleChangePassword(e) {
-    setPassword(e.target.value);
-  }
+  const statusDisabled = !isValid;
 
 
   function handleSubmit(e) {
     e.preventDefault();
 
-    onRegistration({
-      name: name,
-      email: email,
-      password: password,
-    });
+    onRegistration(values);
   }
 
   return (
@@ -40,13 +22,16 @@ function Register({ onRegistration }) {
         authText={"Уже зарегистрированы?"}
         authLink={"/signin"}
         authTextLink={"Войти"}
-        name={name}
-        email={email}
-        password={password}
+        name={values.name}
+        email={values.email}
+        password={values.password}
         onSubmit={handleSubmit}
-        handleChangeName={handleChangeName}
-        handleChangeEmail={handleChangeEmail}
-        handleChangePassword={handleChangePassword}
+        handleChange={handleChange}
+        statusDisabled={statusDisabled}
+        errorMessageName={errors.name}
+        errorMessageEmail={errors.email}
+        errorMessagePassword={errors.password}
+        statusDisabledForClassName={statusDisabled}
       />
     </main>
   );

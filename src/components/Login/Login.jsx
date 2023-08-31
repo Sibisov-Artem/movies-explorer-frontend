@@ -1,28 +1,17 @@
 import AuthForm from '../AuthForm/AuthForm';
-
-import { useState } from "react";
+import useFormValidation from '../hooks/useFormValidation';
 
 function Login({ onAuthorization }) {
 
-  const [email, setEmail] = useState('');
-  // Обработчик изменения инпута обновляет стейт
-  function handleChangeEmail(e) {
-    setEmail(e.target.value);
-  }
+  const { values, handleChange, errors, isValid } = useFormValidation();
 
-  const [password, setPassword] = useState('');
-  function handleChangePassword(e) {
-    setPassword(e.target.value);
-  }
+  const statusDisabled = !isValid;
 
 
   function handleSubmit(e) {
     e.preventDefault();
 
-    onAuthorization({
-      email: email,
-      password: password,
-    });
+    onAuthorization(values);
   }
 
   return (
@@ -33,11 +22,14 @@ function Login({ onAuthorization }) {
         authText={"Ещё не зарегистрированы?"}
         authLink={"/signup"}
         authTextLink={"Регистрация"}
-        email={email}
-        password={password}
+        email={values.email}
+        password={values.password}
         onSubmit={handleSubmit}
-        handleChangeEmail={handleChangeEmail}
-        handleChangePassword={handleChangePassword}
+        handleChange={handleChange}
+        statusDisabled={statusDisabled}
+        errorMessageEmail={errors.email}
+        errorMessagePassword={errors.password}
+        statusDisabledForClassName={statusDisabled}
       />
     </main>
   );
