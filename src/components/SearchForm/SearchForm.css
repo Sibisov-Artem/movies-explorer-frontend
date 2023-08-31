@@ -11,7 +11,7 @@
   padding: 0;
   height: 46px;
   background-color: #2F2F2F;
-  margin: 0 0 41px 0;
+  margin: 0 0 20px 0;
 }
 
 .search-form__input {
@@ -51,6 +51,17 @@
   line-height: 18px;
   font-weight: 400;
   margin: 0;
+}
+
+.search-form__message-error {
+  display: block;
+  text-align: center;
+  font-size: 10px;
+  font-weight: 400;
+  color: #EE3465;
+  line-height: 12px;
+  height: 12px;
+  margin-bottom: 11px;
 }
 
 /* ----------------------------------------------- */

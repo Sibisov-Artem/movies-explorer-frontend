@@ -33,7 +33,6 @@ function AuthForm({ title, buttonText, authText, authLink, authTextLink, name, e
                   id="auth-form-name"
                   defaultValue={name}
                   onChange={handleChange}
-                  message={'asfas'}
                   // поле name содержит только латиницу, кириллицу, пробел или дефис
                   pattern="[а-яёА-ЯЁa-zA-Z\s\-]+"
                   title="Введите имя, используя латиницу, кириллицу, пробел или дефис"

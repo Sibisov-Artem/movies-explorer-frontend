@@ -9,6 +9,7 @@ import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 function SearchForm({ onSearchMovie, currentInputQuery, handleShortFilm, isShortFilm }) {
 
   const [searchQuery, setSearchQuery] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(() => {
     setSearchQuery(currentInputQuery)
@@ -20,7 +21,12 @@ function SearchForm({ onSearchMovie, currentInputQuery, handleShortFilm, isShort
 
   function onSubmit(e) {
     e.preventDefault();
-    onSearchMovie(searchQuery);
+    if (searchQuery) {
+      setErrorMessage('')
+      onSearchMovie(searchQuery)
+    } else {
+      setErrorMessage('Нужно ввести ключевое слово')
+    }
   }
 
   //===============================================================================
@@ -28,7 +34,9 @@ function SearchForm({ onSearchMovie, currentInputQuery, handleShortFilm, isShort
 
     <section className="search-form">
 
-      <form className="search-form__form" onSubmit={onSubmit}>
+      <form className="search-form__form"
+        onSubmit={onSubmit}
+        noValidate>
 
         <fieldset className="search-form__input-container">
           <input className="search-form__input hover"
@@ -40,6 +48,8 @@ function SearchForm({ onSearchMovie, currentInputQuery, handleShortFilm, isShort
             defaultValue={currentInputQuery} />
           <button className="search-form__submit-btn hover" type="submit"></button>
         </fieldset>
+
+        <span className="search-form__message-error">{errorMessage}</span>
 
         <div className="search-form__filter">
           <FilterCheckbox
