@@ -24,7 +24,7 @@
   flex-direction: column;
   border: none;
   padding: 0;
-  margin: 0 0 69px 0;
+  margin: 0 0 23px 0;
 }
 
 .auth-form__label {
@@ -64,6 +64,18 @@
 
 .auth-form__message-error:last-child {
   margin-top: 5px;
+}
+
+.auth-form__submit-error {
+  font-size: 14px;
+  font-weight: 400;
+  color: #EE3465;
+  line-height: 14px;
+  height: 28px;
+  overflow: hidden;
+  max-width: 396px;
+  margin: 0 0 20px 0;
+  text-align: center;
 }
 
 .auth-form__submit-btn {
@@ -135,7 +147,7 @@
   }
 
   .auth-form__input-container {
-    margin: 0 0 157px 0;
+    margin: 0 0 90px 0;
   }
 
   .auth-form__input {

@@ -1,7 +1,7 @@
 import AuthForm from '../AuthForm/AuthForm';
 import useFormValidation from '../hooks/useFormValidation';
 
-function Register({ onRegistration }) {
+function Register({ onRegistration, errorMessage }) {
 
   const { values, handleChange, errors, isValid } = useFormValidation();
 
@@ -32,6 +32,7 @@ function Register({ onRegistration }) {
         errorMessageEmail={errors.email}
         errorMessagePassword={errors.password}
         statusDisabledForClassName={statusDisabled}
+        errorMessage={errorMessage}
       />
     </main>
   );

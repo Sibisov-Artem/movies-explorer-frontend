@@ -3,7 +3,7 @@ import './AuthForm.css'
 import { Link, useLocation } from 'react-router-dom';
 
 function AuthForm({ title, buttonText, authText, authLink, authTextLink, name, email, password, onSubmit,
-  handleChange, statusDisabled, errorMessageName, errorMessageEmail, errorMessagePassword, statusDisabledForClassName }) {
+  handleChange, statusDisabled, errorMessageName, errorMessageEmail, errorMessagePassword, statusDisabledForClassName, errorMessage }) {
 
   const location = useLocation();
 
@@ -75,6 +75,7 @@ function AuthForm({ title, buttonText, authText, authLink, authTextLink, name, e
 
         </fieldset>
 
+        {errorMessage && (<p className='auth-form__submit-error'>{errorMessage}</p>)}
         <button className={`auth-form__submit-btn  ${statusDisabledForClassName ? "auth-form__submit-btn_disable" : "hover"}`}
           type="submit"
           disabled={statusDisabled}

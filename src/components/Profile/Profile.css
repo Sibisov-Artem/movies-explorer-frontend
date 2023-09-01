@@ -67,13 +67,30 @@
   width: 80vw;
 }
 
+.profile__submit-error {
+  font-size: 14px;
+  font-weight: 400;
+  color: #EE3465;
+  line-height: 14px;
+  height: 28px;
+  overflow: hidden;
+  max-width: 396px;
+  margin: 0;
+  text-align: center;
+  visibility: hidden;
+}
+
+.profile__submit-error_active {
+  visibility: visible;
+}
+
 .profile__submit-btn {
   font-size: 13px;
   font-weight: 400;
   color: #FFF;
   background-color: #202020;
   border: none;
-  margin: 185px 0 16px 0;
+  margin: 157px 0 16px 0;
   padding: 0;
   line-height: 16px;
   vertical-align: bottom;
@@ -113,7 +130,7 @@
   }
 
   .profile__submit-btn {
-    margin: 175px 0 16px 0;
+    margin: 145px 0 16px 0;
   }
 
 }
@@ -134,7 +151,7 @@
   .profile__submit-btn {
     font-size: 12px;
     line-height: 15px;
-    margin: 344px 0 16px 0;
+    margin: 314px 0 16px 0;
   }
 
   .profile__close-btn {

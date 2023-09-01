@@ -45,6 +45,10 @@ function App() {
   const [movieNotFound, setMovieNotFound] = useState('');
   const [saveMovieNotFound, setSaveMovieNotFound] = useState('');
 
+  const [errorMessageRegister, setErrorMessageRegister] = useState('');
+  const [errorMessageLogin, setErrorMessageLogin] = useState('');
+  const [errorMessageProfile, setErrorMessageProfile] = useState('');
+
   function handleCheckToken() {
     const token = localStorage.getItem('token');
     if (token) {
@@ -69,6 +73,13 @@ function App() {
       })
       .catch((err) => {
         console.log(err);
+        // console.log(err.statusCode);
+        if (err === 'Что-то пошло не так: 409') {
+          setErrorMessageRegister('Пользователь с таким email уже существует.')
+        } else if (err === 'Что-то пошло не так: 400') {
+          setErrorMessageRegister('При регистрации пользователя произошла ошибка.');
+        };
+        setTimeout(setErrorMessageRegister, 4000);
       });
   }
 
@@ -81,7 +92,14 @@ function App() {
       })
       .catch((err) => {
         console.log(err);
-      });
+        if (err === 'Что-то пошло не так: 401') {
+          setErrorMessageLogin('Вы ввели неправильный логин или пароль.');
+        } else if (err === 'Что-то пошло не так: 400') {
+          setErrorMessageLogin('При авторизации произошла ошибка. Некорректен email.');
+        }
+        setTimeout(setErrorMessageLogin, 4000);
+      }
+      );
   }
 
   function handleUpdateUser(inputData) {
@@ -90,6 +108,10 @@ function App() {
         setCurrentUser(data);
       })
       .catch((err) => {
+        if (err === 'Что-то пошло не так: 500') {
+          setErrorMessageProfile('Пользователь с таким email уже существует.');
+        }
+        setTimeout(setErrorMessageProfile, 4000);
         console.log(err);
       })
   }
@@ -368,13 +390,24 @@ function App() {
               isLoading={isLoadingSavedMovie}
               preloaderMessage={saveMovieNotFound}
             />} />
+
             <Route path='/profile' element={<ProtectedRouteElement
               element={Profile}
               loggedIn={loggedIn}
               onUpdateUser={handleUpdateUser}
-              onSignOut={onSignOut} />} />
-            <Route path='/signup' element={<Register onRegistration={handleRegistration} />} />
-            <Route path='/signin' element={<Login onAuthorization={handleAuthorization} />} />
+              onSignOut={onSignOut}
+              errorMessage={errorMessageProfile}
+            />} />
+
+            <Route path='/signup' element={<Register
+              onRegistration={handleRegistration}
+              errorMessage={errorMessageRegister}
+            />} />
+
+            <Route path='/signin' element={<Login
+              onAuthorization={handleAuthorization}
+              errorMessage={errorMessageLogin}
+            />} />
             <Route path='/*' element={<PageNotFound />} />
           </Routes>
 
