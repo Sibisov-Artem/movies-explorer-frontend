@@ -74,7 +74,7 @@ function SavedMovies({
         // Подождите немного и попробуйте ещё раз».
 
         preloaderMessage ? (
-          <p className='movies__preloader-message'>{preloaderMessage}</p>
+          <p className='saved-movies__preloader-message'>{preloaderMessage}</p>
         ) : (
 
           <>
