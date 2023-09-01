@@ -316,8 +316,18 @@ function App() {
           console.log(err); // выведем ошибку в консоль
         });
     }
-    getUserMovies();
   }, [])
+
+  useEffect(() => {
+    if (loggedIn) {
+      if (localStorage.getItem('savedMovieCards')) {
+        setSavedMovieCards(JSON.parse(localStorage.getItem('savedMovieCards')));
+      } else {
+        getUserMovies();
+      }
+    }
+
+  }, [loggedIn]);
 
   useEffect(() => {
     handleCheckToken();
