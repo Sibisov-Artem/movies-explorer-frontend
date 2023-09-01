@@ -2,13 +2,14 @@ import './Navigation.css';
 
 import { Link, useLocation } from 'react-router-dom';
 
-function Navigation({ burgerActive }) {
+function Navigation({ burgerActive, loggedIn }) {
 
   const location = useLocation();
 
   return (
     <nav className="navigation">
-      {location.pathname === "/" ? (
+
+      {!loggedIn ? (
         <ul className="navigation__list navigation__list_main">
           <li className="navigation__item">
             <Link to="/signup" className="navigation__link navigation__link_place_main hover">Регистрация</Link>

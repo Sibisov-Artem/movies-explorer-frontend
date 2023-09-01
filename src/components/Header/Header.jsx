@@ -10,7 +10,7 @@ import Burger from '../Burger/Burger';
 // В остальных случаях кроме 404, логин, регистрации (где хэдера нет вовсе) - хэдер
 // темно-серый. Нужно создать класс для хэдера для этого случая
 
-function Header() {
+function Header({ loggedIn }) {
 
   const location = useLocation();
 
@@ -31,8 +31,10 @@ function Header() {
               <div className="logo"></div>
             </Link>
             <Navigation
-              burgerActive={burgerActive} />
-            {location.pathname === "/" ?
+              burgerActive={burgerActive}
+              loggedIn={loggedIn}
+            />
+            {!loggedIn ?
               (null) : (
                 <Burger
                   burgerClick={handleBurgerClick}     // нажатие кнопки в Burger.jsx

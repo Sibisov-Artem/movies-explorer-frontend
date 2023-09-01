@@ -357,7 +357,9 @@ function App() {
     <CurrentUserContext.Provider value={currentUser}>
       <div className="root">
         <div className="page">
-          <Header />
+          <Header
+            loggedIn={loggedIn}
+          />
 
           <Routes>
             <Route path='/' element={<Main />} />
