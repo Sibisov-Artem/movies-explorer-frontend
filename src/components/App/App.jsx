@@ -152,10 +152,10 @@ function App() {
       setIsLoading(true);
       moviesApi.getMovies()
         .then((data) => {
-
+          console.log(data);
           const resultSearchMovie = [];  //сюда будем добавлять результат поиска
           data.forEach((movie) => {
-            if (movie.nameRU.toLowerCase().includes(inputSearch.toLowerCase())) { //убрать чувствительность к регистру
+            if (movie.nameRU.toLowerCase().includes(inputSearch.toLowerCase()) || movie.nameEN.toLowerCase().includes(inputSearch.toLowerCase())) { //убрать чувствительность к регистру
               if (isShortFilm) {
                 movie.duration <= 40 && resultSearchMovie.push(movie);
               } else {
@@ -186,7 +186,7 @@ function App() {
       setIsLoading(true);
       const resultSearchMovie = [];
       movieCards.forEach((movie) => {
-        if (movie.nameRU.toLowerCase().includes(inputSearch.toLowerCase())) { //убрать чувствительность к регистру
+        if (movie.nameRU.toLowerCase().includes(inputSearch.toLowerCase()) || movie.nameEN.toLowerCase().includes(inputSearch.toLowerCase())) { //убрать чувствительность к регистру
           if (isShortFilm) {
             movie.duration <= 40 && resultSearchMovie.push(movie);
           } else {
@@ -217,7 +217,7 @@ function App() {
       localStorage.setItem('shortFilmStatusSaveMovie', isShortFilmSaveMovie) // сохраняем текущее состояние чекбокса в лок хран
       const resultSearchSavedMovie = [];
       JSON.parse(localStorage.getItem('savedMovieCards')).forEach((movie) => { //среди сохраненных пользовательских ищем по инпут запросу
-        if (movie.nameRU.toLowerCase().includes(inputSearch.toLowerCase())) {
+        if (movie.nameRU.toLowerCase().includes(inputSearch.toLowerCase()) || movie.nameEN.toLowerCase().includes(inputSearch.toLowerCase())) {
           if (isShortFilmSaveMovie) {
             movie.duration <= 40 && resultSearchSavedMovie.push(movie);
           } else {
