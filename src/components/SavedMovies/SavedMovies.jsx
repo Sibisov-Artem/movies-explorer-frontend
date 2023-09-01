@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import MoviesMore from '../MoviesMore/MoviesMore';
+import Preloader from '../Preloader/Preloader'
 
 
 function SavedMovies({
@@ -14,6 +15,7 @@ function SavedMovies({
   currentInputQuery,
   handleShortFilm,
   isShortFilm,
+  isLoading,
 }) {
 
   const [cardForDisplay, setCardForDisplay] = useState([])
@@ -63,15 +65,21 @@ function SavedMovies({
         handleShortFilm={handleShortFilm}
         isShortFilm={isShortFilm}
       />
-      <MoviesCardList
-        movieCards={movieCards}
-        onMovieCardLikeOff={onMovieCardLikeOff}
-        cardForDisplay={cardForDisplay}
-      />
-      <MoviesMore
-        handleLoadClick={loadMore}
-        isMoreActive={movieCards.length > cardForDisplay ? true : false}
-      />
+
+      {isLoading ? <Preloader /> :
+
+        <>
+          <MoviesCardList
+            movieCards={movieCards}
+            onMovieCardLikeOff={onMovieCardLikeOff}
+            cardForDisplay={cardForDisplay}
+          />
+          <MoviesMore
+            handleLoadClick={loadMore}
+            isMoreActive={movieCards.length > cardForDisplay ? true : false}
+          />
+        </>}
+
     </main>
   );
 }

@@ -39,6 +39,9 @@ function App() {
   const [isShortFilm, setIsShortFilm] = useState(JSON.parse(localStorage.getItem('shortFilmStatus')) || false);
   const [isShortFilmSaveMovie, setIsShortFilmSaveMovie] = useState(JSON.parse(localStorage.getItem('shortFilmStatusSaveMovie')) || false);
 
+  const [isLoading, setIsLoading] = useState(false);
+  const [isLoadingSavedMovie, setIsLoadingSavedMovie] = useState(false);
+
   function handleCheckToken() {
     const token = localStorage.getItem('token');
     if (token) {
@@ -58,7 +61,7 @@ function App() {
   //==============================================================
   function handleRegistration(inputData) {
     mainApi.register(inputData)
-      .then((data) => {
+      .then(() => {
         navigate('/signin');
       })
       .catch((err) => {
@@ -120,6 +123,8 @@ function App() {
     localStorage.setItem('inputSearch', inputSearch); // сохраняем текущий запрос в локальное хранилище
     localStorage.setItem('shortFilmStatus', isShortFilm) // сохраняем текущее состояние чекбокса в лок хран
     if (movieCards.length === 0) {  // если нет загруженных фильмов
+
+      setIsLoading(true);
       moviesApi.getMovies()
         .then((data) => {
 
@@ -140,10 +145,14 @@ function App() {
         })
         .catch((err) => {
           console.log(err); // выведем ошибку в консоль
-        });
+        })
+        .finally(() => {
+          setIsLoading(false);
+        })
 
       //  в случае если фильмы загружены в movieCards
     } else {
+      setIsLoading(true);
       const resultSearchMovie = [];
       movieCards.forEach((movie) => {
         if (movie.nameRU.toLowerCase().includes(inputSearch.toLowerCase())) { //убрать чувствительность к регистру
@@ -156,15 +165,18 @@ function App() {
       })
 
       localStorage.setItem('findedMovies', JSON.stringify(resultSearchMovie));
-      setSearchMovieCards(JSON.parse(localStorage.getItem('findedMovies')))
+      setSearchMovieCards(JSON.parse(localStorage.getItem('findedMovies')));
+      setIsLoading(false);
     }
   }
 
   // поиск  по инпуту среди сохраненных фильмов
   function handleSearchSaveMovie(inputSearch) {
+
     // тут надо написать условие, что если  есть сохраненные карточки то производим поиск
     if (localStorage.getItem('savedMovieCards')) {
 
+      setIsLoadingSavedMovie(true);
       localStorage.setItem('inputSearchSaveMovie', inputSearch); // сохраняем текущий запрос в локальное хранилище
       localStorage.setItem('shortFilmStatusSaveMovie', isShortFilmSaveMovie) // сохраняем текущее состояние чекбокса в лок хран
       const resultSearchSavedMovie = [];
@@ -179,6 +191,7 @@ function App() {
       })
       localStorage.setItem('findedSaveMovies', JSON.stringify(resultSearchSavedMovie));
       setSavedMovieCards(JSON.parse(localStorage.getItem('findedSaveMovies')));
+      setIsLoadingSavedMovie(false);
     }
   }
 
@@ -192,6 +205,7 @@ function App() {
 
   // запрос сохраненных пользователем фильмов
   function getUserMovies() {
+    setIsLoadingSavedMovie(true);
     mainApi
       .getUserMovies()
       .then((savedMovies) => {
@@ -199,7 +213,10 @@ function App() {
       })
       .catch((err) => {
         console.log(err.message);
-      });
+      })
+      .finally(() => {
+        setIsLoadingSavedMovie(false);
+      })
   }
 
   function saveMovieCardsActive(movieCard) {
@@ -314,6 +331,7 @@ function App() {
               currentInputQuery={currentInputQuery}
               handleShortFilm={handleShortFilm}
               isShortFilm={isShortFilm}
+              isLoading={isLoading}
 
             />} />
 
@@ -326,6 +344,7 @@ function App() {
               currentInputQuery={currentInputQuerySaveMovie}
               handleShortFilm={handleShortSaveFilm}
               isShortFilm={isShortFilmSaveMovie}
+              isLoading={isLoadingSavedMovie}
             />} />
             <Route path='/profile' element={<ProtectedRouteElement
               element={Profile}
