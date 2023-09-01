@@ -42,6 +42,9 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [isLoadingSavedMovie, setIsLoadingSavedMovie] = useState(false);
 
+  const [movieNotFound, setMovieNotFound] = useState('');
+  const [saveMovieNotFound, setSaveMovieNotFound] = useState('');
+
   function handleCheckToken() {
     const token = localStorage.getItem('token');
     if (token) {
@@ -142,9 +145,15 @@ function App() {
           localStorage.setItem('findedMovies', JSON.stringify(resultSearchMovie));
           setSearchMovieCards(JSON.parse(localStorage.getItem('findedMovies')))
           setMovieCards(data); // чтобы в след раз поиск проводить без запроса к api
+          if (resultSearchMovie.length === 0) {
+            setMovieNotFound('Ничего не найдено')
+          } else {
+            setMovieNotFound('')
+          }
         })
         .catch((err) => {
           console.log(err); // выведем ошибку в консоль
+          setMovieNotFound('Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз')
         })
         .finally(() => {
           setIsLoading(false);
@@ -167,6 +176,11 @@ function App() {
       localStorage.setItem('findedMovies', JSON.stringify(resultSearchMovie));
       setSearchMovieCards(JSON.parse(localStorage.getItem('findedMovies')));
       setIsLoading(false);
+      if (resultSearchMovie.length === 0) {
+        setMovieNotFound('Ничего не найдено')
+      } else {
+        setMovieNotFound('')
+      }
     }
   }
 
@@ -192,6 +206,11 @@ function App() {
       localStorage.setItem('findedSaveMovies', JSON.stringify(resultSearchSavedMovie));
       setSavedMovieCards(JSON.parse(localStorage.getItem('findedSaveMovies')));
       setIsLoadingSavedMovie(false);
+      if (resultSearchSavedMovie.length === 0) {
+        setSaveMovieNotFound('Ничего не найдено')
+      } else {
+        setSaveMovieNotFound('')
+      }
     }
   }
 
@@ -213,6 +232,7 @@ function App() {
       })
       .catch((err) => {
         console.log(err.message);
+        setMovieNotFound('Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз')
       })
       .finally(() => {
         setIsLoadingSavedMovie(false);
@@ -332,6 +352,7 @@ function App() {
               handleShortFilm={handleShortFilm}
               isShortFilm={isShortFilm}
               isLoading={isLoading}
+              preloaderMessage={movieNotFound}
 
             />} />
 
@@ -345,6 +366,7 @@ function App() {
               handleShortFilm={handleShortSaveFilm}
               isShortFilm={isShortFilmSaveMovie}
               isLoading={isLoadingSavedMovie}
+              preloaderMessage={saveMovieNotFound}
             />} />
             <Route path='/profile' element={<ProtectedRouteElement
               element={Profile}

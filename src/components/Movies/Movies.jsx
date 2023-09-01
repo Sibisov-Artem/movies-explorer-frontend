@@ -16,6 +16,7 @@ function Movies({ movieCards,
   handleShortFilm,
   isShortFilm,
   isLoading,
+  preloaderMessage,
 }) {
 
   const [cardForDisplay, setCardForDisplay] = useState([])
@@ -73,20 +74,28 @@ function Movies({ movieCards,
       />
 
       {isLoading ? <Preloader /> :
+        // Если ничего не найдено, на месте прелоадера появляется надпись «Ничего не найдено».
+        //Если в процессе получения и обработки данных происходит ошибка, в окне результатов выводится надпись:
+        //«Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен.
+        // Подождите немного и попробуйте ещё раз».
 
-        <>
-          <MoviesCardList
-            movieCards={movieCards}
-            saveActive={saveActive}
-            onMovieCardLike={onMovieCardLike}
-            onMovieCardLikeOff={onMovieCardLikeOff}
-            cardForDisplay={cardForDisplay}
-          />
-          <MoviesMore
-            handleLoadClick={loadMore}
-            isMoreActive={movieCards.length > cardForDisplay ? true : false}
-          />
-        </>}
+        preloaderMessage ? (
+          <p className='movies__preloader-message'>{preloaderMessage}</p>
+        ) : (
+
+          <>
+            <MoviesCardList
+              movieCards={movieCards}
+              saveActive={saveActive}
+              onMovieCardLike={onMovieCardLike}
+              onMovieCardLikeOff={onMovieCardLikeOff}
+              cardForDisplay={cardForDisplay}
+            />
+            <MoviesMore
+              handleLoadClick={loadMore}
+              isMoreActive={movieCards.length > cardForDisplay ? true : false}
+            />
+          </>)}
 
     </main>
   );
