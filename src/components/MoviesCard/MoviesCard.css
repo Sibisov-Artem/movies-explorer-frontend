@@ -106,6 +106,14 @@
 }
 
 /* ----------------------------------------------- */
+@media screen and (max-width: 750px) {
+
+  .movies-card__delete-btn {
+    opacity: 1;
+  }
+}
+
+/* ----------------------------------------------- */
 
 @media screen and (max-width: 450px) {
 
@@ -123,4 +131,5 @@
   .movies-card__info-wrapper {
     margin: 0 18px 16px 16px;
   }
+
 }
