@@ -36,6 +36,23 @@ function Movies({ movieCards,
     }
   }
 
+  function refreshQuantity() {
+    if (window.innerWidth >= 1280) {
+      setCardForDisplay(12)
+
+    } else if (window.innerWidth < 600) {
+      setCardForDisplay(5)
+
+    } else {
+      setCardForDisplay(8)
+    }
+  }
+
+  useEffect(() => {
+    refreshQuantity();
+  }, [onSearchMovie]
+  )
+
   useEffect(() => {
     showQuantityOnSize();
   }, []
@@ -51,7 +68,6 @@ function Movies({ movieCards,
 
 
   function loadMore() {
-    console.log(123)
     if (window.innerWidth >= 1280) {
       setCardForDisplay(cardForDisplay + 3)
 
