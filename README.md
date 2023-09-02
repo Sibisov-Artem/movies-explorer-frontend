@@ -9,3 +9,5 @@
 ## Фронтенд: https://a-sibisov.nomoreparties.co 
 
 ## Backend: https://api.a-sibisov.nomoreparties.co
+
+## IP : 51.250.70.252
