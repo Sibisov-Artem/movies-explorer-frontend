@@ -20,7 +20,7 @@ function MoviesCard({ movieCard, saveActive, onMovieCardLikeOff, onMovieCardLike
 
   return (
     <li className="movies-card ">
-      <a className="movies-card__link" href={`${movieCard.trailerLink}`} target="_blank">
+      <a className="movies-card__link" href={`${movieCard.trailerLink}`} target="_blank" rel="noreferrer">
         <img className="movies-card__image"
           src={`${location.pathname === "/movies" ? `https://api.nomoreparties.co${movieCard.image.url}` : movieCard.image}`}
           alt={`Кадр из фильма "${movieCard.nameRU}"`}></img>
