@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import { CurrentUserContext } from '../../context/CurrentUserContext';
 import useFormValidation from '../hooks/useFormValidation';
 
-function Profile({ onUpdateUser, onSignOut, errorMessage }) {
+function Profile({ onUpdateUser, onSignOut, errorMessage, successMessage }) {
 
   const { values, handleChange, errors, isValid, setValues } = useFormValidation();
 
@@ -71,7 +71,8 @@ function Profile({ onUpdateUser, onSignOut, errorMessage }) {
               <span className="profile__message-error">{errors.email}</span>
             </fieldset>
 
-            <p className={`profile__submit-error ${errorMessage && "profile__submit-error_active"}`}>{errorMessage}</p>
+            <p className={`profile__submit-message ${errorMessage && "profile__submit-message_error"}
+            ${successMessage && "profile__submit-message_success"}`}>{`${successMessage || errorMessage}`}</p>
             <button className={`profile__submit-btn ${statusDisabledForClassName ? "profile__submit-btn_disable" : "hover"}`}
               type="submit">Редактировать</button>
           </form>

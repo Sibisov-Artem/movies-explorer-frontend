@@ -48,6 +48,7 @@ function App() {
   const [errorMessageRegister, setErrorMessageRegister] = useState('');
   const [errorMessageLogin, setErrorMessageLogin] = useState('');
   const [errorMessageProfile, setErrorMessageProfile] = useState('');
+  const [successMessageProfile, setSuccessMessageProfile] = useState('');
 
   function handleCheckToken() {
     const token = localStorage.getItem('token');
@@ -106,10 +107,14 @@ function App() {
     mainApi.editUser(inputData)
       .then((data) => {
         setCurrentUser(data);
+        setSuccessMessageProfile('Информация обновлена!');
+        setTimeout(setSuccessMessageProfile, 4000)
       })
       .catch((err) => {
         if (err === 'Что-то пошло не так: 500') {
           setErrorMessageProfile('Пользователь с таким email уже существует.');
+        } else if (err === 'Что-то пошло не так: 400') {
+          setErrorMessageProfile("При обновлении произошла ошибка");
         }
         setTimeout(setErrorMessageProfile, 4000);
         console.log(err);
@@ -411,6 +416,7 @@ function App() {
               onUpdateUser={handleUpdateUser}
               onSignOut={onSignOut}
               errorMessage={errorMessageProfile}
+              successMessage={successMessageProfile}
             />} />
 
             <Route path='/signup' element={<Register

@@ -67,10 +67,9 @@
   width: 80vw;
 }
 
-.profile__submit-error {
+.profile__submit-message {
   font-size: 14px;
   font-weight: 400;
-  color: #EE3465;
   line-height: 14px;
   height: 28px;
   overflow: hidden;
@@ -80,8 +79,14 @@
   visibility: hidden;
 }
 
-.profile__submit-error_active {
+.profile__submit-message_error {
   visibility: visible;
+  color: #EE3465;
+}
+
+.profile__submit-message_success {
+  visibility: visible;
+  color: #3DDC84;
 }
 
 .profile__submit-btn {
