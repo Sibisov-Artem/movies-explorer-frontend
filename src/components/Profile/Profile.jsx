@@ -1,6 +1,6 @@
 import './Profile.css';
 
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import { CurrentUserContext } from '../../context/CurrentUserContext';
@@ -12,7 +12,11 @@ function Profile({ onUpdateUser, onSignOut, errorMessage, successMessage }) {
 
   const currentUser = useContext(CurrentUserContext);
 
-  const statusDisabledForClassName = !isValid;
+  const [statusDisabled, setStatusDisabled] = useState(true);
+
+  useEffect(() => {
+    setStatusDisabled((currentUser.name === values.name && currentUser.email === values.email) || !isValid);
+  }, [values]);
 
   useEffect(() => {
     setValues(
@@ -73,8 +77,11 @@ function Profile({ onUpdateUser, onSignOut, errorMessage, successMessage }) {
 
             <p className={`profile__submit-message ${errorMessage && "profile__submit-message_error"}
             ${successMessage && "profile__submit-message_success"}`}>{`${successMessage || errorMessage}`}</p>
-            <button className={`profile__submit-btn ${statusDisabledForClassName ? "profile__submit-btn_disable" : "hover"}`}
-              type="submit">Редактировать</button>
+
+            <button className={`profile__submit-btn ${statusDisabled ? "profile__submit-btn_disable" : "hover"}`}
+              type="submit"
+              disabled={statusDisabled}
+            >Редактировать</button>
           </form>
           <Link to="/" className="profile__close-btn hover" onClick={onSignOut}>Выйти из аккаунта</Link>
         </div>
