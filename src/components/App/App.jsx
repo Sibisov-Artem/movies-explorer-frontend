@@ -69,7 +69,7 @@ function App() {
   function handleRegistration(inputData) {
     mainApi.register(inputData)
       .then(() => {
-        navigate('/signin');
+        handleAuthorization(inputData)
       })
       .catch((err) => {
         console.log(err);
