@@ -37,7 +37,7 @@ function App() {
   const [currentInputQuerySaveMovie, setCurrentInputQuerySaveMovie] = useState('');
 
   const [isShortFilm, setIsShortFilm] = useState(JSON.parse(localStorage.getItem('shortFilmStatus')) || false);
-  const [isShortFilmSaveMovie, setIsShortFilmSaveMovie] = useState(JSON.parse(localStorage.getItem('shortFilmStatusSaveMovie')) || false);
+  const [isShortFilmSaveMovie, setIsShortFilmSaveMovie] = useState(false);
 
   const [isLoading, setIsLoading] = useState(false);
   const [isLoadingSavedMovie, setIsLoadingSavedMovie] = useState(false);
@@ -120,23 +120,29 @@ function App() {
     localStorage.removeItem('token');
 
     localStorage.removeItem('inputSearch');
-    localStorage.removeItem('inputSearchSaveMovie');
 
     localStorage.removeItem('shortFilmStatus');
-    localStorage.removeItem('shortFilmStatusSaveMovie');
 
     localStorage.removeItem('findedMovies');
-    localStorage.removeItem('findedSaveMovies');
+
     localStorage.removeItem('savedMovieCards');
 
+    setCurrentUser({ name: '', email: '' });
+
     setSavedMovieCards([]);
-    setSearchMovieCards([])
-    setMovieCards([])
+    setSearchMovieCards([]);
+    setMovieCards([]);
 
-    setCurrentInputQuery([])
-    setCurrentInputQuerySaveMovie([])
+    setCurrentInputQuery([]);
+    setCurrentInputQuerySaveMovie([]);
 
-    setLoggedIn((''));
+    setIsShortFilm(false);
+    setIsShortFilmSaveMovie(false);
+
+    setMovieNotFound('');
+    setSaveMovieNotFound('');
+
+    setLoggedIn(false);
   }
 
   //==========================================================
@@ -213,8 +219,6 @@ function App() {
     if (localStorage.getItem('savedMovieCards')) {
 
       setIsLoadingSavedMovie(true);
-      localStorage.setItem('inputSearchSaveMovie', inputSearch); // сохраняем текущий запрос в локальное хранилище
-      localStorage.setItem('shortFilmStatusSaveMovie', isShortFilmSaveMovie) // сохраняем текущее состояние чекбокса в лок хран
       const resultSearchSavedMovie = [];
       JSON.parse(localStorage.getItem('savedMovieCards')).forEach((movie) => { //среди сохраненных пользовательских ищем по инпут запросу
         if (movie.nameRU.toLowerCase().includes(inputSearch.toLowerCase()) || movie.nameEN.toLowerCase().includes(inputSearch.toLowerCase())) {
@@ -225,8 +229,7 @@ function App() {
           }
         }
       })
-      localStorage.setItem('findedSaveMovies', JSON.stringify(resultSearchSavedMovie));
-      setSavedMovieCards(JSON.parse(localStorage.getItem('findedSaveMovies')));
+      setSavedMovieCards(resultSearchSavedMovie);
       setIsLoadingSavedMovie(false);
       if (resultSearchSavedMovie.length === 0) {
         setSaveMovieNotFound('Ничего не найдено')
@@ -251,6 +254,7 @@ function App() {
       .getUserMovies()
       .then((savedMovies) => {
         setSavedMovieCards(savedMovies);
+        localStorage.setItem('savedMovieCards', JSON.stringify(savedMovies));
       })
       .catch((err) => {
         console.log(err.message);
@@ -340,20 +344,18 @@ function App() {
     if (localStorage.getItem('inputSearch')) {
       setCurrentInputQuery(localStorage.getItem('inputSearch'));
     }
-    // для сохранения при обновлении страницы поискового запроса на роуте save-movies
-    if (localStorage.getItem('inputSearchSaveMovie')) {
-      setCurrentInputQuerySaveMovie(localStorage.getItem('inputSearchSaveMovie'));
-    }
     // для сохранения при обновлении страницы найденных по запросу фильмов на роуте movies
     if (localStorage.getItem('findedMovies')) {
       setSearchMovieCards(JSON.parse(localStorage.getItem('findedMovies'))); //найденные по поиску для роута movies
     }
-    // для сохранения при обновлении страницы найденных по запросу фильмов на роуте save-movies
-    const findedSaveMoviesForDisplay = JSON.parse(localStorage.getItem('findedSaveMovies'));
-    if (findedSaveMoviesForDisplay) {
-      setSavedMovieCards(findedSaveMoviesForDisplay)
+
+    if (localStorage.getItem('savedMovieCards')) {
+      setSavedMovieCards(JSON.parse(localStorage.getItem('savedMovieCards'))); //найденные по поиску для роута movies
     }
-  }, [loggedIn]);
+
+    setIsShortFilmSaveMovie(false); // для переключения чек бокса в неактивное состояние при обновлении или переходе
+
+  }, [loggedIn, navigate]);
 
 
   //========================================================================
