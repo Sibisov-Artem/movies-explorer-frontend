@@ -48,10 +48,10 @@ function Movies({ movieCards,
     }
   }
 
-  useEffect(() => {
-    refreshQuantity();
-  }, [onSearchMovie]
-  )
+  // useEffect(() => {
+  //   refreshQuantity();
+  // }, [onSearchMovie]
+  // )
 
   useEffect(() => {
     showQuantityOnSize();
@@ -87,6 +87,7 @@ function Movies({ movieCards,
         currentInputQuery={currentInputQuery}
         handleShortFilm={handleShortFilm}
         isShortFilm={isShortFilm}
+        refreshQuantity={refreshQuantity}
       />
 
       {isLoading ? <Preloader /> :

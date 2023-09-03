@@ -6,7 +6,7 @@ import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 
 
 
-function SearchForm({ onSearchMovie, currentInputQuery, handleShortFilm, isShortFilm }) {
+function SearchForm({ onSearchMovie, currentInputQuery, handleShortFilm, isShortFilm, onSubmit, refreshQuantity }) {
 
   const [searchQuery, setSearchQuery] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
@@ -22,10 +22,11 @@ function SearchForm({ onSearchMovie, currentInputQuery, handleShortFilm, isShort
   function onSubmit(e) {
     e.preventDefault();
     if (searchQuery) {
-      setErrorMessage('')
-      onSearchMovie(searchQuery)
+      refreshQuantity();
+      setErrorMessage('');
+      onSearchMovie(searchQuery);
     } else {
-      setErrorMessage('Нужно ввести ключевое слово')
+      setErrorMessage('Нужно ввести ключевое слово');
     }
   }
 
