@@ -387,9 +387,9 @@ function App() {
       setSearchMovieCards(JSON.parse(localStorage.getItem('findedMovies'))); //найденные по поиску для роута movies
     }
 
-    if (localStorage.getItem('savedMovieCards')) {
-      setSavedMovieCards(JSON.parse(localStorage.getItem('savedMovieCards'))); //сохраненные по поиску для роута movies
-    }
+    // if (localStorage.getItem('savedMovieCards')) {
+    //   setSavedMovieCards(JSON.parse(localStorage.getItem('savedMovieCards'))); //сохраненные по поиску для роута movies
+    // }
 
     if (localStorage.getItem('shortFilmStatus')) {
       setIsShortFilm(JSON.parse(localStorage.getItem('shortFilmStatus'))); //состояние чекбокса роута movies
