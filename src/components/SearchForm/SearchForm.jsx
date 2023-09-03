@@ -1,12 +1,15 @@
 import './SearchForm.css';
 
 import { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 
 
 
 function SearchForm({ onSearchMovie, currentInputQuery, handleShortFilm, isShortFilm, onSubmit, refreshQuantity }) {
+
+  const location = useLocation();
 
   const [searchQuery, setSearchQuery] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
@@ -22,7 +25,9 @@ function SearchForm({ onSearchMovie, currentInputQuery, handleShortFilm, isShort
   function onSubmit(e) {
     e.preventDefault();
     if (searchQuery) {
-      refreshQuantity();
+      if (location.pathname === "/movies") {
+        refreshQuantity();
+      }
       setErrorMessage('');
       onSearchMovie(searchQuery);
     } else {
