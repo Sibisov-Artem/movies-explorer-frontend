@@ -122,19 +122,8 @@ function App() {
   }
 
   function onSignOut() {
-    localStorage.removeItem('token');
 
-    localStorage.removeItem('inputSearch');
-
-    localStorage.removeItem('shortFilmStatus');
-
-    localStorage.removeItem('findedMovies');
-
-    localStorage.removeItem('savedMovieCards');
-
-    localStorage.removeItem('checkedMovies');
-
-    localStorage.removeItem('movieCards');
+    localStorage.clear();
 
     setCurrentUser({ name: '', email: '' });
 
@@ -170,7 +159,11 @@ function App() {
           const resultSearchMovie = [];  //сюда будем добавлять результат поиска
           data.forEach((movie) => {
             if (movie.nameRU.toLowerCase().includes(inputSearch.toLowerCase()) || movie.nameEN.toLowerCase().includes(inputSearch.toLowerCase())) { //убрать чувствительность к регистру
-              resultSearchMovie.push(movie);
+              if (isShortFilm) {
+                movie.duration <= 40 && resultSearchMovie.push(movie);
+              } else {
+                resultSearchMovie.push(movie);
+              }
             }
           })
 
@@ -199,7 +192,11 @@ function App() {
       const resultSearchMovie = [];
       movieCards.forEach((movie) => {
         if (movie.nameRU.toLowerCase().includes(inputSearch.toLowerCase()) || movie.nameEN.toLowerCase().includes(inputSearch.toLowerCase())) { //убрать чувствительность к регистру
-          resultSearchMovie.push(movie);
+          if (isShortFilm) {
+            movie.duration <= 40 && resultSearchMovie.push(movie);
+          } else {
+            resultSearchMovie.push(movie);
+          }
         }
       })
 
@@ -243,13 +240,13 @@ function App() {
     setIsShortFilm(!isShortFilm) //чтоб так и так переключался
     localStorage.setItem('shortFilmStatus', !isShortFilm) // не забыть добавить его в useEffect внизу чтоб не терялся при обновлении
 
-    if (localStorage.getItem('movieCards')) {
+    if (localStorage.getItem('findedMovies')) {
 
       const resultSearchMovie = [];
 
       if (!isShortFilm) {
 
-        movieCards.forEach((movie) => {
+        JSON.parse(localStorage.getItem('findedMovies')).forEach((movie) => {
           movie.duration <= 40 && resultSearchMovie.push(movie);
         })
 
@@ -316,6 +313,7 @@ function App() {
     mainApi
       .addNewUserMovie(movie)
       .then((newMovie) => {
+        console.log(newMovie)
         setSavedMovieCards([...savedMovieCards, newMovie]);
         const saveMoviesLocalStorage = [...savedMovieCards, newMovie];
         localStorage.setItem('savedMovieCards', JSON.stringify(saveMoviesLocalStorage))
@@ -326,15 +324,20 @@ function App() {
   }
 
   function deleteMovieCard(movie) {
-    const movieForDelete = savedMovieCards.find((c) => c.movieId === movie.id || movie.movieId);
 
-    mainApi
-      .deleteUserMovie(movieForDelete._id)
-      .then(() => {
-        setSavedMovieCards((state) => state.filter((c) => c._id !== movieForDelete._id));
+    const searchId = movie.id ? movie.id : movie.movieId;
+    const movieDelete = savedMovieCards.find((savedCard) => {
+      return savedCard.movieId === searchId;
+    });
+    mainApi.
+      deleteUserMovie(movieDelete._id)
+      .then((res) => {
+        console.log(res);
+        localStorage.setItem('savedMovieCards', JSON.stringify(savedMovieCards.filter((el) => el._id !== movieDelete._id)));
+        setSavedMovieCards(savedMovieCards.filter((с) => с._id !== movieDelete._id));
       })
       .catch((err) => {
-        console.log(err);
+        console.log(err); // выведем ошибку в консоль
       });
   }
 
@@ -387,9 +390,9 @@ function App() {
       setSearchMovieCards(JSON.parse(localStorage.getItem('findedMovies'))); //найденные по поиску для роута movies
     }
 
-    // if (localStorage.getItem('savedMovieCards')) {
-    //   setSavedMovieCards(JSON.parse(localStorage.getItem('savedMovieCards'))); //сохраненные по поиску для роута movies
-    // }
+    if (localStorage.getItem('savedMovieCards')) {
+      setSavedMovieCards(JSON.parse(localStorage.getItem('savedMovieCards'))); //сохраненные по поиску для роута movies
+    }
 
     if (localStorage.getItem('shortFilmStatus')) {
       setIsShortFilm(JSON.parse(localStorage.getItem('shortFilmStatus'))); //состояние чекбокса роута movies
