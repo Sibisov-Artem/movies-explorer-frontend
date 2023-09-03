@@ -7,7 +7,7 @@ function PageNotFound() {
   const navigate = useNavigate();
 
   function goBack() {
-    navigate(-1, { replace: true });
+    navigate(-4); //(-1, { replace: true });
   }
 
   return (
