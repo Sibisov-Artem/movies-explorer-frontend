@@ -10,12 +10,10 @@ function MoviesCard({ movieCard, saveActive, onMovieCardLikeOff, onMovieCardLike
 
   function handleLikeClick() {
     onMovieCardLike(movieCard)
-    console.log(movieCard)
   }
 
   function handleDeleteClick() {
     onMovieCardLikeOff(movieCard)
-    console.log(movieCard)
   }
 
   return (

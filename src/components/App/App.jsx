@@ -74,7 +74,6 @@ function App() {
       })
       .catch((err) => {
         console.log(err);
-        // console.log(err.statusCode);
         if (err === 'Что-то пошло не так: 409') {
           setErrorMessageRegister('Пользователь с таким email уже существует.')
         } else if (err === 'Что-то пошло не так: 400') {
@@ -155,10 +154,14 @@ function App() {
       setIsLoading(true);
       moviesApi.getMovies()
         .then((data) => {
-          console.log(data);
           const resultSearchMovie = [];  //сюда будем добавлять результат поиска
+          const resultSearchByInputForCheckbox = [];  //сюда будем добавлять результат поиска по инпуту и направим для работы с переключением чекбокса
           data.forEach((movie) => {
+
             if (movie.nameRU.toLowerCase().includes(inputSearch.toLowerCase()) || movie.nameEN.toLowerCase().includes(inputSearch.toLowerCase())) { //убрать чувствительность к регистру
+              resultSearchByInputForCheckbox.push(movie);
+              localStorage.setItem('resultSearchByInputForCheckbox', JSON.stringify(resultSearchByInputForCheckbox));
+
               if (isShortFilm) {
                 movie.duration <= 40 && resultSearchMovie.push(movie);
               } else {
@@ -174,6 +177,7 @@ function App() {
           setMovieCards(JSON.parse(localStorage.getItem('movieCards'))); // чтобы в след раз поиск проводить без запроса к api
           if (resultSearchMovie.length === 0) {
             setMovieNotFound('Ничего не найдено')
+
           } else {
             setMovieNotFound('')
           }
@@ -185,15 +189,22 @@ function App() {
         .finally(() => {
           setIsLoading(false);
         })
-
+      ///////////////////////////////////////////////////////////////////////////////////////////////
+      // продолжение функции// часть вторая
+      ///////////////////////////////////////////////////////////////////////////////////////////
       //  в случае если фильмы загружены в movieCards
     } else {
       setIsLoading(true);
       const resultSearchMovie = [];
+      const resultSearchByInputForCheckbox = [];
       movieCards.forEach((movie) => {
         if (movie.nameRU.toLowerCase().includes(inputSearch.toLowerCase()) || movie.nameEN.toLowerCase().includes(inputSearch.toLowerCase())) { //убрать чувствительность к регистру
+          resultSearchByInputForCheckbox.push(movie);
+          localStorage.setItem('resultSearchByInputForCheckbox', JSON.stringify(resultSearchByInputForCheckbox));
+
           if (isShortFilm) {
             movie.duration <= 40 && resultSearchMovie.push(movie);
+            localStorage.removeItem('checkedMovies');
           } else {
             resultSearchMovie.push(movie);
           }
@@ -204,9 +215,13 @@ function App() {
       setSearchMovieCards(JSON.parse(localStorage.getItem('findedMovies')));
       setIsLoading(false);
       if (resultSearchMovie.length === 0) {
+        localStorage.removeItem('findedMovies')
         setMovieNotFound('Ничего не найдено')
       } else {
         setMovieNotFound('')
+      }
+      if (resultSearchByInputForCheckbox.length === 0) {
+        localStorage.removeItem('resultSearchByInputForCheckbox')
       }
     }
   }
@@ -237,24 +252,31 @@ function App() {
   // переключатель чек-бокс для поиска короткометражных фильмов
   function handleShortFilm() {
 
-    setIsShortFilm(!isShortFilm) //чтоб так и так переключался
-    localStorage.setItem('shortFilmStatus', !isShortFilm) // не забыть добавить его в useEffect внизу чтоб не терялся при обновлении
+    setIsShortFilm(!isShortFilm) //чтобы переключался
+    localStorage.setItem('shortFilmStatus', !isShortFilm)
 
-    if (localStorage.getItem('findedMovies')) {
+    if ((localStorage.getItem('findedMovies')) || (localStorage.getItem('resultSearchByInputForCheckbox'))) {
 
       const resultSearchMovie = [];
 
       if (!isShortFilm) {
-
-        JSON.parse(localStorage.getItem('findedMovies')).forEach((movie) => {
-          movie.duration <= 40 && resultSearchMovie.push(movie);
-        })
-
+        if (localStorage.getItem('findedMovies')) {
+          JSON.parse(localStorage.getItem('findedMovies')).forEach((movie) => {
+            movie.duration <= 40 && resultSearchMovie.push(movie);
+          })
+        }
         localStorage.setItem('checkedMovies', JSON.stringify(resultSearchMovie));
         setSearchMovieCards(JSON.parse(localStorage.getItem('checkedMovies')))
+        if (!localStorage.getItem('findedMovies')) {
+          setMovieNotFound('Ничего не найдено')
+        }
       } else {
-        localStorage.removeItem('checkedMovies');            // чтоб не перекрывал показ найденного по поисковому запросу
-        setSearchMovieCards(JSON.parse(localStorage.getItem('findedMovies')))
+        if (localStorage.getItem('resultSearchByInputForCheckbox')) {
+          setMovieNotFound('')
+        }
+
+        localStorage.removeItem('checkedMovies');
+        setSearchMovieCards(JSON.parse(localStorage.getItem('resultSearchByInputForCheckbox')))
       }
     }
   }
@@ -262,7 +284,6 @@ function App() {
   // переключатель чек-бокс для поиска СОХРАНЕННЫХ короткометражных фильмов
   function handleShortSaveFilm() {
     setIsShortFilmSaveMovie(!isShortFilmSaveMovie)
-
 
     if (localStorage.getItem('savedMovieCards')) {
       const resultSearchSavedMovie = [];
@@ -276,7 +297,7 @@ function App() {
         localStorage.setItem('checkedSaveMovies', JSON.stringify(resultSearchSavedMovie));
         setSavedMovieCards(JSON.parse(localStorage.getItem('checkedSaveMovies')))
       } else {
-        localStorage.removeItem('checkedSaveMovies');            // чтоб не перекрывал показ найденного по поисковому запросу
+        localStorage.removeItem('checkedSaveMovies');
         setSavedMovieCards(JSON.parse(localStorage.getItem('savedMovieCards')))
       }
     }
@@ -301,19 +322,15 @@ function App() {
   }
 
   function saveMovieCardsActive(movieCard) {
-    // function sayTrue() {
     return savedMovieCards.some(
       (c) => c.nameRU === movieCard.nameRU
     );
-    // }
-    // console.log(sayTrue());
   }
 
   function saveMovieCard(movie) {
     mainApi
       .addNewUserMovie(movie)
       .then((newMovie) => {
-        console.log(newMovie)
         setSavedMovieCards([...savedMovieCards, newMovie]);
         const saveMoviesLocalStorage = [...savedMovieCards, newMovie];
         localStorage.setItem('savedMovieCards', JSON.stringify(saveMoviesLocalStorage))
@@ -329,15 +346,15 @@ function App() {
     const movieDelete = savedMovieCards.find((savedCard) => {
       return savedCard.movieId === searchId;
     });
-    mainApi.
-      deleteUserMovie(movieDelete._id)
-      .then((res) => {
-        console.log(res);
-        localStorage.setItem('savedMovieCards', JSON.stringify(savedMovieCards.filter((el) => el._id !== movieDelete._id)));
-        setSavedMovieCards(savedMovieCards.filter((с) => с._id !== movieDelete._id));
+    mainApi
+      .deleteUserMovie(movieDelete._id)
+      .then(() => {
+        const savedMovieAfterDelete = savedMovieCards.filter((с) => с._id !== movieDelete._id);
+        localStorage.setItem('savedMovieCards', JSON.stringify(savedMovieAfterDelete));
+        setSavedMovieCards(savedMovieAfterDelete);
       })
       .catch((err) => {
-        console.log(err); // выведем ошибку в консоль
+        console.log(err);
       });
   }
 
@@ -355,10 +372,9 @@ function App() {
       mainApi.getUser()
         .then((data) => {
           setCurrentUser(data);
-          console.log(data);
         })
         .catch((err) => {
-          console.log(err); // выведем ошибку в консоль
+          console.log(err);
         });
     }
   }, [])
@@ -400,6 +416,16 @@ function App() {
 
     if (localStorage.getItem('checkedMovies')) {
       setSearchMovieCards(JSON.parse(localStorage.getItem('checkedMovies'))); //найденные по чекбоксу для роута movies
+    }
+
+    if (localStorage.getItem('resultSearchByInputForCheckbox')) {
+      if (isShortFilm) {
+        if (localStorage.getItem('checkedMovies')) {
+          setSearchMovieCards(JSON.parse(localStorage.getItem('checkedMovies'))); //найденные по чекбоксу для роута movies
+        }
+      } else {
+        setSearchMovieCards(JSON.parse(localStorage.getItem('resultSearchByInputForCheckbox'))); //найденные по чекбоксу для роута movies
+      }
     }
 
     setIsShortFilmSaveMovie(false); // для переключения чек бокса в неактивное состояние при обновлении или переходе
