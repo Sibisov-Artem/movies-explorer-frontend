@@ -234,17 +234,36 @@ function App() {
 
       setIsLoadingSavedMovie(true);
       const resultSearchSavedMovie = [];
+      const resultSearchSavedMovieByInputForCheckbox = [];
       JSON.parse(localStorage.getItem('savedMovieCards')).forEach((movie) => { //среди сохраненных пользовательских ищем по инпут запросу
         if (movie.nameRU.toLowerCase().includes(inputSearch.toLowerCase()) || movie.nameEN.toLowerCase().includes(inputSearch.toLowerCase())) {
-          resultSearchSavedMovie.push(movie);
+
+          resultSearchSavedMovieByInputForCheckbox.push(movie);
+          localStorage.setItem('resultSearchSavedMovieByInputForCheckbox', JSON.stringify(resultSearchSavedMovieByInputForCheckbox));
+
+
+          if (isShortFilmSaveMovie) {
+            movie.duration <= 40 && resultSearchSavedMovie.push(movie);
+            localStorage.removeItem('checkedSaveMovies');
+          } else {
+            resultSearchSavedMovie.push(movie);
+          }
         }
       })
-      setSavedMovieCards(resultSearchSavedMovie);
+
+      localStorage.setItem('findedSaveMovies', JSON.stringify(resultSearchSavedMovie));
+      setSavedMovieCards(JSON.parse(localStorage.getItem('findedSaveMovies')));
       setIsLoadingSavedMovie(false);
+
+
       if (resultSearchSavedMovie.length === 0) {
+        localStorage.removeItem('findedSaveMovies')
         setSaveMovieNotFound('Ничего не найдено')
       } else {
         setSaveMovieNotFound('')
+      }
+      if (resultSearchSavedMovieByInputForCheckbox.length === 0) {
+        localStorage.removeItem('resultSearchSavedMovieByInputForCheckbox')
       }
     }
   }
@@ -270,6 +289,7 @@ function App() {
         if (!localStorage.getItem('findedMovies')) {
           setMovieNotFound('Ничего не найдено')
         }
+
       } else {
         if (localStorage.getItem('resultSearchByInputForCheckbox')) {
           setMovieNotFound('')
@@ -286,19 +306,42 @@ function App() {
     setIsShortFilmSaveMovie(!isShortFilmSaveMovie)
 
     if (localStorage.getItem('savedMovieCards')) {
-      const resultSearchSavedMovie = [];
 
-      if (!isShortFilmSaveMovie) {
+      const resultCheckSavedMovie = [];
+      const resultChekedFromInputForCheckbox = [];
 
-        JSON.parse(localStorage.getItem('savedMovieCards')).forEach((movie) => { //среди сохраненных пользовательских ищем
-          movie.duration <= 40 && resultSearchSavedMovie.push(movie);
-        })
+      if (!isShortFilmSaveMovie) {////////////////
 
-        localStorage.setItem('checkedSaveMovies', JSON.stringify(resultSearchSavedMovie));
-        setSavedMovieCards(JSON.parse(localStorage.getItem('checkedSaveMovies')))
+
+        // после поиска в инпуте
+        if (localStorage.getItem('resultSearchSavedMovieByInputForCheckbox')) {
+          console.log((localStorage.getItem('resultSearchSavedMovieByInputForCheckbox')))
+
+          JSON.parse(localStorage.getItem('resultSearchSavedMovieByInputForCheckbox')).forEach((movie) => { //среди сохраненных пользовательских ищем
+            movie.duration <= 40 && resultChekedFromInputForCheckbox.push(movie);
+
+            localStorage.setItem('checkedFromInputForCheckbox', JSON.stringify(resultChekedFromInputForCheckbox));
+
+            setSavedMovieCards(JSON.parse(localStorage.getItem('checkedFromInputForCheckbox')))
+          })
+        } else {
+
+          // сохраненные
+          JSON.parse(localStorage.getItem('savedMovieCards')).forEach((movie) => { //среди сохраненных пользовательских ищем
+            movie.duration <= 40 && resultCheckSavedMovie.push(movie);
+          })
+          localStorage.setItem('checkedSaveMovies', JSON.stringify(resultCheckSavedMovie));
+          setSavedMovieCards(JSON.parse(localStorage.getItem('checkedSaveMovies')))
+        }
+
       } else {
-        localStorage.removeItem('checkedSaveMovies');
-        setSavedMovieCards(JSON.parse(localStorage.getItem('savedMovieCards')))
+        if (localStorage.getItem('resultSearchSavedMovieByInputForCheckbox')) {
+          localStorage.removeItem('checkedFromInputForCheckbox');
+          setSavedMovieCards(JSON.parse(localStorage.getItem('resultSearchSavedMovieByInputForCheckbox')))
+        } else {
+          localStorage.removeItem('checkedSaveMovies');
+          setSavedMovieCards(JSON.parse(localStorage.getItem('savedMovieCards')))
+        }
       }
     }
   }
@@ -407,7 +450,7 @@ function App() {
     }
 
     if (localStorage.getItem('savedMovieCards')) {
-      setSavedMovieCards(JSON.parse(localStorage.getItem('savedMovieCards'))); //сохраненные по поиску для роута movies
+      setSavedMovieCards(JSON.parse(localStorage.getItem('savedMovieCards'))); //сохраненные по поиску для роута saved-movies
     }
 
     if (localStorage.getItem('shortFilmStatus')) {
@@ -427,6 +470,9 @@ function App() {
         setSearchMovieCards(JSON.parse(localStorage.getItem('resultSearchByInputForCheckbox'))); //найденные по чекбоксу для роута movies
       }
     }
+
+    localStorage.removeItem('resultSearchSavedMovieByInputForCheckbox');
+    localStorage.removeItem('checkedFromInputForCheckbox');
 
     setIsShortFilmSaveMovie(false); // для переключения чек бокса в неактивное состояние при обновлении или переходе
 
