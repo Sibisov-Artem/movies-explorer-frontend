@@ -49,21 +49,21 @@ function Movies({ movieCards,
   }
 
   // useEffect(() => {
-  //   refreshQuantity();
-  // }, [onSearchMovie]
+  //   showQuantityOnSize();
+  // }, []
   // )
-
-  useEffect(() => {
-    showQuantityOnSize();
-  }, []
-  )
 
   //слушатель resize для синхронного изменения кол-ва к показу
   //в зависимости от изменнеия разрешения с ограничением по времени setTimeout
+  // и  удаление слушателя
+  //
   useEffect(() => {
-    setTimeout(() => {
-      window.addEventListener('resize', showQuantityOnSize);
-    }, 1000);
+    window.addEventListener('resize', showQuantityOnSize);
+    // Все обработчики, добавленные через addEventListener, удаляются при размонтировании компонента.
+    return () => {
+      window.removeEventListener('resize', showQuantityOnSize);
+    };
+
   }, []);
 
 
