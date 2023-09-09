@@ -444,10 +444,7 @@ function App() {
     if (localStorage.getItem('inputSearch')) {
       setCurrentInputQuery(localStorage.getItem('inputSearch'));
     }
-    // для сохранения при обновлении страницы найденных по запросу фильмов на роуте movies
-    if (localStorage.getItem('findedMovies')) {
-      setSearchMovieCards(JSON.parse(localStorage.getItem('findedMovies'))); //найденные по поиску для роута movies
-    }
+
 
     if (localStorage.getItem('savedMovieCards')) {
       setSavedMovieCards(JSON.parse(localStorage.getItem('savedMovieCards'))); //сохраненные по поиску для роута saved-movies
@@ -475,6 +472,11 @@ function App() {
     localStorage.removeItem('checkedFromInputForCheckbox');
 
     setIsShortFilmSaveMovie(false); // для переключения чек бокса в неактивное состояние при обновлении или переходе
+
+    // для сохранения при обновлении страницы найденных по запросу фильмов на роуте movies
+    if (localStorage.getItem('findedMovies')) {
+      setSearchMovieCards(JSON.parse(localStorage.getItem('findedMovies'))); //найденные по поиску для роута movies
+    }
 
   }, [loggedIn, navigate]);
 

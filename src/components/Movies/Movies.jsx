@@ -48,10 +48,10 @@ function Movies({ movieCards,
     }
   }
 
-  // useEffect(() => {
-  //   showQuantityOnSize();
-  // }, []
-  // )
+  useEffect(() => {
+    showQuantityOnSize();
+  }, []
+  )
 
   //слушатель resize для синхронного изменения кол-ва к показу
   //в зависимости от изменнеия разрешения с ограничением по времени setTimeout
