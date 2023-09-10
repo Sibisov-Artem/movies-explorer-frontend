@@ -1,7 +1,7 @@
 import AuthForm from '../AuthForm/AuthForm';
 import useFormValidation from '../hooks/useFormValidation';
 
-function Login({ onAuthorization, errorMessage }) {
+function Login({ onAuthorization, errorMessage, isBlockedForm }) {
 
   const { values, handleChange, errors, isValid } = useFormValidation();
 
@@ -31,6 +31,7 @@ function Login({ onAuthorization, errorMessage }) {
         errorMessagePassword={errors.password}
         statusDisabledForClassName={statusDisabled}
         errorMessage={errorMessage}
+        isBlockedForm={isBlockedForm}
       />
     </main>
   );

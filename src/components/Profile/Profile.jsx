@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import { CurrentUserContext } from '../../context/CurrentUserContext';
 import useFormValidation from '../hooks/useFormValidation';
 
-function Profile({ onUpdateUser, onSignOut, errorMessage, successMessage }) {
+function Profile({ onUpdateUser, onSignOut, errorMessage, successMessage, isBlockedForm }) {
 
   const { values, handleChange, errors, isValid, setValues } = useFormValidation();
 
@@ -41,7 +41,7 @@ function Profile({ onUpdateUser, onSignOut, errorMessage, successMessage }) {
           <h1 className="profile__title">{`Привет, ${currentUser.name}!`}</h1>
           <form className="profile__form" name="profile" onSubmit={onSubmit}>
 
-            <fieldset className="profile__input-container">
+            <fieldset className="profile__input-container" disabled={isBlockedForm}>
               <label className="profile__label">Имя
                 <input className="profile__input"
                   type="text"
@@ -80,7 +80,7 @@ function Profile({ onUpdateUser, onSignOut, errorMessage, successMessage }) {
 
             <button className={`profile__submit-btn ${statusDisabled ? "profile__submit-btn_disable" : "hover"}`}
               type="submit"
-              disabled={statusDisabled}
+              disabled={statusDisabled || isBlockedForm}
             >Редактировать</button>
           </form>
           <Link to="/" className="profile__close-btn hover" onClick={onSignOut}>Выйти из аккаунта</Link>

@@ -3,13 +3,10 @@ import './AuthForm.css'
 import { Link, useLocation } from 'react-router-dom';
 
 function AuthForm({ title, buttonText, authText, authLink, authTextLink, name, email, password, onSubmit,
-  handleChange, statusDisabled, errorMessageName, errorMessageEmail, errorMessagePassword, statusDisabledForClassName, errorMessage }) {
+  handleChange, statusDisabled, errorMessageName, errorMessageEmail, errorMessagePassword, statusDisabledForClassName, errorMessage,
+  isBlockedForm }) {
 
   const location = useLocation();
-
-  // function onSubmit(e) {
-  //   e.preventDefault();
-  // }
 
   return (
     <section className="auth-form">
@@ -19,7 +16,7 @@ function AuthForm({ title, buttonText, authText, authLink, authTextLink, name, e
       <h1 className="auth-form__title">{title}</h1>
       <form className="auth-form__form" onSubmit={onSubmit}>
 
-        <fieldset className="auth-form__input-container">
+        <fieldset className="auth-form__input-container" disabled={isBlockedForm}>
           {location.pathname === "/signup" ?
             (
               <>
@@ -78,7 +75,7 @@ function AuthForm({ title, buttonText, authText, authLink, authTextLink, name, e
         {errorMessage && (<p className='auth-form__submit-error'>{errorMessage}</p>)}
         <button className={`auth-form__submit-btn  ${statusDisabledForClassName ? "auth-form__submit-btn_disable" : "hover"}`}
           type="submit"
-          disabled={statusDisabled}
+          disabled={statusDisabled || isBlockedForm}
         >{buttonText}</button>
 
         <div className="auth-form__auth">

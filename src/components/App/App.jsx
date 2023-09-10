@@ -50,6 +50,8 @@ function App() {
   const [errorMessageProfile, setErrorMessageProfile] = useState('');
   const [successMessageProfile, setSuccessMessageProfile] = useState('');
 
+  const [isBlockedForm, setIsBlockedForm] = useState(false);
+
   function handleCheckToken() {
     const token = localStorage.getItem('token');
     if (token) {
@@ -68,6 +70,7 @@ function App() {
   //==========================================================
   //==============================================================
   function handleRegistration(inputData) {
+    setIsBlockedForm(true);
     mainApi.register(inputData)
       .then(() => {
         handleAuthorization(inputData)
@@ -80,10 +83,14 @@ function App() {
           setErrorMessageRegister('При регистрации пользователя произошла ошибка.');
         };
         setTimeout(setErrorMessageRegister, 4000);
+      })
+      .finally(() => {
+        setIsBlockedForm(false);
       });
   }
 
   function handleAuthorization(inputData) {
+    setIsBlockedForm(true);
     mainApi.login(inputData)
       .then((data) => {
         localStorage.setItem("token", data.token);
@@ -99,10 +106,14 @@ function App() {
         }
         setTimeout(setErrorMessageLogin, 4000);
       }
-      );
+      )
+      .finally(() => {
+        setIsBlockedForm(false);
+      });
   }
 
   function handleUpdateUser(inputData) {
+    setIsBlockedForm(true);
     mainApi.editUser(inputData)
       .then((data) => {
         setCurrentUser(data);
@@ -115,9 +126,13 @@ function App() {
         } else if (err === 'Что-то пошло не так: 400') {
           setErrorMessageProfile("При обновлении произошла ошибка");
         }
-        setTimeout(setErrorMessageProfile, 4000);
+        setTimeout(setErrorMessageProfile(), 4000);
         console.log(err);
       })
+      .finally(() => {
+        setIsBlockedForm(false);
+        // setTimeout(setIsBlockedForm, 10000, false);
+      });
   }
 
   function onSignOut() {
@@ -535,16 +550,19 @@ function App() {
               onSignOut={onSignOut}
               errorMessage={errorMessageProfile}
               successMessage={successMessageProfile}
+              isBlockedForm={isBlockedForm}
             />} />
 
             <Route path='/signup' element={<Register
               onRegistration={handleRegistration}
               errorMessage={errorMessageRegister}
+              isBlockedForm={isBlockedForm}
             />} />
 
             <Route path='/signin' element={<Login
               onAuthorization={handleAuthorization}
               errorMessage={errorMessageLogin}
+              isBlockedForm={isBlockedForm}
             />} />
             <Route path='/*' element={<PageNotFound />} />
           </Routes>

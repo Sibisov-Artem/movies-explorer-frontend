@@ -1,11 +1,11 @@
 import AuthForm from '../AuthForm/AuthForm';
 import useFormValidation from '../hooks/useFormValidation';
 
-function Register({ onRegistration, errorMessage }) {
+function Register({ onRegistration, errorMessage, isBlockedForm }) {
 
   const { values, handleChange, errors, isValid } = useFormValidation();
 
-  const statusDisabled = !isValid;
+  const statusDisabled = !isValid || isBlockedForm;
 
 
   function handleSubmit(e) {
@@ -33,6 +33,7 @@ function Register({ onRegistration, errorMessage }) {
         errorMessagePassword={errors.password}
         statusDisabledForClassName={statusDisabled}
         errorMessage={errorMessage}
+        isBlockedForm={isBlockedForm}
       />
     </main>
   );
