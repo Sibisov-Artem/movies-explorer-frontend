@@ -1,3 +1,4 @@
+import { API_GET_MOVIES_URL } from './constants.js';
 class MoviesApi {
   constructor(options) {
     this.url = options.baseUrl;
@@ -23,5 +24,5 @@ class MoviesApi {
 }
 
 export const moviesApi = new MoviesApi({
-  baseUrl: 'https://api.nomoreparties.co/beatfilm-movies',
+  baseUrl: API_GET_MOVIES_URL,
 });

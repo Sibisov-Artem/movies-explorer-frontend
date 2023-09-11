@@ -1,3 +1,5 @@
+import { MAIN_API_URL, API_MOVIES } from './constants.js'
+
 class MainApi {
   constructor(options) {
     this.url = options.baseUrl;
@@ -105,11 +107,11 @@ class MainApi {
         duration: movie.duration,
         year: movie.year,
         description: movie.description,
-        image: `https://api.nomoreparties.co${movie.image.url}`,
+        image: `${API_MOVIES}${movie.image.url}`,
         trailerLink: movie.trailerLink,
         nameRU: movie.nameRU,
         nameEN: movie.nameEN,
-        thumbnail: `https://api.nomoreparties.co${movie.image.formats.thumbnail.url}`,
+        thumbnail: `${API_MOVIES}${movie.image.formats.thumbnail.url}`,
         movieId: movie.id,
       })
     })
@@ -125,6 +127,6 @@ class MainApi {
 }
 
 export const mainApi = new MainApi({
-  baseUrl: 'http://localhost:3000',
+  baseUrl: MAIN_API_URL,
   // baseUrl: 'https://api.a-sibisov.nomoreparties.co',
 });

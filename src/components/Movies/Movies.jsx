@@ -7,6 +7,16 @@ import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import MoviesMore from '../MoviesMore/MoviesMore';
 import Preloader from '../Preloader/Preloader'
 
+import {
+  QUANTITY_MOVIE_FOR_BIG_SIZE_WINDOW,
+  QUANTITY_MOVIE_FOR_MEDIUM_SIZE_WINDOW,
+  QUANTITY_MOVIE_FOR_SMALL_SIZE_WINDOW,
+  LOAD_MORE_MOVIE_FOR_BIG_SIZE_WINDOW,
+  LOAD_MORE_MOVIE_FOR_MEDIUM_SIZE_WINDOW,
+  LOAD_MORE_MOVIE_FOR_SMALL_SIZE_WINDOW,
+  SIZE_WINDOW
+} from '../../utils/constants.js'
+
 function Movies({ movieCards,
   saveActive,
   onMovieCardLikeOff,
@@ -25,26 +35,26 @@ function Movies({ movieCards,
   // // при разрешении экрана < 1280 показывать первоначально 8шт, потом добавлять по 2шт
   // // при разрешении экрана < 600 показывать первоначально 5шт, потом добавлять по 2шт
   function showQuantityOnSize() {
-    if (window.innerWidth >= 1280) {
-      setCardForDisplay(12)
+    if (window.innerWidth >= SIZE_WINDOW.big) {
+      setCardForDisplay(QUANTITY_MOVIE_FOR_BIG_SIZE_WINDOW)
 
-    } else if (window.innerWidth < 600) {
-      setCardForDisplay(5)
+    } else if (window.innerWidth < SIZE_WINDOW.small) {
+      setCardForDisplay(QUANTITY_MOVIE_FOR_SMALL_SIZE_WINDOW)
 
     } else {
-      setCardForDisplay(8)
+      setCardForDisplay(QUANTITY_MOVIE_FOR_MEDIUM_SIZE_WINDOW)
     }
   }
 
   function refreshQuantity() {
-    if (window.innerWidth >= 1280) {
-      setCardForDisplay(12)
+    if (window.innerWidth >= SIZE_WINDOW.big) {
+      setCardForDisplay(QUANTITY_MOVIE_FOR_BIG_SIZE_WINDOW)
 
-    } else if (window.innerWidth < 600) {
-      setCardForDisplay(5)
+    } else if (window.innerWidth < SIZE_WINDOW.small) {
+      setCardForDisplay(QUANTITY_MOVIE_FOR_SMALL_SIZE_WINDOW)
 
     } else {
-      setCardForDisplay(8)
+      setCardForDisplay(QUANTITY_MOVIE_FOR_MEDIUM_SIZE_WINDOW)
     }
   }
 
@@ -67,14 +77,14 @@ function Movies({ movieCards,
 
 
   function loadMore() {
-    if (window.innerWidth >= 1280) {
-      setCardForDisplay(cardForDisplay + 3)
+    if (window.innerWidth >= SIZE_WINDOW.big) {
+      setCardForDisplay(cardForDisplay + LOAD_MORE_MOVIE_FOR_BIG_SIZE_WINDOW)
 
-    } else if (window.innerWidth < 600) {
-      setCardForDisplay(cardForDisplay + 2)
+    } else if (window.innerWidth < SIZE_WINDOW.small) {
+      setCardForDisplay(cardForDisplay + LOAD_MORE_MOVIE_FOR_SMALL_SIZE_WINDOW)
 
     } else {
-      setCardForDisplay(cardForDisplay + 2)
+      setCardForDisplay(cardForDisplay + LOAD_MORE_MOVIE_FOR_MEDIUM_SIZE_WINDOW)
     }
 
   }

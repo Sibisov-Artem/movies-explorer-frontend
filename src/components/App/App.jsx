@@ -19,6 +19,8 @@ import ProtectedRouteElement from '../ProtectedRoute/ProtectedRoute';
 
 import { CurrentUserContext } from '../../context/CurrentUserContext';
 
+import { SHORT_MOVIE_DURATION } from '../../utils/constants.js'
+
 function App() {
 
   const location = useLocation();
@@ -126,7 +128,7 @@ function App() {
         } else if (err === 'Что-то пошло не так: 400') {
           setErrorMessageProfile("При обновлении произошла ошибка");
         }
-        setTimeout(setErrorMessageProfile(), 4000);
+        setTimeout(setErrorMessageProfile, 4000);
         console.log(err);
       })
       .finally(() => {
@@ -178,7 +180,7 @@ function App() {
               localStorage.setItem('resultSearchByInputForCheckbox', JSON.stringify(resultSearchByInputForCheckbox));
 
               if (isShortFilm) {
-                movie.duration <= 40 && resultSearchMovie.push(movie);
+                movie.duration <= SHORT_MOVIE_DURATION && resultSearchMovie.push(movie);
               } else {
                 resultSearchMovie.push(movie);
               }
@@ -218,7 +220,7 @@ function App() {
           localStorage.setItem('resultSearchByInputForCheckbox', JSON.stringify(resultSearchByInputForCheckbox));
 
           if (isShortFilm) {
-            movie.duration <= 40 && resultSearchMovie.push(movie);
+            movie.duration <= SHORT_MOVIE_DURATION && resultSearchMovie.push(movie);
             localStorage.removeItem('checkedMovies');
           } else {
             resultSearchMovie.push(movie);
@@ -258,7 +260,7 @@ function App() {
 
 
           if (isShortFilmSaveMovie) {
-            movie.duration <= 40 && resultSearchSavedMovie.push(movie);
+            movie.duration <= SHORT_MOVIE_DURATION && resultSearchSavedMovie.push(movie);
             localStorage.removeItem('checkedSaveMovies');
           } else {
             resultSearchSavedMovie.push(movie);
@@ -296,7 +298,7 @@ function App() {
       if (!isShortFilm) {
         if (localStorage.getItem('findedMovies')) {
           JSON.parse(localStorage.getItem('findedMovies')).forEach((movie) => {
-            movie.duration <= 40 && resultSearchMovie.push(movie);
+            movie.duration <= SHORT_MOVIE_DURATION && resultSearchMovie.push(movie);
           })
         }
         localStorage.setItem('checkedMovies', JSON.stringify(resultSearchMovie));
@@ -333,7 +335,7 @@ function App() {
           console.log((localStorage.getItem('resultSearchSavedMovieByInputForCheckbox')))
 
           JSON.parse(localStorage.getItem('resultSearchSavedMovieByInputForCheckbox')).forEach((movie) => { //среди сохраненных пользовательских ищем
-            movie.duration <= 40 && resultChekedFromInputForCheckbox.push(movie);
+            movie.duration <= SHORT_MOVIE_DURATION && resultChekedFromInputForCheckbox.push(movie);
 
             localStorage.setItem('checkedFromInputForCheckbox', JSON.stringify(resultChekedFromInputForCheckbox));
 
@@ -343,7 +345,7 @@ function App() {
 
           // сохраненные
           JSON.parse(localStorage.getItem('savedMovieCards')).forEach((movie) => { //среди сохраненных пользовательских ищем
-            movie.duration <= 40 && resultCheckSavedMovie.push(movie);
+            movie.duration <= SHORT_MOVIE_DURATION && resultCheckSavedMovie.push(movie);
           })
           localStorage.setItem('checkedSaveMovies', JSON.stringify(resultCheckSavedMovie));
           setSavedMovieCards(JSON.parse(localStorage.getItem('checkedSaveMovies')))
@@ -392,6 +394,10 @@ function App() {
         setSavedMovieCards([...savedMovieCards, newMovie]);
         const saveMoviesLocalStorage = [...savedMovieCards, newMovie];
         localStorage.setItem('savedMovieCards', JSON.stringify(saveMoviesLocalStorage))
+        console.log(movie)
+        const { NODE_ENV, DS = 'ddddd' } = process.env;
+        console.log(NODE_ENV)
+        console.log(DS)
       })
       .catch((err) => {
         console.log(err);
