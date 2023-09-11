@@ -394,10 +394,6 @@ function App() {
         setSavedMovieCards([...savedMovieCards, newMovie]);
         const saveMoviesLocalStorage = [...savedMovieCards, newMovie];
         localStorage.setItem('savedMovieCards', JSON.stringify(saveMoviesLocalStorage))
-        console.log(movie)
-        const { NODE_ENV, DS = 'ddddd' } = process.env;
-        console.log(NODE_ENV)
-        console.log(DS)
       })
       .catch((err) => {
         console.log(err);
