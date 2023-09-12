@@ -17,8 +17,8 @@ function Footer() {
             <div className="footer__wrapper">
               <p className="footer__year">©&nbsp;2023</p>
               <ul className="footer__links-list">
-                <li><a className="footer__link-item hover" href="https://practicum.yandex.ru" target="_blank">Яндекс.Практикум</a></li>
-                <li><a className="footer__link-item hover" href="https://github.com/" target="_blank">Github</a></li>
+                <li><a className="footer__link-item hover" href="https://practicum.yandex.ru" target="_blank" rel="noreferrer">Яндекс.Практикум</a></li>
+                <li><a className="footer__link-item hover" href="https://github.com/" target="_blank" rel="noreferrer">Github</a></li>
               </ul>
             </div>
           </footer>

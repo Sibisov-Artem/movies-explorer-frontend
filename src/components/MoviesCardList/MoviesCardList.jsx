@@ -1,18 +1,20 @@
 import './MoviesCardList.css';
 
-
-
 import MoviesCard from '../MoviesCard/MoviesCard';
 
-function MoviesCardList({ array }) {
+function MoviesCardList({ movieCards, saveActive, onMovieCardLikeOff, onMovieCardLike, cardForDisplay }) {
+
   return (
     <section className="movies-cards">
       <ul className="movies-cards__grid">
 
-        {array.map((movieCard) => (
+        {movieCards.slice(0, cardForDisplay).map((movieCard) => (
           <MoviesCard
-            movie={movieCard}
-            key={movieCard._id}
+            movieCard={movieCard}
+            key={movieCard.id || movieCard._id}
+            saveActive={saveActive}
+            onMovieCardLike={onMovieCardLike}
+            onMovieCardLikeOff={onMovieCardLikeOff}
           />
         ))}
 

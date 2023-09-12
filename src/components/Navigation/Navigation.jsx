@@ -2,13 +2,14 @@ import './Navigation.css';
 
 import { Link, useLocation } from 'react-router-dom';
 
-function Navigation({ burgerActive }) {
+function Navigation({ burgerActive, loggedIn, closeBurgerOnOverlay }) {
 
   const location = useLocation();
 
   return (
     <nav className="navigation">
-      {location.pathname === "/" ? (
+
+      {!loggedIn ? (
         <ul className="navigation__list navigation__list_main">
           <li className="navigation__item">
             <Link to="/signup" className="navigation__link navigation__link_place_main hover">Регистрация</Link>
@@ -18,7 +19,11 @@ function Navigation({ burgerActive }) {
           </li>
         </ul>
       ) : (
-        <div className={`navigation__opacity-background ${burgerActive ? "navigation__opacity-background_active" : ""}`}>
+        <div className={`navigation__opacity-background ${burgerActive ? "navigation__opacity-background_active" : ""}`}
+          onMouseUp={closeBurgerOnOverlay}
+          // onKeyDown={closeBurgerOnOverlay}
+          // tabIndex="0"
+        >
           <ul className="navigation__list navigation__list_other">
 
             <li className="navigation__item navigation__item-burger">

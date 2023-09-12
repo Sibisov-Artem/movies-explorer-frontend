@@ -1,24 +1,17 @@
 import './MoviesMore.css'
 
-import { useLocation } from 'react-router-dom';
 
-function MoviesMore() {
-
-  const location = useLocation();
+function MoviesMore({ handleLoadClick, isMoreActive }) {
 
   return (
-    <>
-      {location.pathname === "/movies" ?
-        (
-          <div className="movies-more">
-            <button className="movies-more__btn hover" type="button">Ещё</button>
-          </div>
-        ) : (
-          <div className="movies-more movies-more_not-visible section"></div>
-        )}
-
-    </>
+    <div className="movies-more">
+      <button className={`movies-more__btn hover ${isMoreActive && "movies-more__btn_active"} `}
+        type="button"
+        onClick={handleLoadClick}
+      >Ещё</button>
+    </div>
   );
 }
 
 export default MoviesMore;
+// movies-more__btn_disable hover

@@ -18,7 +18,7 @@ function AboutMe() {
             С 2015 года работал в компании «СКБ Контур». После того, как прошёл курс по веб-разработке,
             начал заниматься фриланс-заказами и ушёл с постоянной работы.
           </p>
-          <a className="about-me__github hover" href="https://github.com/Sibisov-Artem" target="_blank">Github</a>
+          <a className="about-me__github hover" href="https://github.com/Sibisov-Artem" target="_blank" rel="noreferrer">Github</a>
         </div>
 
         <img className="about-me__image" alt="Виталий" src={aboutMeImage}></img>
