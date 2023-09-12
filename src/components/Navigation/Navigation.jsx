@@ -2,7 +2,7 @@ import './Navigation.css';
 
 import { Link, useLocation } from 'react-router-dom';
 
-function Navigation({ burgerActive, loggedIn }) {
+function Navigation({ burgerActive, loggedIn, closeBurgerOnOverlay }) {
 
   const location = useLocation();
 
@@ -19,7 +19,11 @@ function Navigation({ burgerActive, loggedIn }) {
           </li>
         </ul>
       ) : (
-        <div className={`navigation__opacity-background ${burgerActive ? "navigation__opacity-background_active" : ""}`}>
+        <div className={`navigation__opacity-background ${burgerActive ? "navigation__opacity-background_active" : ""}`}
+          onMouseUp={closeBurgerOnOverlay}
+          // onKeyDown={closeBurgerOnOverlay}
+          // tabIndex="0"
+        >
           <ul className="navigation__list navigation__list_other">
 
             <li className="navigation__item navigation__item-burger">

@@ -29,8 +29,17 @@ function Header({ loggedIn }) {
     if (evt.key === "Escape") {
       setBurgerActive(false);
       document.removeEventListener('keydown', closeBurgerOnEscape)
+      console.log(evt.target)
+      console.log(evt.currentTarget)
     }
   }, [])
+
+  const closeBurgerOnOverlay = useCallback((evt) => {
+    if (evt.target === evt.currentTarget) { // ((evt.target === evt.currentTarget) || (evt.key === "Escape"))
+      setBurgerActive(false);
+      document.removeEventListener('keydown', closeBurgerOnEscape)
+    }
+  }, [closeBurgerOnEscape])
 
   return (
     <>
@@ -46,6 +55,7 @@ function Header({ loggedIn }) {
             <Navigation
               burgerActive={burgerActive}
               loggedIn={loggedIn}
+              closeBurgerOnOverlay={closeBurgerOnOverlay}
             />
             {!loggedIn ?
               (null) : (
