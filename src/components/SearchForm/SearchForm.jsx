@@ -7,7 +7,7 @@ import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 
 
 
-function SearchForm({ onSearchMovie, currentInputQuery, handleShortFilm, isShortFilm, onSubmit, refreshQuantity }) {
+function SearchForm({ onSearchMovie, currentInputQuery, handleShortFilm, isShortFilm, refreshQuantity }) {
 
   const location = useLocation();
 
