@@ -29,8 +29,6 @@ function Header({ loggedIn }) {
     if (evt.key === "Escape") {
       setBurgerActive(false);
       document.removeEventListener('keydown', closeBurgerOnEscape)
-      console.log(evt.target)
-      console.log(evt.currentTarget)
     }
   }, [])
 
