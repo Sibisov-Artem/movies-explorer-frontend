@@ -1,7 +1,7 @@
 import './Header.css';
 
 import { useLocation, Link } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 
 import Navigation from '../Navigation/Navigation';
 import Burger from '../Burger/Burger';
@@ -15,9 +15,22 @@ function Header({ loggedIn }) {
   const location = useLocation();
 
   const [burgerActive, setBurgerActive] = useState(false);
+
   function handleBurgerClick() {        // обработчик управления состояния кнопки бургера,
     setBurgerActive(!burgerActive);     // от него зависят стили в Navigation(менюшка) и визулизация кнопочки-бургера
+    if (!burgerActive) {
+      document.addEventListener('keydown', closeBurgerOnEscape)
+    } else {
+      document.removeEventListener('keydown', closeBurgerOnEscape)
+    }
   }
+
+  const closeBurgerOnEscape = useCallback((evt) => {
+    if (evt.key === "Escape") {
+      setBurgerActive(false);
+      document.removeEventListener('keydown', closeBurgerOnEscape)
+    }
+  }, [])
 
   return (
     <>
