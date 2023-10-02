@@ -50,7 +50,7 @@
 
 Запустить приложение: `npm run start`
 
-Backend проекта располагается [тут](https://github.com/Sibisov-Artem/movies-explorer-api).
+Backend проекта располагается [здесь](https://github.com/Sibisov-Artem/movies-explorer-api).
 
 ## *🛠 Стек*
 
